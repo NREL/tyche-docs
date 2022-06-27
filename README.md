@@ -8,7 +8,7 @@ To re-generate this documentation:
 
 * Clone this repository and [tyche](https://github.com/NREL/tyche) to your local machine.
 * Install a LaTeX distribution if you don't already have one. [MiKTeX](https://miktex.org/) works and can be installed locally.
-* Open an Anaconda prompt and change the directory to your local tyche repository directory.
+* Open an Anaconda prompt, activate the `tyche` environment, and change the directory to the docs subdirectory within your local tyche repository directory.
 * Use sphinx to generate a `.tex` file in this repository directory:
 ```
 sphinx-build -b latex path\to\tyche\repo path\to\tyche-docs\repo
