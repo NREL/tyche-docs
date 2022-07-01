@@ -54,8 +54,8 @@
 
 
 \title{Tyche}
-\date{Jun 30, 2022}
-\release{0.1.0}
+\date{Jul 01, 2022}
+\release{1.0}
 \author{}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
@@ -678,7 +678,7 @@ Offset
 &
 Integer
 &
-≥ 0
+\$geq\$ 0
 &
 Numerical location of the Index within each Type.
 \\
@@ -686,12 +686,10 @@ Numerical location of the Index within each Type.
 Description
 &
 String
-&\sphinxstartmulticolumn{2}%
-\begin{varwidth}[t]{\sphinxcolwidth{2}{4}}
-Any             \textbar{} Additional user-defined information, such as units. Not used during Tyche calculations.
-\par
-\vskip-\baselineskip\vbox{\hbox{\strut}}\end{varwidth}%
-\sphinxstopmulticolumn
+&
+Any
+&
+Additional user-defined information, such as units. Not used during Tyche calculations.
 \\
 \hline
 Notes
@@ -5123,7 +5121,7 @@ Designs for technologies.
 \index{Designs (class in tyche.Designs)@\spxentry{Designs}\spxextra{class in tyche.Designs}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.Designs.Designs}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Designs.}}\sphinxbfcode{\sphinxupquote{Designs}}}{\emph{path=None}, \emph{indices='indices.csv'}, \emph{functions='functions.csv'}, \emph{designs='designs.csv'}, \emph{parameters='parameters.csv'}, \emph{results='results.csv'}}{}
+\phantomsection\label{\detokenize{tyche:tyche.Designs.Designs}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Designs.}}\sphinxbfcode{\sphinxupquote{Designs}}}{\emph{path=None}, \emph{uncertain=True}, \emph{indices='indices.csv'}, \emph{functions='functions.csv'}, \emph{designs='designs.csv'}, \emph{parameters='parameters.csv'}, \emph{results='results.csv'}}{}
 Bases: \sphinxcode{\sphinxupquote{object}}
 
 Designs for a technology.
@@ -5794,64 +5792,6 @@ all metrics. If string, the sense is used for all metrics.
 
 \end{fulllineitems}
 
-\index{Optimum (class in tyche.EpsilonConstraints)@\spxentry{Optimum}\spxextra{class in tyche.EpsilonConstraints}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.EpsilonConstraints.Optimum}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.EpsilonConstraints.}}\sphinxbfcode{\sphinxupquote{Optimum}}}{\emph{exit\_code}, \emph{exit\_message}, \emph{amounts}, \emph{metrics}, \emph{solve\_time}, \emph{opt\_sense}}{}
-Bases: \sphinxcode{\sphinxupquote{tuple}}
-
-Named tuple type for optimization results.
-\index{amounts (tyche.EpsilonConstraints.Optimum attribute)@\spxentry{amounts}\spxextra{tyche.EpsilonConstraints.Optimum attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.EpsilonConstraints.Optimum.amounts}}\pysigline{\sphinxbfcode{\sphinxupquote{amounts}}}
-Alias for field number 2
-
-\end{fulllineitems}
-
-\index{exit\_code (tyche.EpsilonConstraints.Optimum attribute)@\spxentry{exit\_code}\spxextra{tyche.EpsilonConstraints.Optimum attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.EpsilonConstraints.Optimum.exit_code}}\pysigline{\sphinxbfcode{\sphinxupquote{exit\_code}}}
-Alias for field number 0
-
-\end{fulllineitems}
-
-\index{exit\_message (tyche.EpsilonConstraints.Optimum attribute)@\spxentry{exit\_message}\spxextra{tyche.EpsilonConstraints.Optimum attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.EpsilonConstraints.Optimum.exit_message}}\pysigline{\sphinxbfcode{\sphinxupquote{exit\_message}}}
-Alias for field number 1
-
-\end{fulllineitems}
-
-\index{metrics (tyche.EpsilonConstraints.Optimum attribute)@\spxentry{metrics}\spxextra{tyche.EpsilonConstraints.Optimum attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.EpsilonConstraints.Optimum.metrics}}\pysigline{\sphinxbfcode{\sphinxupquote{metrics}}}
-Alias for field number 3
-
-\end{fulllineitems}
-
-\index{opt\_sense (tyche.EpsilonConstraints.Optimum attribute)@\spxentry{opt\_sense}\spxextra{tyche.EpsilonConstraints.Optimum attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.EpsilonConstraints.Optimum.opt_sense}}\pysigline{\sphinxbfcode{\sphinxupquote{opt\_sense}}}
-Alias for field number 5
-
-\end{fulllineitems}
-
-\index{solve\_time (tyche.EpsilonConstraints.Optimum attribute)@\spxentry{solve\_time}\spxextra{tyche.EpsilonConstraints.Optimum attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.EpsilonConstraints.Optimum.solve_time}}\pysigline{\sphinxbfcode{\sphinxupquote{solve\_time}}}
-Alias for field number 4
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
 
 
 \subsection{tyche.Evaluator module}
@@ -5860,7 +5800,7 @@ Fast evaluation of technology investments.
 \index{Evaluator (class in tyche.Evaluator)@\spxentry{Evaluator}\spxextra{class in tyche.Evaluator}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.Evaluator.Evaluator}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Evaluator.}}\sphinxbfcode{\sphinxupquote{Evaluator}}}{\emph{tranches}, \emph{summary}}{}
+\phantomsection\label{\detokenize{tyche:tyche.Evaluator.Evaluator}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Evaluator.}}\sphinxbfcode{\sphinxupquote{Evaluator}}}{\emph{tranches}}{}
 Bases: \sphinxcode{\sphinxupquote{object}}
 
 Evalutate technology investments using a response surface.
@@ -5993,7 +5933,7 @@ Evaluate a statistic for an investment.
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{tyche:tyche.Evaluator.Evaluator.make_statistic_evaluator}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{make\_statistic\_evaluator}}}{\emph{statistic=\textless{}function mean\textgreater{}}}{}
-Return a function that valuates a statistic for an investment.
+Return a function that evaluates a statistic for an investment.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxstyleliteralstrong{\sphinxupquote{statistic}} (\sphinxstyleliteralemphasis{\sphinxupquote{function}}) \textendash{} The statistic to evaluate.
@@ -6062,7 +6002,7 @@ Investments in technologies.
 \index{Investments (class in tyche.Investments)@\spxentry{Investments}\spxextra{class in tyche.Investments}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.Investments.Investments}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Investments.}}\sphinxbfcode{\sphinxupquote{Investments}}}{\emph{path=None}, \emph{tranches='tranches.csv'}, \emph{investments='investments.csv'}}{}
+\phantomsection\label{\detokenize{tyche:tyche.Investments.Investments}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Investments.}}\sphinxbfcode{\sphinxupquote{Investments}}}{\emph{path=None}, \emph{uncertain=False}, \emph{tranches='tranches.csv'}, \emph{investments='investments.csv'}}{}
 Bases: \sphinxcode{\sphinxupquote{object}}
 
 Investments in a technology.
@@ -6092,15 +6032,26 @@ DataFrame
 
 \end{fulllineitems}
 
+\index{compile() (tyche.Investments.Investments method)@\spxentry{compile()}\spxextra{tyche.Investments.Investments method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Investments.Investments.compile}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{compile}}}{}{}
+Parse any probability distributions in the tranches.
+
+\end{fulllineitems}
+
 \index{evaluate\_investments() (tyche.Investments.Investments method)@\spxentry{evaluate\_investments()}\spxextra{tyche.Investments.Investments method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.Investments.Investments.evaluate_investments}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate\_investments}}}{\emph{designs}, \emph{sample\_count=1}}{}
+\phantomsection\label{\detokenize{tyche:tyche.Investments.Investments.evaluate_investments}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate\_investments}}}{\emph{designs}, \emph{tranche\_results=None}, \emph{sample\_count=1}}{}
 Evaluate the investments for a design.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{designs}} (\sphinxstyleliteralemphasis{\sphinxupquote{tyche.Designs}}) \textendash{} The designs.
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{tranche\_results}} (\sphinxstyleliteralemphasis{\sphinxupquote{tyche.Evaluations}}) \textendash{} Output of evaluate\_tranches method. Necessary only if the investment amounts contain uncertainty.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{sample\_count}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of random samples.
@@ -6141,7 +6092,7 @@ Data types for Tyche.
 \index{Evaluations (class in tyche.Types)@\spxentry{Evaluations}\spxextra{class in tyche.Types}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.Types.Evaluations}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Types.}}\sphinxbfcode{\sphinxupquote{Evaluations}}}{\emph{amounts}, \emph{metrics}, \emph{summary}}{}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Evaluations}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Types.}}\sphinxbfcode{\sphinxupquote{Evaluations}}}{\emph{amounts}, \emph{metrics}, \emph{summary}, \emph{uncertain}}{}
 Bases: \sphinxcode{\sphinxupquote{tuple}}
 
 Named tuple type for rows in the \sphinxstyleemphasis{evaluations} table.
@@ -6166,6 +6117,14 @@ Alias for field number 1
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{tyche:tyche.Types.Evaluations.summary}}\pysigline{\sphinxbfcode{\sphinxupquote{summary}}}
 Alias for field number 2
+
+\end{fulllineitems}
+
+\index{uncertain (tyche.Types.Evaluations attribute)@\spxentry{uncertain}\spxextra{tyche.Types.Evaluations attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Evaluations.uncertain}}\pysigline{\sphinxbfcode{\sphinxupquote{uncertain}}}
+Alias for field number 3
 
 \end{fulllineitems}
 
@@ -6342,6 +6301,64 @@ Alias for field number 6
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{tyche:tyche.Types.Inputs.scale}}\pysigline{\sphinxbfcode{\sphinxupquote{scale}}}
 Alias for field number 1
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{Optimum (class in tyche.Types)@\spxentry{Optimum}\spxextra{class in tyche.Types}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Optimum}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{tyche.Types.}}\sphinxbfcode{\sphinxupquote{Optimum}}}{\emph{exit\_code}, \emph{exit\_message}, \emph{amounts}, \emph{metrics}, \emph{solve\_time}, \emph{opt\_sense}}{}
+Bases: \sphinxcode{\sphinxupquote{tuple}}
+
+Named tuple type for optimization results.
+\index{amounts (tyche.Types.Optimum attribute)@\spxentry{amounts}\spxextra{tyche.Types.Optimum attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Optimum.amounts}}\pysigline{\sphinxbfcode{\sphinxupquote{amounts}}}
+Alias for field number 2
+
+\end{fulllineitems}
+
+\index{exit\_code (tyche.Types.Optimum attribute)@\spxentry{exit\_code}\spxextra{tyche.Types.Optimum attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Optimum.exit_code}}\pysigline{\sphinxbfcode{\sphinxupquote{exit\_code}}}
+Alias for field number 0
+
+\end{fulllineitems}
+
+\index{exit\_message (tyche.Types.Optimum attribute)@\spxentry{exit\_message}\spxextra{tyche.Types.Optimum attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Optimum.exit_message}}\pysigline{\sphinxbfcode{\sphinxupquote{exit\_message}}}
+Alias for field number 1
+
+\end{fulllineitems}
+
+\index{metrics (tyche.Types.Optimum attribute)@\spxentry{metrics}\spxextra{tyche.Types.Optimum attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Optimum.metrics}}\pysigline{\sphinxbfcode{\sphinxupquote{metrics}}}
+Alias for field number 3
+
+\end{fulllineitems}
+
+\index{opt\_sense (tyche.Types.Optimum attribute)@\spxentry{opt\_sense}\spxextra{tyche.Types.Optimum attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Optimum.opt_sense}}\pysigline{\sphinxbfcode{\sphinxupquote{opt\_sense}}}
+Alias for field number 5
+
+\end{fulllineitems}
+
+\index{solve\_time (tyche.Types.Optimum attribute)@\spxentry{solve\_time}\spxextra{tyche.Types.Optimum attribute}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Types.Optimum.solve_time}}\pysigline{\sphinxbfcode{\sphinxupquote{solve\_time}}}
+Alias for field number 4
 
 \end{fulllineitems}
 
