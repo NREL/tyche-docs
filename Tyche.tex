@@ -54,7 +54,7 @@
 
 
 \title{Tyche}
-\date{Jul 01, 2022}
+\date{Aug 04, 2022}
 \release{1.0}
 \author{}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -67,7 +67,7 @@
 \pagestyle{plain}
 \sphinxtableofcontents
 \pagestyle{normal}
-\phantomsection\label{\detokenize{main_page::doc}}
+\phantomsection\label{\detokenize{index::doc}}
 
 
 Risk and uncertainty are core characteristics of research and development (R\&D) programs. Attempting to do what has not been done before will sometimes end in failure, just as it will sometimes lead to extraordinary success. The challenge is to identify an optimal mix of R\&D investments in pathways that provide the highest returns while reducing the costs of failure. The goal of the R\&D Pathway and Portfolio Analysis and Evaluation project is to develop systematic, scalable pathway and portfolio analysis and evaluation methodologies and tools that provide high value to the U.S. Department of Energy (DOE) and its Office of Energy Efficiency \& Renewable Energy (EERE). This work aims to assist analysts and decision makers identify and evaluate, quantify and monitor, manage, document, and communicate energy technology R\&D pathway and portfolio risks and benefits. The project-level risks typically considered are technology cost and performance (e.g., efficiency and environmental impact), while the portfolio level risks generally include market factors (e.g., competitiveness and consumer preference).
@@ -75,56 +75,69 @@ Risk and uncertainty are core characteristics of research and development (R\&D)
 This documentation summarizes work in progress on R\&D Portfolio Analysis and Evaluation. It discusses a mock FOA approach for designing a decision-support process for R\&D portfolios, the portfolio-optimization methodology, and the underlying software framework. The end goal of this process is to inform decision-making across R\&D projects and programs through identifying and evaluating, quantifying, and monitoring, managing, documenting, and communicating energy technology R\&D pathway and portfolio risks and benefits.
 
 
-\chapter{Tyche Quick Start Guide}
-\label{\detokenize{cheat-sheet:tyche-quick-start-guide}}\label{\detokenize{cheat-sheet::doc}}
+\chapter{Quick Start Guide}
+\label{\detokenize{cheat-sheet:quick-start-guide}}\label{\detokenize{cheat-sheet::doc}}
+The purpose of this quick start guide is to allow a new user to set up their first R\&D decision context using Tyche, and to provide some examples of using Tyche for decision support analyses.
 
-\section{Introduction and Getting Started}
-\label{\detokenize{cheat-sheet:introduction-and-getting-started}}
+An R\&D decision context involves one or more technologies that are subject to various R\&D investments with the goal of changing the technology metrics and outcomes.
 
-\subsection{Set up Tyche package}
+
+\section{Set up Tyche package}
 \label{\detokenize{cheat-sheet:set-up-tyche-package}}
-There are several platforms for using Tyche.  Listed below is the process of downloading the Tyche framework to your personal computer. The Tyche repository is available on github at this {[}link{]}(\sphinxurl{https://github.com/NREL/tyche}).   A library of simple Tyche models is available at to provide beginning templates for developing more complete models of technologies of interest {[}here.{]}(\sphinxurl{https://github.com/NREL/tyche/tree/dev/src/technology})
+To download and use the Tyche package on a personal computer:
 \begin{itemize}
 \item {} 
-Download and install {[}Anaconda{]}(\sphinxurl{https://www.anaconda.com/}). No need for installing Anaconda for Linux or Mac systems.
+On Windows only, for users without a Python distribution: First download and install \sphinxhref{https://anaconda.org/}{Anaconda}.
 
 \item {} 
-Download Tyche from GitHub
+Download the \sphinxhref{https://github.com/NREL/tyche/releases/}{source code}.
 
 \item {} 
-Navigate to the downloaded Tyche repository folder.
-
-\item {} \begin{description}
-\item[{Create the Tyche environment}] \leavevmode\begin{itemize}
-\item {} 
-Type the following into the Anaconda Shell (under Anaconda in the Windows Start menu). For Mac use system terminal.
+Navigate to the Tyche repository folder.
 
 \item {} 
-Windows OS:  \sphinxcode{\sphinxupquote{{}`conda env create -{-}file conda\textbackslash{}win.yml {}`}}
-
-\item {} 
-Mac OS:  \sphinxcode{\sphinxupquote{{}`conda env create -{-}file conda\textbackslash{}mac.yml {}`}}
-
-\item {} 
-\sphinxcode{\sphinxupquote{{}`conda activate tyche{}`}}
-
-\item {} 
-\sphinxcode{\sphinxupquote{{}`pip install mip{}`}}
+Create the Tyche environment
 
 \end{itemize}
 
-\end{description}
+On Windows:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{conda} \PYG{n}{env} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{file} \PYG{n}{conda}\PYGZbs{}\PYG{n}{win}\PYG{o}{.}\PYG{n}{yml}
+\PYG{n}{conda} \PYG{n}{activate} \PYG{n}{tyche}
+\end{sphinxVerbatim}
+
+On Mac:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{conda} \PYG{n}{env} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{file} \PYG{n}{conda}\PYG{o}{/}\PYG{n}{mac}\PYG{o}{.}\PYG{n}{yml}
+\PYG{n}{conda} \PYG{n}{activate} \PYG{n}{tyche}
+\end{sphinxVerbatim}
+
+Note that the conda environment was created with the command:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{conda} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{n}{n} \PYG{n}{tyche} \PYG{o}{\PYGZhy{}}\PYG{n}{c} \PYG{n}{conda}\PYG{o}{\PYGZhy{}}\PYG{n}{forge} \PYG{n}{python}\PYG{o}{=}\PYG{l+m+mf}{3.7} \PYG{n}{numpy} \PYG{n}{scipy} \PYG{n}{scikit}\PYG{o}{\PYGZhy{}}\PYG{n}{learn} \PYG{n}{seaborn}\PYG{o}{=}\PYG{l+m+mf}{0.10} \PYG{n}{matplotlib}\PYG{o}{=}\PYG{l+m+mf}{3.3} \PYG{n}{quart} \PYG{n}{hypercorn} \PYG{n}{jupyter}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+If you receive an HTTPS error, consider retrying the command with the \sphinxtitleref{\textendash{}insecure} flag added.
+
+\item {} 
+See the \sphinxhref{https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html\#creating-an-environment-from-an-environment-yml-file}{conda documentation} for additional information on installing and troubleshooting environments.
 
 \end{itemize}
 
 
-\subsection{Repository Organization}
-\label{\detokenize{cheat-sheet:repository-organization}}
-The directory where users should store new technology models (.py files) and the accompanying datasets (discussed below) is indicated in blue. We recommend that users create sub-directories under technology for each new technology or decision context, to avoid confusing the various input datasets.
+\section{Directory Structure}
+\label{\detokenize{cheat-sheet:directory-structure}}
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{image1}.png}
+
+The directory where users should store new technology models (.py files) and the accompanying datasets discussed below is indicated in blue. We recommend that users create sub-directories for each new technology or decision context, to avoid confusing the various input datasets.
 
 
-\section{Defining a Technology Model}
-\label{\detokenize{cheat-sheet:defining-a-technology-model}}
+\section{Defining Technologies}
+\label{\detokenize{cheat-sheet:defining-technologies}}
 
 \subsection{What is a “technology”?}
 \label{\detokenize{cheat-sheet:what-is-a-technology}}
@@ -136,16 +149,17 @@ In the R\&D decision contexts represented and analyzed by Tyche, “technology�
 
 \subsection{Designs Dataset}
 \label{\detokenize{cheat-sheet:designs-dataset}}
-A \sphinxstyleemphasis{design} is one set of technology data that results from a specific R\&D investment scenario. The \sphinxstyleemphasis{designs} dataset collects the technologies and technology versions that may result from all R\&D investment scenarios being considered in a decision context.
+A \sphinxstyleemphasis{design} is one set of technology data that results from a specific R\&D investment scenario. The \sphinxstyleemphasis{designs} dataset collects the technology versions that may result from all R\&D investment scenarios being considered in a decision context.
 
-The \sphinxstyleemphasis{designs} dataset contains information for one or more technologies being compared within an R\&D investment decision context. There will be multiple sets of data for each technology; each set represents the technology data that results from a specific R\&D investment scenario. Tables 2 and 3 provide a data dictionary for the \sphinxstyleemphasis{designs} dataset.
-
-\sphinxstylestrong{Table 1:}
-\begin{quote}
+The \sphinxstyleemphasis{designs} dataset contains information for one or more technologies being compared within an R\&D investment decision context. There will be multiple sets of data for each technology; each set represents the technology data that results from a specific R\&D investment scenario. \hyperref[\detokenize{cheat-sheet:tbl-designsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-designsdict}}} provides a data dictionary for the \sphinxstyleemphasis{designs} dataset. Additional information on mandatory Variables is provided in \hyperref[\detokenize{cheat-sheet:tbl-designsvars}]{Table \ref{\detokenize{cheat-sheet:tbl-designsvars}}}.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{designs} dataset which defines various technology versions resulting from R\&D investments.}\label{\detokenize{cheat-sheet:table-1}}\label{\detokenize{cheat-sheet:tbl-designsdict}}
+\sphinxaftertopcaption
 \begin{tabular}[t]{|*{4}{\X{1}{4}|}}
 \hline
 \sphinxstyletheadfamily 
@@ -264,16 +278,16 @@ Description provided by user. Not used by Tyche.
 \end{tabular}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
-If there are no elements within a Variable for the technology under study, the Variable must still be included in the \sphinxstyleemphasis{designs} dataset: leaving out any of the Variables in this dataset will break the code. The Value for irrelevant Variables may be set to 0 or 1. Variables and their component Indexes are defined further in Table 2.
-
-\sphinxstylestrong{Table 2:}
-\begin{quote}
+If there are no elements within a Variable for the technology under study, the Variable must still be included in the \sphinxstyleemphasis{designs} dataset: leaving out any of the Variables in this dataset will break the code. The Value for irrelevant Variables may be set to 0 or 1. Variables and their component Indexes are defined further in \hyperref[\detokenize{cheat-sheet:tbl-designsvars}]{Table \ref{\detokenize{cheat-sheet:tbl-designsvars}}}.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Mandatory values for Variables in the \sphinxstyleemphasis{designs} dataset.}\label{\detokenize{cheat-sheet:table-2}}\label{\detokenize{cheat-sheet:tbl-designsvars}}
+\sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{|T|T|T|}
 \hline
 \sphinxstyletheadfamily 
@@ -336,19 +350,19 @@ No index.
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 
 \subsection{Parameters Dataset}
 \label{\detokenize{cheat-sheet:parameters-dataset}}
 The \sphinxstyleemphasis{parameters} dataset contains any ad hoc data, other than that contained in the \sphinxstyleemphasis{designs} dataset, that is required to calculate a technology’s capital cost, fixed cost, production (actual output amount(s)), and metrics. If the information in the \sphinxstyleemphasis{designs} dataset completely defines the technology and its metrics of interest, then the \sphinxstyleemphasis{parameters} dataset can be left blank except for the column names. Identically to the \sphinxstyleemphasis{designs} dataset, the \sphinxstyleemphasis{parameters} dataset contains multiple sets of data corresponding to different R\&D investment scenarios.
 
-\sphinxstylestrong{Table 3:}
-\begin{quote}
-
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{parameters} dataset, which contains ad-hoc technology parameters other than those in the \sphinxstyleemphasis{designs} dataset.}\label{\detokenize{cheat-sheet:table-3}}\label{\detokenize{cheat-sheet:tbl-paramsdict}}
+\sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{|T|T|T|}
 \hline
 \sphinxstyletheadfamily 
@@ -411,21 +425,21 @@ Any additional information defined by the user. Not used during Tyche calculatio
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 Including the Offset value in the \sphinxstyleemphasis{parameters} dataset creates a user reference that makes it easier to access parameter values when defining the technology model.
 
 
-\subsection{Technology model Python file}
-\label{\detokenize{cheat-sheet:technology-model-python-file}}
-The technology model is a Python file (.py) which is user defined and contains methods for calculating capital cost, fixed cost, production (the actual output amount), and any metrics of interest, using the content of the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. Table 4 describes methods that must be included in the technology model Python file. The names of the methods are user-defined and must match the contents of the \sphinxstyleemphasis{functions} dataset, discussed below. Additional methods can be included in the technology model, if necessary, but the methods in Table 4 are required. All return values for the required methods must be formatted as numpy “stacks” of values; for more information, see the numpy documentation.
-
-\sphinxstylestrong{Table 4:} Methods required within the technology model Python file. Method names are user-defined and should match the contents of the functions dataset. Additional methods can be defined within the technology model as necessary.\_
-\begin{quote}
+\subsection{Technology Model}
+\label{\detokenize{cheat-sheet:technology-model}}
+The technology model is a Python file (.py) which is user defined and contains methods for calculating capital cost, fixed cost, production (the actual output amount), and any metrics of interest, using the content of the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}} describes methods that must be included in the technology model Python file. The names of the methods are user-defined and must match the contents of the \sphinxstyleemphasis{functions} dataset, discussed below. Additional methods can be included in the technology model, if necessary, but the methods in \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}} are required. All return values for the required methods must be formatted as \sphinxhref{https://numpy.org/doc/stable/reference/generated/numpy.stack.html}{Numpy stacks}
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Methods required within the technology model Python file. Method names are user-defined and should match the contents of the functions dataset. Additional methods can be defined within the technology model as necessary.}\label{\detokenize{cheat-sheet:table-4}}\label{\detokenize{cheat-sheet:tbl-techmethods}}
+\sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{|T|T|T|}
 \hline
 \sphinxstyletheadfamily 
@@ -467,7 +481,6 @@ Calculated technology metric value(s).
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 The production method can access the actual input amount, which is the ideal or raw input amount value multiplied by the input efficiency value (both defined in the \sphinxstyleemphasis{designs} dataset). In contrast, the metrics method can access both the ideal input amount (\sphinxstyleemphasis{input\_raw}) and the actual input amount (\sphinxstyleemphasis{input}).
 
@@ -479,14 +492,15 @@ The production method can access the actual input amount, which is the ideal or 
 \label{\detokenize{cheat-sheet:tranches-dataset}}
 A \sphinxstyleemphasis{tranche} is a discrete unit of R\&D investment (dollar amount) in a specific research category. Tranches within the same research category are mutually exclusive: one cannot simultaneously invest \$1M and \$5M in a research category. A \sphinxstyleemphasis{scenario} is a combination of tranches that represents one option for making R\&D investments.
 
-The \sphinxstyleemphasis{tranches} dataset defines the allowed set of R\&D investments across the research categories that are relevant to the technology under study. Tranches are combined into investment Scenarios \textendash{} the same Scenarios found in the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. The impact of each Scenario on the technology is highly uncertain and is quantified using expert elicitation. A data dictionary for the \sphinxstyleemphasis{tranches} dataset is given in Table 5.
-
-\sphinxstylestrong{Table 5:}
-\begin{quote}
+The \sphinxstyleemphasis{tranches} dataset defines the allowed set of R\&D investments across the research categories that are relevant to the technology under study. Tranches are combined into investment Scenarios \textendash{} the same Scenarios found in the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. The impact of each Scenario on the technology is highly uncertain and is quantified using expert elicitation. A data dictionary for the \sphinxstyleemphasis{tranches} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-tranchesdict}]{Table \ref{\detokenize{cheat-sheet:tbl-tranchesdict}}}.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{tranches} dataset.}\label{\detokenize{cheat-sheet:table-5}}\label{\detokenize{cheat-sheet:tbl-tranchesdict}}
+\sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{|T|T|T|}
 \hline
 \sphinxstyletheadfamily 
@@ -535,21 +549,21 @@ Additional user-defined information. Not used by Tyche.
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 
 \subsection{Investment Dataset}
 \label{\detokenize{cheat-sheet:investment-dataset}}
 An \sphinxstyleemphasis{investment}, similar to a \sphinxstyleemphasis{scenario}, is a combination of tranches that represents a particular R\&D strategy.
 
-The \sphinxstyleemphasis{investments} dataset provides a separate way to look at making R\&D investments. Combining individual tranches allows users to explore and optimize R\&D investment amounts, but it may be the case that there are specific strategies that users wish to explore, without optimizing. In this case, the \sphinxstyleemphasis{investments} dataset is used to define specific combinations of tranches that are of interest. A data dictionary for the \sphinxstyleemphasis{investments} dataset is given in Table 6.
-
-\sphinxstylestrong{Table 6:}
-\begin{quote}
+The \sphinxstyleemphasis{investments} dataset provides a separate way to look at making R\&D investments. Combining individual tranches allows users to explore and optimize R\&D investment amounts, but it may be the case that there are specific strategies that users wish to explore, without optimizing. In this case, the \sphinxstyleemphasis{investments} dataset is used to define specific combinations of tranches that are of interest. A data dictionary for the \sphinxstyleemphasis{investments} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-investmentsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-investmentsdict}}}.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{investments} dataset.}\label{\detokenize{cheat-sheet:table-6}}\label{\detokenize{cheat-sheet:tbl-investmentsdict}}
+\sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{|T|T|T|}
 \hline
 \sphinxstyletheadfamily 
@@ -593,7 +607,6 @@ String     Additional user-defined information. Not used by Tyche.
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 
 \section{Uncertainty in the Input Datasets}
@@ -607,7 +620,7 @@ It is critical to note that these use cases are \sphinxstylestrong{mutually excl
 
 \subsection{Defining values as probability distributions and mixtures}
 \label{\detokenize{cheat-sheet:defining-values-as-probability-distributions-and-mixtures}}
-An uncertain value can be defined within a dataset using any of the built-in distributions of the {[}scipy.stats{]}(\sphinxurl{https://docs.scipy.org/doc/scipy/reference/stats.html}) package. A list of available distributions is provided at the hyperlink. Uncertain values can also be defined as a weighted average or mixture of probability distributions using the Tyche \sphinxstyleemphasis{mixture} method.
+An uncertain value can be defined within a dataset using any of the built-in distributions of the \sphinxhref{https://docs.scipy.org/doc/scipy/reference/stats.html}{scipy.stats} package. A list of available distributions is provided at the hyperlink. Uncertain values can also be defined as a weighted average or mixture of probability distributions using the Tyche \sphinxstyleemphasis{mixture} method.
 
 
 \section{Additional Input Datasets}
@@ -615,14 +628,15 @@ An uncertain value can be defined within a dataset using any of the built-in dis
 
 \subsection{Indices Dataset}
 \label{\detokenize{cheat-sheet:indices-dataset}}
-The \sphinxstyleemphasis{indices} dataset contains the numerical indexes (location within a list or array) used to access content in the other datasets. Table 7 describes the columns required for the indices table. Numerical locations for parameters should not be listed in this dataset.
-
-\sphinxstylestrong{Table 7:}
-\begin{quote}
+The \sphinxstyleemphasis{indices} dataset contains the numerical indexes (location within a list or array) used to access content in the other datasets. \hyperref[\detokenize{cheat-sheet:tbl-indicesdict}]{Table \ref{\detokenize{cheat-sheet:tbl-indicesdict}}} describes the columns required for the indices table. Numerical locations for parameters should not be listed in this dataset.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{indices} dataset.}\label{\detokenize{cheat-sheet:table-7}}\label{\detokenize{cheat-sheet:tbl-indicesdict}}
+\sphinxaftertopcaption
 \begin{tabular}[t]{|*{4}{\X{1}{4}|}}
 \hline
 
@@ -704,7 +718,6 @@ Additional user-defined information. Not used during Tyche calculations.
 \end{tabular}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 All four Types must be listed in the \sphinxstyleemphasis{indices} dataset. If a particular Type is not relevant to the technology under study, it still must be included in this dataset.
 
@@ -718,14 +731,15 @@ The \sphinxstyleemphasis{indices} dataset lists the elements of the Capital, Inp
 
 \subsection{Functions Dataset}
 \label{\detokenize{cheat-sheet:functions-dataset}}
-The \sphinxstyleemphasis{functions} dataset is used internally by Tyche to locate the technology model file and identify the four required methods listed in Table 4. Table 8 provides a data dictionary for the \sphinxstyleemphasis{functions} dataset.
-
-\sphinxstylestrong{Table 8:}
-\begin{quote}
+The \sphinxstyleemphasis{functions} dataset is used internally by Tyche to locate the technology model file and identify the four required methods listed in \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}}. \hyperref[\detokenize{cheat-sheet:tbl-functionsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-functionsdict}}} provides a data dictionary for the \sphinxstyleemphasis{functions} dataset.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{functions} dataset.}\label{\detokenize{cheat-sheet:table-8}}\label{\detokenize{cheat-sheet:tbl-functionsdict}}
+\sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{|T|T|T|T|}
 \hline
 \sphinxstyletheadfamily 
@@ -813,7 +827,6 @@ Any information that the user needs to record can go here. Not used during Tyche
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 The Style should remain \sphinxtitleref{numpy} in Tyche 1.0. This indicates that inputs and outputs from the methods within the technology model Python file are treated as arrays rather than higher-dimensional (i.e., tensor) structures.
 
@@ -822,14 +835,15 @@ If only one technology model is used within a decision context, then the \sphinx
 
 \subsection{Results Dataset}
 \label{\detokenize{cheat-sheet:results-dataset}}
-The \sphinxstyleemphasis{results} dataset lists the Tyche outcomes that are of interest within a decision context, organized into categories defined by the Variable column. This dataset is used internally by Tyche for organizing and labeling results tables for easier user comprehension. A data dictionary for the \sphinxstyleemphasis{results} dataset is given in Table 9.
-
-\sphinxstylestrong{Table 9:}
-\begin{quote}
+The \sphinxstyleemphasis{results} dataset lists the Tyche outcomes that are of interest within a decision context, organized into categories defined by the Variable column. This dataset is used internally by Tyche for organizing and labeling results tables for easier user comprehension. A data dictionary for the \sphinxstyleemphasis{results} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-resultsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-resultsdict}}}.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{results} dataset.}\label{\detokenize{cheat-sheet:table-9}}\label{\detokenize{cheat-sheet:tbl-resultsdict}}
+\sphinxaftertopcaption
 \begin{tabular}[t]{|*{4}{\X{1}{4}|}}
 \hline
 
@@ -899,9 +913,1257 @@ Additional information defined by the user. Not used during Tyche calculations.
 \end{tabular}
 \par
 \sphinxattableend\end{savenotes}
-\end{quote}
 
 The Variable “Cost” is a technology-wide lifetime cost, and as such may not be relevant within all decision contexts. To fill in the Index values for the “Output” and “Metric” Variables, see the \sphinxstyleemphasis{designs} dataset.
+
+
+\chapter{Electrolysis Example}
+\label{\detokenize{example-technology:electrolysis-example}}\label{\detokenize{example-technology::doc}}
+Here is a very simple model for electrolysis of water. We just have
+water, electricity, a catalyst, and some lab space. We choose the
+fundamental unit of operation to be moles of H$_{\text{2}}$:
+
+     H$_{\text{2}}$O \(\rightarrow\) H$_{\text{2}}$ + ½ O$_{\text{2}}$
+
+For this example, we treat the catalyst as the capital that we use to transform inputs into outputs. Our inputs are water and electricity, and our outputs are oxygen and hydrogen. Our only fixed cost is the rent on the lab space at \$1000/year. Using our past experience with electrolysis technology as well as some historical data, we estimate that we’ll be able to produce 6650 mol/year of hydrogen and at this scale, our catalyst has a lifetime of about 3 years. The metrics we’d like to calculate for our electrolysis technology are cost, greenhouse gas (GHG) emissions, and jobs created. Based on this information, the \sphinxstyleemphasis{designs} dataset for the base case electrolysis technology is as shown in \hyperref[\detokenize{example-technology:tbl-electrolysisdesigns}]{Table \ref{\detokenize{example-technology:tbl-electrolysisdesigns}}}.
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{\sphinxstyleemphasis{designs} dataset for the base case (without any R\&D) of the simple electrolysis example technology.}\label{\detokenize{example-technology:table-1}}\label{\detokenize{example-technology:tbl-electrolysisdesigns}}
+\sphinxaftertopcaption
+\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|}
+\hline
+\sphinxstyletheadfamily 
+Technology
+&\sphinxstyletheadfamily 
+Scenario
+&\sphinxstyletheadfamily 
+Variable
+&\sphinxstyletheadfamily 
+Index
+&\sphinxstyletheadfamily 
+Value
+&\sphinxstyletheadfamily 
+Units
+&\sphinxstyletheadfamily 
+Notes
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Input
+&
+Water
+&
+19.04
+&
+g/mole
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Input efficiency
+&
+Water
+&
+0.95
+&
+1
+&
+Due to mass transport loss on input.
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Input
+&
+Electricity
+&
+279
+&
+kJ/mole
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Input efficiency
+&
+Electricity
+&
+0.85
+&
+l
+&
+Due to ohmic losses on input.
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Output efficiency
+&
+Oxygen
+&
+0.9
+&
+1
+&
+Due to mass transport loss on output.
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Output efficiency
+&
+Hydrogen
+&
+0.9
+&
+1
+&
+Due to mass transport loss on output.
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Lifetime
+&
+Catalyst
+&
+3
+&
+yr
+&
+Effective lifetime of Al-Ni catalyst.
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Scale
+&
+n/a
+&
+6650
+&
+mole/yr
+&
+Rough estimate for a 50W setup.
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Input price
+&
+Water
+&
+4.80E-03
+&
+USD/mole
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Input price
+&
+Electricity
+&
+3.33E-05
+&
+USD/kJ
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Output price
+&
+Oxygen
+&
+3.00E-03
+&
+USD/g
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Output price
+&
+Hydrogen
+&
+1.00E-02
+&
+USD/g
+&
+Note
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+Note that this is not the only way to model the electrolysis technology. We could choose to purchase lab space and equipment instead of renting, in which case we would have more types of capital, each with a particular lifetime. We could treat the oxygen output from our technology as waste instead of a coproduct and remove it from the model entirely. We could operate at a different scale and perhaps change our fixed or capital costs by doing so. Depending on where we operate this technology, our input and output prices will likely change. The Tyche framework offers great flexibility in representing technologies and technology systems; it is unlikely that there will only be a single correct way to model a decision context.
+
+A key quantity that is not included in the \sphinxstyleemphasis{designs} dataset is our fixed cost, rent for the lab space. This quantity is included in the \sphinxstyleemphasis{parameters} dataset in \hyperref[\detokenize{example-technology:tbl-electrolysisparams}]{Table \ref{\detokenize{example-technology:tbl-electrolysisparams}}}, along with the necessary data to calculate our metrics of interest (cost, GHG, jobs).
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\sphinxcapstartof{table}
+\sphinxthecaptionisattop
+\sphinxcaption{\sphinxstyleemphasis{parameters} dataset for the base case (without any R\&D) of the simple electrolysis example technology.}\label{\detokenize{example-technology:table-2}}\label{\detokenize{example-technology:tbl-electrolysisparams}}
+\sphinxaftertopcaption
+\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|}
+\hline
+\sphinxstyletheadfamily 
+Technology
+&\sphinxstyletheadfamily 
+Scenario
+&\sphinxstyletheadfamily 
+Parameter
+&\sphinxstyletheadfamily 
+Offset
+&\sphinxstyletheadfamily 
+Value
+&\sphinxstyletheadfamily 
+Units
+&\sphinxstyletheadfamily 
+Notes
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Oxygen production
+&
+0
+&
+16
+&
+g
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Hydrogen production
+&
+1
+&
+2
+&
+g
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Water consumption
+&
+2
+&
+18.08
+&
+g
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Electricity consumption
+&
+3
+&
+237
+&
+kJ
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Jobs
+&
+4
+&
+1.50E-04
+&
+job/mole
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Reference scale
+&
+5
+&
+6650
+&
+mole/yr
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Reference capital cost for catalyst
+&
+6
+&
+0.63
+&
+USD
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+Reference fixed cost for rent
+&
+7
+&
+1000
+&
+USD/yr
+&
+Note
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+GHG factor for water
+&
+8
+&
+0.00108
+&
+gCO2e/g
+&
+based on 244,956 gallons = 1 Mg CO2e
+\\
+\hline
+Simple electrolysis
+&
+Base Electrolysis
+&
+GHG factor for electricity
+&
+9
+&
+0.138
+&
+gCO2e/kJ
+&
+based on 1 kWh = 0.5 kg CO2e
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+Within our R\&D decision context, we’re interested in increasing the input and output efficiencies of this process so we can produce hydrogen as cheaply as possible. Experts could assess how much R\&D to increase the various efficiencies \(\eta\) would cost. They could also suggest different catalysts, adding alkali, or replacing the process with PEM.
+
+
+\section{Production function (à la Leontief)}
+\label{\detokenize{example-technology:production-function-a-la-leontief}}
+\(P_\mathrm{oxygen} = \left( 16.00~\mathrm{g} \right) \cdot \min \left\{ \frac{I^*_\mathrm{water}}{18.08~\mathrm{g}}, \frac{I^*_\mathrm{electricity}}{237~\mathrm{kJ}} \right\}\)
+
+\(P_\mathrm{hydrogen} = \left( 2.00~\mathrm{g} \right) \cdot \min \left\{ \frac{I^*_\mathrm{water}}{18.08~\mathrm{g}}, \frac{I^*_\mathrm{electricity}}{237~\mathrm{kJ}} \right\}\)
+
+
+\section{Metric functions}
+\label{\detokenize{example-technology:metric-functions}}
+\(M_\mathrm{cost} = K / O_\mathrm{hydrogen}\)
+
+\(M_\mathrm{GHG} = \left( \left( 0.00108~\mathrm{gCO2e/gH20} \right) I_\mathrm{water} + \left( 0.138~\mathrm{gCO2e/kJ} \right) I_\mathrm{electricity} \right) / O_\mathrm{hydrogen}\)
+
+\(M_\mathrm{jobs} = \left( 0.00015~\mathrm{job/mole} \right) / O_\mathrm{hydrogen}\)
+
+
+\section{Performance of current design.}
+\label{\detokenize{example-technology:performance-of-current-design}}
+\(K = 0.18~\mathrm{USD/mole}\) (i.e., not profitable since it is
+positive)
+
+\(O_\mathrm{oxygen} = 14~\mathrm{g/mole}\)
+
+\(O_\mathrm{hydrogen} = 1.8~\mathrm{g/mole}\)
+
+\(\mu_\mathrm{cost} = 0.102~\mathrm{USD/gH2}\)
+
+\(\mu_\mathrm{GHG} = 21.4~\mathrm{gCO2e/gH2}\)
+
+\(\mu_\mathrm{jobs} = 0.000083~\mathrm{job/gH2}\)
+
+
+\section{Technology Model}
+\label{\detokenize{example-technology:technology-model}}
+Each technology design requires a Python file with a capital cost, a fixed cost, a production, and a metrics function. \hyperref[\detokenize{example-technology:lst-electrolysis}]{Listing \ref{\detokenize{example-technology:lst-electrolysis}}} shows these functions for the simple electrolysis example.
+\sphinxSetupCaptionForVerbatim{Example technology-defining functions.}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{example-technology:lst-electrolysis}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Simple electrolysis.}
+
+
+\PYG{c+c1}{\PYGZsh{} All of the computations must be vectorized, so use {}`numpy{}`.}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+
+
+\PYG{c+c1}{\PYGZsh{} Capital\PYGZhy{}cost function.}
+\PYG{k}{def} \PYG{n+nf}{capital\PYGZus{}cost}\PYG{p}{(}
+  \PYG{n}{scale}\PYG{p}{,}
+  \PYG{n}{parameter}
+\PYG{p}{)}\PYG{p}{:}
+
+  \PYG{c+c1}{\PYGZsh{} Scale the reference values.}
+  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}
+    \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{scale}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{)}
+  \PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} Fixed\PYGZhy{}cost function.}
+\PYG{k}{def} \PYG{n+nf}{fixed\PYGZus{}cost}\PYG{p}{(}
+  \PYG{n}{scale}\PYG{p}{,}
+  \PYG{n}{parameter}
+\PYG{p}{)}\PYG{p}{:}
+
+  \PYG{c+c1}{\PYGZsh{} Scale the reference values.}
+  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}
+    \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{scale}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{)}
+  \PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} Production function.}
+\PYG{k}{def} \PYG{n+nf}{production}\PYG{p}{(}
+  \PYG{n}{capital}\PYG{p}{,}
+  \PYG{n}{fixed}\PYG{p}{,}
+  \PYG{n+nb}{input}\PYG{p}{,}
+  \PYG{n}{parameter}
+\PYG{p}{)}\PYG{p}{:}
+
+  \PYG{c+c1}{\PYGZsh{} Moles of input.}
+  \PYG{n}{water}       \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{)}
+  \PYG{n}{electricity} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZsh{} Moles of output.}
+  \PYG{n}{output} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{minimum}\PYG{p}{(}\PYG{n}{water}\PYG{p}{,} \PYG{n}{electricity}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZsh{} Grams of output.}
+  \PYG{n}{oxygen}   \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
+  \PYG{n}{hydrogen} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZsh{} Package results.}
+  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{oxygen}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{]}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} Metrics function.}
+\PYG{k}{def} \PYG{n+nf}{metrics}\PYG{p}{(}
+  \PYG{n}{capital}\PYG{p}{,}
+  \PYG{n}{fixed}\PYG{p}{,}
+  \PYG{n}{input\PYGZus{}raw}\PYG{p}{,}
+  \PYG{n+nb}{input}\PYG{p}{,}
+  \PYG{n}{img}\PYG{o}{/}\PYG{n}{output\PYGZus{}raw}\PYG{p}{,}
+  \PYG{n}{output}\PYG{p}{,}
+  \PYG{n}{cost}\PYG{p}{,}
+  \PYG{n}{parameter}
+\PYG{p}{)}\PYG{p}{:}
+
+  \PYG{c+c1}{\PYGZsh{} Hydrogen output.}
+  \PYG{n}{hydrogen} \PYG{o}{=} \PYG{n}{output}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
+
+  \PYG{c+c1}{\PYGZsh{} Cost of hydrogen.}
+  \PYG{n}{cost1} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{cost}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZsh{} Jobs normalized to hydrogen.}
+  \PYG{n}{jobs} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZsh{} GHGs associated with water and electricity.}
+  \PYG{n}{water}       \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{input\PYGZus{}raw}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{8}\PYG{p}{]}\PYG{p}{)}
+  \PYG{n}{electricity} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{input\PYGZus{}raw}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{9}\PYG{p}{]}\PYG{p}{)}
+  \PYG{n}{co2e} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{water}\PYG{p}{,} \PYG{n}{electricity}\PYG{p}{)}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZsh{} Package results.}
+  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{cost1}\PYG{p}{,} \PYG{n}{jobs}\PYG{p}{,} \PYG{n}{co2e}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\chapter{Tutorial}
+\label{\detokenize{analysis-tutorial:tutorial}}\label{\detokenize{analysis-tutorial::doc}}
+Multiple Objectives for Residential PV.
+
+
+\section{Import packages.}
+\label{\detokenize{analysis-tutorial:import-packages}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+\PYG{k+kn}{import} \PYG{n+nn}{sys}
+\PYG{n}{sys}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{abspath}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{../src}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{numpy}             \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib}\PYG{n+nn}{.}\PYG{n+nn}{pyplot} \PYG{k}{as} \PYG{n+nn}{pl}
+\PYG{k+kn}{import} \PYG{n+nn}{pandas}            \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{seaborn}           \PYG{k}{as} \PYG{n+nn}{sb}
+\PYG{k+kn}{import} \PYG{n+nn}{tyche}             \PYG{k}{as} \PYG{n+nn}{ty}
+
+\PYG{k+kn}{from} \PYG{n+nn}{copy}            \PYG{k+kn}{import} \PYG{n}{deepcopy}
+\PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}
+\end{sphinxVerbatim}
+
+
+\section{Load data.}
+\label{\detokenize{analysis-tutorial:load-data}}
+The data are stored in a set of tab-separated value files in a folder.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{designs} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Designs}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{data/pv\PYGZus{}residential\PYGZus{}simple}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investments} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Investments}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{data/pv\PYGZus{}residential\PYGZus{}simple}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+Compile the production and metric functions for each technology in the dataset.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{designs}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\section{Examine the data.}
+\label{\detokenize{analysis-tutorial:examine-the-data}}
+The \sphinxcode{\sphinxupquote{functions}} table specifies where the Python code for each technology resides.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{designs}\PYG{o}{.}\PYG{n}{functions}
+\end{sphinxVerbatim}
+
+
+
+Right now, only the style \sphinxcode{\sphinxupquote{numpy}} is supported.
+
+The \sphinxcode{\sphinxupquote{indices}} table defines the subscripts for variables.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{designs}\PYG{o}{.}\PYG{n}{indices}
+\end{sphinxVerbatim}
+
+
+
+The \sphinxcode{\sphinxupquote{designs}} table contains the cost, input, efficiency, and price data for a scenario.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{designs}\PYG{o}{.}\PYG{n}{designs}
+\end{sphinxVerbatim}
+
+
+
+The \sphinxcode{\sphinxupquote{parameters}} table contains additional techno-economic parameters for each technology.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{designs}\PYG{o}{.}\PYG{n}{parameters}
+\end{sphinxVerbatim}
+
+
+
+The \sphinxcode{\sphinxupquote{results}} table specifies the units of measure for results of computations.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{designs}\PYG{o}{.}\PYG{n}{results}
+\end{sphinxVerbatim}
+
+
+
+The \sphinxcode{\sphinxupquote{tranches}} table specifies multually exclusive possibilities for investments: only one \sphinxcode{\sphinxupquote{Tranch}} may be selected for each \sphinxcode{\sphinxupquote{Category}}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investments}\PYG{o}{.}\PYG{n}{tranches}
+\end{sphinxVerbatim}
+
+
+
+The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of tranches (one per category) into an overall investment.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investments}\PYG{o}{.}\PYG{n}{investments}
+\end{sphinxVerbatim}
+
+
+
+
+\section{Evaluate the scenarios in the dataset.}
+\label{\detokenize{analysis-tutorial:evaluate-the-scenarios-in-the-dataset}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{scenario\PYGZus{}results} \PYG{o}{=} \PYG{n}{designs}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}scenarios}\PYG{p}{(}\PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+
+
+\subsection{Save results.}
+\label{\detokenize{analysis-tutorial:save-results}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}scenario.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsection{Plot GHG metric.}
+\label{\detokenize{analysis-tutorial:plot-ghg-metric}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+        \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+        \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}     \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
+    \PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG Reduction [gCO2e / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_35_0}.png}
+
+
+\subsection{Plot LCOE metric.}
+\label{\detokenize{analysis-tutorial:plot-lcoe-metric}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+        \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+        \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}     \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
+    \PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE Reduction [USD / kWh]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_37_0}.png}
+
+
+\subsection{Plot labor metric.}
+\label{\detokenize{analysis-tutorial:plot-labor-metric}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+        \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
+        \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}     \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
+    \PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor Increase [USD / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_39_0}.png}
+
+
+\section{Evaluate the investments in the dataset.}
+\label{\detokenize{analysis-tutorial:evaluate-the-investments-in-the-dataset}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}results} \PYG{o}{=} \PYG{n}{investments}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}investments}\PYG{p}{(}\PYG{n}{designs}\PYG{p}{,} \PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsection{Costs of investments.}
+\label{\detokenize{analysis-tutorial:costs-of-investments}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}
+\end{sphinxVerbatim}
+
+
+
+
+\subsection{Benefits of investments.}
+\label{\detokenize{analysis-tutorial:benefits-of-investments}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+
+
+\subsection{Save results.}
+\label{\detokenize{analysis-tutorial:save-results-1}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}investment\PYGZhy{}amounts.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}investment\PYGZhy{}metrics.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsection{Plot GHG metric.}
+\label{\detokenize{analysis-tutorial:plot-ghg-metric-1}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Low R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}   \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Medium R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{High R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
+    \PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG Reduction [gCO2e / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_51_0}.png}
+
+
+\subsection{Plot LCOE metric.}
+\label{\detokenize{analysis-tutorial:plot-lcoe-metric-1}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Low R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}   \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Medium R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{High R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
+    \PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE Reduction [USD / kWh]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_53_0}.png}
+
+
+\subsection{Plot labor metric.}
+\label{\detokenize{analysis-tutorial:plot-labor-metric-1}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Low R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}   \PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Medium R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{High R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
+    \PYG{p}{]}
+\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor Increase [USD / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_55_0}.png}
+
+
+\section{Multi-objective decision analysis.}
+\label{\detokenize{analysis-tutorial:multi-objective-decision-analysis}}
+
+\subsection{Compute costs and metrics for tranches.}
+\label{\detokenize{analysis-tutorial:compute-costs-and-metrics-for-tranches}}
+Tranches are atomic units for building investment portfolios. Evaluate
+all of the tranches, so we can assemble them into investments
+(portfolios).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tranche\PYGZus{}results} \PYG{o}{=} \PYG{n}{investments}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}tranches}\PYG{p}{(}\PYG{n}{designs}\PYG{p}{,} \PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+Display the cost of each tranche.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}
+\end{sphinxVerbatim}
+
+
+
+Display the metrics for each tranche.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}
+\end{sphinxVerbatim}
+
+
+
+Save the results.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}tranche\PYGZhy{}amounts.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}tranche\PYGZhy{}summary.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\subsection{Fit a response surface to the results.}
+\label{\detokenize{analysis-tutorial:fit-a-response-surface-to-the-results}}
+The response surface interpolates between the discrete set of cases
+provided in the expert elicitation. This allows us to study funding
+levels intermediate between those scenarios.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{evaluator} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Evaluator}\PYG{p}{(}\PYG{n}{investments}\PYG{o}{.}\PYG{n}{tranches}\PYG{p}{,} \PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+Here are the categories of investment and the maximum amount that could
+be invested in each:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{max\PYGZus{}amount}
+\end{sphinxVerbatim}
+
+
+
+Here are the metrics and their units of measure:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{units}
+\end{sphinxVerbatim}
+
+
+
+
+\subsubsection{Example interpolation.}
+\label{\detokenize{analysis-tutorial:example-interpolation}}
+Let’s evaluate the case where each category is invested in at half of
+its maximum amount.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{example\PYGZus{}investments} \PYG{o}{=} \PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{max\PYGZus{}amount} \PYG{o}{/} \PYG{l+m+mi}{2}
+\PYG{n}{example\PYGZus{}investments}
+\end{sphinxVerbatim}
+
+
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Category}    \PYG{n}{Index}  \PYG{n}{Sample}
+\PYG{n}{BoS} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}     \PYG{n}{GHG}    \PYG{l+m+mi}{1}         \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0010586097518157094}
+                   \PYG{l+m+mi}{2}          \PYG{l+m+mf}{7.493162517135921e\PYGZhy{}05}
+                   \PYG{l+m+mi}{3}           \PYG{l+m+mf}{0.001253893601450784}
+                   \PYG{l+m+mi}{4}           \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00398626797827717}
+                   \PYG{l+m+mi}{5}          \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.005572343870333896}
+                                      \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\PYG{n}{Module} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}  \PYG{n}{Labor}  \PYG{l+m+mi}{46}          \PYG{l+m+mf}{0.014371009324918305}
+                   \PYG{l+m+mi}{47}          \PYG{l+m+mf}{0.011128728287076228}
+                   \PYG{l+m+mi}{48}         \PYG{l+m+mf}{0.0039832773605894545}
+                   \PYG{l+m+mi}{49}          \PYG{l+m+mf}{0.006026680267950724}
+                   \PYG{l+m+mi}{50}          \PYG{l+m+mf}{0.028844695933457842}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{Length}\PYG{p}{:} \PYG{l+m+mi}{450}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n+nb}{object}
+\end{sphinxVerbatim}
+
+Let’s evaluate the mean instead of outputing the whole distribution.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}statistic}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Index}
+\PYG{n}{GHG}       \PYG{l+m+mf}{30.156830}
+\PYG{n}{LCOE}       \PYG{l+m+mf}{0.038160}
+\PYG{n}{Labor}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{246.843027}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+Here is the standard deviation:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}statistic}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{std}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Index}
+\PYG{n}{GHG}       \PYG{l+m+mf}{1.410956}
+\PYG{n}{LCOE}      \PYG{l+m+mf}{0.000850}
+\PYG{n}{Labor}    \PYG{l+m+mf}{16.070395}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+A risk-averse decision maker might be interested in the 10\% percentile:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}statistic}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{,} \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Index}
+\PYG{n}{GHG}       \PYG{l+m+mf}{28.573627}
+\PYG{n}{LCOE}       \PYG{l+m+mf}{0.037140}
+\PYG{n}{Labor}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{268.059699}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+
+\subsection{\(\epsilon\)-Constraint multiobjective optimization}
+\label{\detokenize{analysis-tutorial:constraint-multiobjective-optimization}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{optimizer} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{EpsilonConstraintOptimizer}\PYG{p}{(}\PYG{n}{evaluator}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+In order to meaningfully map the decision space, we need to know the
+maximum values for each of the metrics.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{metric\PYGZus{}max} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{max\PYGZus{}metrics}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{metric\PYGZus{}max}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{GHG}      \PYG{l+m+mf}{49.429976}
+\PYG{n}{LCOE}      \PYG{l+m+mf}{0.062818}
+\PYG{n}{Labor}     \PYG{l+m+mf}{0.049555}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Example optimization.}
+\label{\detokenize{analysis-tutorial:example-optimization}}
+Limit spending to \$3M.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}max} \PYG{o}{=} \PYG{l+m+mf}{3e6}
+\end{sphinxVerbatim}
+
+Require that the GHG reduction be at least 40 gCO2e/system and that the
+Labor wages not decrease.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{metric\PYGZus{}min} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{40}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{metric\PYGZus{}min}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{GHG}      \PYG{l+m+mi}{40}
+\PYG{n}{Labor}     \PYG{l+m+mi}{0}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{int64}
+\end{sphinxVerbatim}
+
+Compute the \(\epsilon\)-constrained maximum for the LCOE.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}                       \PYG{p}{,}
+    \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}\PYG{p}{,}
+    \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{metric\PYGZus{}min}    \PYG{p}{,}
+    \PYG{n}{statistic}    \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}       \PYG{p}{,}
+\PYG{p}{)}
+\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Optimization terminated successfully.}\PYG{l+s+s1}{\PYGZsq{}}
+\end{sphinxVerbatim}
+
+Here are the optimal spending levels:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{amounts}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Category}
+\PYG{n}{BoS} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}               \PYG{l+m+mf}{0.0}
+\PYG{n}{Inverter} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}          \PYG{l+m+mf}{0.0}
+\PYG{n}{Module} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}      \PYG{l+m+mf}{3000000.0}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Amount}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+Here are the three metrics at that optimum:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Index}
+\PYG{n}{GHG}      \PYG{l+m+mf}{41.627691}
+\PYG{n}{LCOE}      \PYG{l+m+mf}{0.037566}
+\PYG{n}{Labor}     \PYG{l+m+mf}{0.028691}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+\sphinxstyleemphasis{Thus, by putting all of the investment into Module R\&D, we can expected
+to achieve a mean 3.75 ¢/kWh reduction in LCOE under the GHG and Labor
+constraints.}
+
+It turns out that there is no solution for these constraints if we
+evaluate the 10th percentile of the metrics, for a risk-averse decision
+maker.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}                       \PYG{p}{,}
+    \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}\PYG{p}{,}
+    \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{metric\PYGZus{}min}    \PYG{p}{,}
+    \PYG{n}{statistic}    \PYG{o}{=} \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{)}
+\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Iteration limit exceeded}\PYG{l+s+s1}{\PYGZsq{}}
+\end{sphinxVerbatim}
+
+Let’s try again, but with a less stringent set of constraints, only
+constraining GHG somewhat but not Labor at all.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
+    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}                                                         \PYG{p}{,}
+    \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}                                  \PYG{p}{,}
+    \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{30}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
+    \PYG{n}{statistic}    \PYG{o}{=} \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}                   \PYG{p}{,}
+\PYG{p}{)}
+\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Optimization terminated successfully.}\PYG{l+s+s1}{\PYGZsq{}}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{amounts}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Category}
+\PYG{n}{BoS} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}               \PYG{l+m+mf}{0.0}
+\PYG{n}{Inverter} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}          \PYG{l+m+mf}{0.0}
+\PYG{n}{Module} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}      \PYG{l+m+mf}{3000000.0}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Amount}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Index}
+\PYG{n}{GHG}      \PYG{l+m+mf}{39.046988}
+\PYG{n}{LCOE}      \PYG{l+m+mf}{0.036463}
+\PYG{n}{Labor}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.019725}
+\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
+\end{sphinxVerbatim}
+
+
+\subsection{Pareto surfaces.}
+\label{\detokenize{analysis-tutorial:pareto-surfaces}}
+
+\subsubsection{Metrics constrained by total investment.}
+\label{\detokenize{analysis-tutorial:metrics-constrained-by-total-investment}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pareto\PYGZus{}amounts} \PYG{o}{=} \PYG{k+kc}{None}
+\PYG{k}{for} \PYG{n}{investment\PYGZus{}max} \PYG{o+ow}{in} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mf}{1e6}\PYG{p}{,} \PYG{l+m+mf}{9e6}\PYG{p}{,} \PYG{l+m+mf}{0.5e6}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{metrics} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{max\PYGZus{}metrics}\PYG{p}{(}\PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}\PYG{p}{)}
+    \PYG{n}{pareto\PYGZus{}amounts} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}
+        \PYG{p}{[}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{values}\PYG{p}{]}                                         \PYG{p}{,}
+        \PYG{n}{columns} \PYG{o}{=} \PYG{n}{metrics}\PYG{o}{.}\PYG{n}{index}\PYG{o}{.}\PYG{n}{values}                           \PYG{p}{,}
+        \PYG{n}{index}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Index}\PYG{p}{(}\PYG{p}{[}\PYG{n}{investment\PYGZus{}max} \PYG{o}{/} \PYG{l+m+mf}{1e6}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{pareto\PYGZus{}amounts}\PYG{p}{)}
+\PYG{n}{pareto\PYGZus{}amounts}
+\end{sphinxVerbatim}
+
+
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sb}\PYG{o}{.}\PYG{n}{relplot}\PYG{p}{(}
+    \PYG{n}{x}         \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y}         \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}          \PYG{p}{,}
+    \PYG{n}{col}       \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
+    \PYG{n}{kind}      \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{line}\PYG{l+s+s2}{\PYGZdq{}}           \PYG{p}{,}
+    \PYG{n}{facet\PYGZus{}kws} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sharey}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{k+kc}{False}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+    \PYG{n}{data}      \PYG{o}{=} \PYG{n}{pareto\PYGZus{}amounts}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{melt}\PYG{p}{(}\PYG{n}{id\PYGZus{}vars} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{var\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{value\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZlt{}}\PYG{n}{seaborn}\PYG{o}{.}\PYG{n}{axisgrid}\PYG{o}{.}\PYG{n}{FacetGrid} \PYG{n}{at} \PYG{l+m+mh}{0x7f9da11752b0}\PYG{o}{\PYGZgt{}}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_108_1}.png}
+
+\sphinxstyleemphasis{We see that the LCOE metric saturates more slowly than the GHG and
+Labor ones.}
+
+
+\subsubsection{GHG vs LCOE, constrained by total investment.}
+\label{\detokenize{analysis-tutorial:ghg-vs-lcoe-constrained-by-total-investment}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{investment\PYGZus{}max} \PYG{o}{=} \PYG{l+m+mi}{3}
+\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe} \PYG{o}{=} \PYG{k+kc}{None}
+\PYG{k}{for} \PYG{n}{lcoe\PYGZus{}min} \PYG{o+ow}{in} \PYG{l+m+mf}{0.95} \PYG{o}{*} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{l+m+mf}{0.05}\PYG{p}{)} \PYG{o}{*} \PYG{n}{pareto\PYGZus{}amounts}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{n}{investment\PYGZus{}max}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{:}
+    \PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+        \PYG{n}{max\PYGZus{}amount}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mf}{0.9e6}\PYG{p}{,} \PYG{l+m+mf}{3.0e6}\PYG{p}{,} \PYG{l+m+mf}{1.0e6}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Amount}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
+        \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max} \PYG{o}{*} \PYG{l+m+mf}{1e6}                                 \PYG{p}{,}
+        \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{n}{lcoe\PYGZus{}min}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
+    \PYG{p}{)}
+    \PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}
+        \PYG{p}{[}\PYG{p}{[}\PYG{n}{investment\PYGZus{}max}\PYG{p}{,} \PYG{n}{lcoe\PYGZus{}min}\PYG{p}{,} \PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+        \PYG{n}{columns} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE (min)}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Result}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}                               \PYG{p}{,}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}\PYG{p}{)}
+\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe} \PYG{o}{=} \PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE (min)}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}
+\end{sphinxVerbatim}
+
+
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sb}\PYG{o}{.}\PYG{n}{relplot}\PYG{p}{(}
+    \PYG{n}{x} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{y} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{kind} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{scatter}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{data} \PYG{o}{=} \PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}\PYG{c+c1}{\PYGZsh{}[pareto\PYGZus{}ghg\PYGZus{}lcoe.Result == \PYGZdq{}Optimization terminated successfully.\PYGZdq{}]}
+\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZlt{}}\PYG{n}{seaborn}\PYG{o}{.}\PYG{n}{axisgrid}\PYG{o}{.}\PYG{n}{FacetGrid} \PYG{n}{at} \PYG{l+m+mh}{0x7f9da13ae630}\PYG{o}{\PYGZgt{}}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_112_1}.png}
+
+\sphinxstyleemphasis{The three types of investment are too decoupled to make an interesting
+pareto frontier, and we also need a better solver if we want to push to
+lower right.}
+
+
+\section{Run the interactive explorer for the decision space.}
+\label{\detokenize{analysis-tutorial:run-the-interactive-explorer-for-the-decision-space}}
+Make sure the the \sphinxcode{\sphinxupquote{tk}} package is installed on your machine. Here is
+the Anaconda link: \sphinxurl{https://anaconda.org/anaconda/tk}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{w} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{DecisionWindow}\PYG{p}{(}\PYG{n}{evaluator}\PYG{p}{)}
+\PYG{n}{w}\PYG{o}{.}\PYG{n}{mainloop}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+A new window should open that looks like the image below. Moving the
+sliders will cause a recomputation of the boxplots.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{Image}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{pv\PYGZus{}residential\PYGZus{}simple\PYGZus{}gui.png}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{output_118_0}.png}
 
 
 \chapter{Approach}
@@ -940,6 +2202,229 @@ Below we detail the mathematical formulation and its implementation as a
 Python module with user-specified data tables and technology functions.
 We also provide a sample analysis that exercises the framework’s main
 features.
+
+
+\chapter{Mock FOA Definition}
+\label{\detokenize{approach:mock-foa-definition}}
+
+\section{Background}
+\label{\detokenize{approach:background}}
+Understanding the FOA process is essential to designing an effective
+tool to make to make technically and analytically-based decisions. The
+“Mock FOA” process takes a service design approach to understanding the
+FOA-writing process as it stands. The Mock FOA began with interviews
+with five previous DOE detailees and seven senior DOE staff who have led
+multiple FOA development efforts. A major theme emerged: effective
+communication of analysis logic and results poses one of the largest
+challenges during the FOA process.
+
+A decision-support tool could assist in the communication necessary to
+percolate this technical information up the chain. Interview findings
+were formalized in collaboration with the NREL service design team to
+understand where such a tool could make the greatest impact. The team
+considered the steps taken to issue a FOA, resources referenced, and
+decision-makers involved.
+
+
+\subsection{Phases}
+\label{\detokenize{approach:phases}}
+Interviews revealed that, while all FOA processes are unique and highly
+non-linear, specific actions must occur. These characterize phases of
+the FOA journey:
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+\sphinxstylestrong{Launch}. Decide to issue a FOA.
+
+\item {} 
+\sphinxstylestrong{Frame}. Formulate a plan to collect the information necessary to write the FOA
+
+\item {} 
+\sphinxstylestrong{Scope}. Investigate topic options.
+
+\item {} 
+\sphinxstylestrong{Draft}. Compile information into draft FOA.
+
+\item {} 
+\sphinxstylestrong{Refine}. Prepare FOA for distribution.
+
+\end{enumerate}
+
+The specific needs of each phase inform the tool \sphinxstylestrong{content}.
+
+
+\subsection{Roles}
+\label{\detokenize{approach:roles}}
+The team considered that different staff members will interact with this
+information differently and prefer different methods of data
+communication. These roles were characterized by “personae” defined by
+level of involvement in the FOA-writing process.
+\begin{itemize}
+\item {} 
+Technical analyst
+
+\item {} 
+Technical lead
+
+\item {} 
+FOA lead
+
+\item {} 
+Approver
+
+\end{itemize}
+
+Decision makers in each of these roles will interact with tool output.
+The tool users determine how the tool will be used and how its content
+will be displayed, informing \sphinxstylestrong{interactions and data visualization}.
+For example, a user who will view the tool output in a presentation will
+need a static representation of the tool output.
+
+
+\section{Potential topics}
+\label{\detokenize{approach:potential-topics}}
+Prototyping a tool requires content. The team referenced two previous
+FOAs to understand the break-down of topic areas. We then extracted FOA
+topic/subtopic areas and metrics from 2016 budget request, combining
+hard/soft cost-focused FOAs to examine how to compete the two and avoid
+directly analyzing a specific past FOA. Following this process further
+informed the team’s understanding of how decision-makers might decide
+what to input into the tool.
+
+Topics under consideration might be assessed by the following metrics:
+\begin{itemize}
+\item {} 
+\$/W$_{\text{DC}}$
+
+\item {} 
+\$/kWh
+
+\item {} 
+Strategic metal content (lifetime)
+
+\item {} 
+Hazardous waste content (lifetime)
+
+\item {} 
+Lifetime
+
+\item {} 
+Reliability
+
+\item {} 
+Emissions
+
+\item {} 
+Labor
+
+\end{itemize}
+
+The following text details topic areas considered for Tyche tool
+development.
+
+
+\subsection{1. Crystaline silicon wafer design}
+\label{\detokenize{approach:crystaline-silicon-wafer-design}}\begin{itemize}
+\item {} 
+Wafer area
+
+\item {} 
+Wafer thickness
+
+\item {} 
+Wafer density
+
+\item {} 
+Silicon utilization
+
+\item {} 
+Production yield
+
+\end{itemize}
+
+
+\subsection{2. Tandem thin-films}
+\label{\detokenize{approach:tandem-thin-films}}\begin{itemize}
+\item {} 
+Design parameters
+
+\item {} 
+Architectures
+
+\end{itemize}
+
+
+\subsection{3. Polysilicon module}
+\label{\detokenize{approach:polysilicon-module}}\begin{itemize}
+\item {} 
+(many parameters)
+
+\end{itemize}
+
+
+\subsection{4. Module design}
+\label{\detokenize{approach:module-design}}\begin{itemize}
+\item {} 
+Module Capital
+
+\item {} 
+Module Lifetime
+
+\item {} 
+Module Efficiency
+
+\item {} 
+Module Aperture
+
+\item {} 
+Module O\&M Fixed
+
+\item {} 
+Module Degradation
+
+\item {} 
+Module Soiling Loss
+
+\end{itemize}
+
+
+\subsection{5. Inverter design}
+\label{\detokenize{approach:inverter-design}}\begin{itemize}
+\item {} 
+Inverter Capital
+
+\item {} 
+Inverter Lifetime
+
+\item {} 
+Inverter Replacement
+
+\item {} 
+Inverter Efficiency
+
+\end{itemize}
+
+
+\subsection{6. Balance-of-system design}
+\label{\detokenize{approach:balance-of-system-design}}\begin{itemize}
+\item {} 
+Hardware Capital
+
+\item {} 
+Direct Labor
+
+\item {} 
+Permitting
+
+\item {} 
+Customer Acquisition
+
+\item {} 
+Installer Overhead \& Profit
+
+\end{itemize}
 
 
 \chapter{Mathematical Formulation}
@@ -1534,105 +3019,6 @@ probability and range (e.g., 10th to 90th percentile) of change in the
 cost or waste parameters or the production or metric functions. In
 essence, the expert elicitation defines \(\sigma_\phi(\theta)\) for
 each potential scenario \(\theta\) of each investment \(\phi\).
-
-
-\chapter{Electrolysis Example}
-\label{\detokenize{example-electrolysis:electrolysis-example}}\label{\detokenize{example-electrolysis::doc}}
-Here is a very simple model for electrolysis of water. We just have
-water, electricity, a catalyst, and some lab space. We choose the
-fundamental unit of operation to be moles of H$_{\text{2}}$:
-
-     H$_{\text{2}}$O \(\rightarrow\) H$_{\text{2}}$ + ½ O$_{\text{2}}$
-
-Experts could assess how much R\&D to increase the various efficiencies
-\(\eta\) would cost. They could also suggest different catalysts,
-adding alkali, or replacing the process with PEM.
-
-
-\section{Tracked quantities.}
-\label{\detokenize{example-electrolysis:tracked-quantities}}
-\(\mathcal{C} = \{ \mathrm{catalyst} \}\)
-
-\(\mathcal{F} = \{ \mathrm{rent} \}\)
-
-\(\mathcal{I} = \{ \mathrm{water}, \mathrm{electricity} \}\)
-
-\(\mathcal{O} = \{ \mathrm{oxygen}, \mathrm{hydrogen} \}\)
-
-\(\mathcal{M} = \{ \mathrm{cost}, \mathrm{GHG}, \mathrm{jobs} \}\)
-
-
-\section{Current design.}
-\label{\detokenize{example-electrolysis:current-design}}
-\(I_\mathrm{water} = 19.04~\mathrm{g/mole}\)
-
-\(\eta_\mathrm{water} = 0.95\) (due to mass transport loss on input)
-
-\(I_\mathrm{electricity} = 279~\mathrm{kJ/mole}\)
-
-\(\eta_\mathrm{electricity} = 0.85\) (due to ohmic losses on input)
-
-\(\eta_\mathrm{oxygen} = 0.90\) (due to mass transport loss on
-output)
-
-\(\eta_\mathrm{hydrogen} = 0.90\) (due to mass transport loss on
-output)
-
-
-\section{Current costs.}
-\label{\detokenize{example-electrolysis:current-costs}}
-\(C_\mathrm{catalyst} = \left( 0.63~\mathrm{USD} \right) \cdot \frac{S}{6650~\mathrm{mole/yr}}\)
-(cost of Al-Ni catalyst)
-
-\(\tau_\mathrm{catalyst} = 3~\mathrm{yr}\) (effective lifetime of
-Al-Ni catalyst)
-
-\(F_\mathrm{rent} = \left( 1000~\mathrm{USD/yr} \right) \cdot \frac{S}{6650~\mathrm{mole/yr}}\)
-
-\(S = 6650~\mathrm{mole/yr}\) (rough estimate for a 50W setup)
-
-
-\section{Current prices.}
-\label{\detokenize{example-electrolysis:current-prices}}
-\(p_\mathrm{water} = 4.8 \cdot 10^{-3}~\mathrm{USD/mole}\)
-
-\(p_\mathrm{electricity} = 3.33 \cdot 10^{-5}~\mathrm{USD/kJ}\)
-
-\(p_\mathrm{oxygen} = 3.0 \cdot 10^{-3}~\mathrm{USD/g}\)
-
-\(p_\mathrm{hydrogen} = 1.0 \cdot 10^{-2}~\mathrm{USD/g}\)
-
-
-\section{Production function (à la Leontief)}
-\label{\detokenize{example-electrolysis:production-function-a-la-leontief}}
-\(P_\mathrm{oxygen} = \left( 16.00~\mathrm{g} \right) \cdot \min \left\{ \frac{I^*_\mathrm{water}}{18.08~\mathrm{g}}, \frac{I^*_\mathrm{electricity}}{237~\mathrm{kJ}} \right\}\)
-
-\(P_\mathrm{hydrogen} = \left( 2.00~\mathrm{g} \right) \cdot \min \left\{ \frac{I^*_\mathrm{water}}{18.08~\mathrm{g}}, \frac{I^*_\mathrm{electricity}}{237~\mathrm{kJ}} \right\}\)
-
-
-\section{Metric function.}
-\label{\detokenize{example-electrolysis:metric-function}}
-\(M_\mathrm{cost} = K / O_\mathrm{hydrogen}\)
-
-\(M_\mathrm{GHG} = \left( \left( 0.00108~\mathrm{gCO2e/gH20} \right) I_\mathrm{water} + \left( 0.138~\mathrm{gCO2e/kJ} \right) I_\mathrm{electricity} \right) / O_\mathrm{hydrogen}\)
-
-\(M_\mathrm{jobs} = \left( 0.00015~\mathrm{job/mole} \right) / O_\mathrm{hydrogen}\)
-
-
-\section{Performance of current design.}
-\label{\detokenize{example-electrolysis:performance-of-current-design}}
-\(K = 0.18~\mathrm{USD/mole}\) (i.e., not profitable since it is
-positive)
-
-\(O_\mathrm{oxygen} = 14~\mathrm{g/mole}\)
-
-\(O_\mathrm{hydrogen} = 1.8~\mathrm{g/mole}\)
-
-\(\mu_\mathrm{cost} = 0.102~\mathrm{USD/gH2}\)
-
-\(\mu_\mathrm{GHG} = 21.4~\mathrm{gCO2e/gH2}\)
-
-\(\mu_\mathrm{jobs} = 0.000083~\mathrm{job/gH2}\)
 
 
 \chapter{Database Schema}
@@ -2450,100 +3836,6 @@ High Electrolysis R\&D
 \end{tabulary}
 \par
 \sphinxattableend\end{savenotes}
-
-
-\chapter{Defining Technologies}
-\label{\detokenize{example-technology:defining-technologies}}\label{\detokenize{example-technology::doc}}
-Each technology design requires a Python module with a capital cost, a
-fixed cost, a production, and a metrics function. \hyperref[\detokenize{example-technology:lst-electrolysis}]{Listing \ref{\detokenize{example-technology:lst-electrolysis}}}
-shows these functions for the simple electrolysis example.
-\sphinxSetupCaptionForVerbatim{Example technology-defining functions.}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{example-technology:lst-electrolysis}}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{} Simple electrolysis.}
-
-
-\PYG{c+c1}{\PYGZsh{} All of the computations must be vectorized, so use {}`numpy{}`.}
-\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
-
-
-\PYG{c+c1}{\PYGZsh{} Capital\PYGZhy{}cost function.}
-\PYG{k}{def} \PYG{n+nf}{capital\PYGZus{}cost}\PYG{p}{(}
-  \PYG{n}{scale}\PYG{p}{,}
-  \PYG{n}{parameter}
-\PYG{p}{)}\PYG{p}{:}
-
-  \PYG{c+c1}{\PYGZsh{} Scale the reference values.}
-  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}
-    \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{scale}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{)}
-  \PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
-
-
-\PYG{c+c1}{\PYGZsh{} Fixed\PYGZhy{}cost function.}
-\PYG{k}{def} \PYG{n+nf}{fixed\PYGZus{}cost}\PYG{p}{(}
-  \PYG{n}{scale}\PYG{p}{,}
-  \PYG{n}{parameter}
-\PYG{p}{)}\PYG{p}{:}
-
-  \PYG{c+c1}{\PYGZsh{} Scale the reference values.}
-  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}
-    \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{scale}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{)}
-  \PYG{p}{)}\PYG{p}{]}\PYG{p}{)}
-
-
-\PYG{c+c1}{\PYGZsh{} Production function.}
-\PYG{k}{def} \PYG{n+nf}{production}\PYG{p}{(}
-  \PYG{n}{capital}\PYG{p}{,}
-  \PYG{n}{fixed}\PYG{p}{,}
-  \PYG{n+nb}{input}\PYG{p}{,}
-  \PYG{n}{parameter}
-\PYG{p}{)}\PYG{p}{:}
-
-  \PYG{c+c1}{\PYGZsh{} Moles of input.}
-  \PYG{n}{water}       \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{)}
-  \PYG{n}{electricity} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{)}
-
-  \PYG{c+c1}{\PYGZsh{} Moles of output.}
-  \PYG{n}{output} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{minimum}\PYG{p}{(}\PYG{n}{water}\PYG{p}{,} \PYG{n}{electricity}\PYG{p}{)}
-
-  \PYG{c+c1}{\PYGZsh{} Grams of output.}
-  \PYG{n}{oxygen}   \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
-  \PYG{n}{hydrogen} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{output}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-
-  \PYG{c+c1}{\PYGZsh{} Package results.}
-  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{oxygen}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{]}\PYG{p}{)}
-
-
-\PYG{c+c1}{\PYGZsh{} Metrics function.}
-\PYG{k}{def} \PYG{n+nf}{metrics}\PYG{p}{(}
-  \PYG{n}{capital}\PYG{p}{,}
-  \PYG{n}{fixed}\PYG{p}{,}
-  \PYG{n}{input\PYGZus{}raw}\PYG{p}{,}
-  \PYG{n+nb}{input}\PYG{p}{,}
-  \PYG{n}{img}\PYG{o}{/}\PYG{n}{output\PYGZus{}raw}\PYG{p}{,}
-  \PYG{n}{output}\PYG{p}{,}
-  \PYG{n}{cost}\PYG{p}{,}
-  \PYG{n}{parameter}
-\PYG{p}{)}\PYG{p}{:}
-
-  \PYG{c+c1}{\PYGZsh{} Hydrogen output.}
-  \PYG{n}{hydrogen} \PYG{o}{=} \PYG{n}{output}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
-
-  \PYG{c+c1}{\PYGZsh{} Cost of hydrogen.}
-  \PYG{n}{cost1} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{cost}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{)}
-
-  \PYG{c+c1}{\PYGZsh{} Jobs normalized to hydrogen.}
-  \PYG{n}{jobs} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{)}
-
-  \PYG{c+c1}{\PYGZsh{} GHGs associated with water and electricity.}
-  \PYG{n}{water}       \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{input\PYGZus{}raw}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{8}\PYG{p}{]}\PYG{p}{)}
-  \PYG{n}{electricity} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{multiply}\PYG{p}{(}\PYG{n}{input\PYGZus{}raw}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{parameter}\PYG{p}{[}\PYG{l+m+mi}{9}\PYG{p}{]}\PYG{p}{)}
-  \PYG{n}{co2e} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{divide}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{water}\PYG{p}{,} \PYG{n}{electricity}\PYG{p}{)}\PYG{p}{,} \PYG{n}{hydrogen}\PYG{p}{)}
-
-  \PYG{c+c1}{\PYGZsh{} Package results.}
-  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{p}{[}\PYG{n}{cost1}\PYG{p}{,} \PYG{n}{jobs}\PYG{p}{,} \PYG{n}{co2e}\PYG{p}{]}\PYG{p}{)}
-\end{sphinxVerbatim}
 
 
 \chapter{Optimization}
@@ -3586,1201 +4878,41 @@ A user can toggle between their visualization options using the links
 default, Eutychia opens to the grid layout.
 
 
+\section{Running the Server}
+\label{\detokenize{user-interface:running-the-server}}
+Visit the folder \sphinxcode{\sphinxupquote{src/eutychia/}} and start the server in debug mode
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cd} \PYG{n}{src}\PYGZbs{}\PYG{n}{eutychia}
+\PYG{n}{debug}\PYG{o}{.}\PYG{n}{cmd}
+\end{sphinxVerbatim}
+
+on Windows, or on Mac
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cd} \PYG{n}{src}\PYG{o}{/}\PYG{n}{eutychia}
+\PYG{o}{.}\PYG{o}{/}\PYG{n}{debug}\PYG{o}{.}\PYG{n}{sh}
+\end{sphinxVerbatim}
+
+or in production mode
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cd} \PYG{n}{src}\PYGZbs{}\PYG{n}{eutychia}
+\PYG{n}{run}\PYG{o}{.}\PYG{n}{cmd}
+\end{sphinxVerbatim}
+
+on Windows, or on Mac
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{cd} \PYG{n}{src}\PYG{o}{/}\PYG{n}{eutychia}
+\PYG{o}{.}\PYG{o}{/}\PYG{n}{run}\PYG{o}{.}\PYG{n}{sh}
+\end{sphinxVerbatim}
+
+and then visit \sphinxurl{http://127.0.0.1:5000/}.
+
+
 \section{References}
 \label{\detokenize{user-interface:references}}
-
-\chapter{Tutorial}
-\label{\detokenize{tutorial:tutorial}}\label{\detokenize{tutorial::doc}}
-Multiple Objectives for Residential PV.
-
-
-\section{Import packages.}
-\label{\detokenize{tutorial:import-packages}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{os}
-\PYG{k+kn}{import} \PYG{n+nn}{sys}
-\PYG{n}{sys}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{abspath}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{../src}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{numpy}             \PYG{k}{as} \PYG{n+nn}{np}
-\PYG{k+kn}{import} \PYG{n+nn}{matplotlib}\PYG{n+nn}{.}\PYG{n+nn}{pyplot} \PYG{k}{as} \PYG{n+nn}{pl}
-\PYG{k+kn}{import} \PYG{n+nn}{pandas}            \PYG{k}{as} \PYG{n+nn}{pd}
-\PYG{k+kn}{import} \PYG{n+nn}{seaborn}           \PYG{k}{as} \PYG{n+nn}{sb}
-\PYG{k+kn}{import} \PYG{n+nn}{tyche}             \PYG{k}{as} \PYG{n+nn}{ty}
-
-\PYG{k+kn}{from} \PYG{n+nn}{copy}            \PYG{k+kn}{import} \PYG{n}{deepcopy}
-\PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}
-\end{sphinxVerbatim}
-
-
-\section{Load data.}
-\label{\detokenize{tutorial:load-data}}
-The data are stored in a set of tab-separated value files in a folder.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Designs}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{data/pv\PYGZus{}residential\PYGZus{}simple}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investments} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Investments}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{data/pv\PYGZus{}residential\PYGZus{}simple}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Compile the production and metric functions for each technology in the dataset.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\section{Examine the data.}
-\label{\detokenize{tutorial:examine-the-data}}
-The \sphinxcode{\sphinxupquote{functions}} table specifies where the Python code for each technology resides.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{functions}
-\end{sphinxVerbatim}
-
-
-
-Right now, only the style \sphinxcode{\sphinxupquote{numpy}} is supported.
-
-The \sphinxcode{\sphinxupquote{indices}} table defines the subscripts for variables.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{indices}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{designs}} table contains the cost, input, efficiency, and price data for a scenario.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{designs}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{parameters}} table contains additional techno-economic parameters for each technology.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{parameters}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{results}} table specifies the units of measure for results of computations.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{results}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{tranches}} table specifies multually exclusive possibilities for investments: only one \sphinxcode{\sphinxupquote{Tranch}} may be selected for each \sphinxcode{\sphinxupquote{Category}}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investments}\PYG{o}{.}\PYG{n}{tranches}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of tranches (one per category) into an overall investment.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investments}\PYG{o}{.}\PYG{n}{investments}
-\end{sphinxVerbatim}
-
-
-
-
-\section{Evaluate the scenarios in the dataset.}
-\label{\detokenize{tutorial:evaluate-the-scenarios-in-the-dataset}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results} \PYG{o}{=} \PYG{n}{designs}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}scenarios}\PYG{p}{(}\PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-
-\subsection{Save results.}
-\label{\detokenize{tutorial:save-results}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}scenario.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Plot GHG metric.}
-\label{\detokenize{tutorial:plot-ghg-metric}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-        \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
-        \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}     \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
-    \PYG{p}{]}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG Reduction [gCO2e / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_35_0}.png}
-
-
-\subsection{Plot LCOE metric.}
-\label{\detokenize{tutorial:plot-lcoe-metric}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-        \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
-        \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}     \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
-    \PYG{p}{]}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE Reduction [USD / kWh]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_37_0}.png}
-
-
-\subsection{Plot labor metric.}
-\label{\detokenize{tutorial:plot-labor-metric}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-        \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
-        \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}    \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Moderate Progress}\PYG{l+s+s2}{\PYGZdq{}}     \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS Fast Progress}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
-    \PYG{p}{]}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor Increase [USD / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_39_0}.png}
-
-
-\section{Evaluate the investments in the dataset.}
-\label{\detokenize{tutorial:evaluate-the-investments-in-the-dataset}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results} \PYG{o}{=} \PYG{n}{investments}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}investments}\PYG{p}{(}\PYG{n}{designs}\PYG{p}{,} \PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Costs of investments.}
-\label{\detokenize{tutorial:costs-of-investments}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}
-\end{sphinxVerbatim}
-
-
-
-
-\subsection{Benefits of investments.}
-\label{\detokenize{tutorial:benefits-of-investments}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-
-\subsection{Save results.}
-\label{\detokenize{tutorial:save-results-1}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}investment\PYGZhy{}amounts.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}investment\PYGZhy{}metrics.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Plot GHG metric.}
-\label{\detokenize{tutorial:plot-ghg-metric-1}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Low R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}   \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Medium R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{High R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
-    \PYG{p}{]}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG Reduction [gCO2e / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_51_0}.png}
-
-
-\subsection{Plot LCOE metric.}
-\label{\detokenize{tutorial:plot-lcoe-metric-1}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Low R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}   \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Medium R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{High R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
-    \PYG{p}{]}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE Reduction [USD / kWh]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_53_0}.png}
-
-
-\subsection{Plot labor metric.}
-\label{\detokenize{tutorial:plot-labor-metric-1}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Low R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}   \PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Medium R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{High R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}  \PYG{p}{,}
-    \PYG{p}{]}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set}\PYG{p}{(}\PYG{n}{ylabel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor Increase [USD / system]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticklabels}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{get\PYGZus{}xticklabels}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{)}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_55_0}.png}
-
-
-\section{Multi-objective decision analysis.}
-\label{\detokenize{tutorial:multi-objective-decision-analysis}}
-
-\subsection{Compute costs and metrics for tranches.}
-\label{\detokenize{tutorial:compute-costs-and-metrics-for-tranches}}
-Tranches are atomic units for building investment portfolios. Evaluate
-all of the tranches, so we can assemble them into investments
-(portfolios).
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tranche\PYGZus{}results} \PYG{o}{=} \PYG{n}{investments}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}tranches}\PYG{p}{(}\PYG{n}{designs}\PYG{p}{,} \PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Display the cost of each tranche.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}
-\end{sphinxVerbatim}
-
-
-
-Display the metrics for each tranche.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}
-\end{sphinxVerbatim}
-
-
-
-Save the results.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}tranche\PYGZhy{}amounts.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}tranche\PYGZhy{}summary.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Fit a response surface to the results.}
-\label{\detokenize{tutorial:fit-a-response-surface-to-the-results}}
-The response surface interpolates between the discrete set of cases
-provided in the expert elicitation. This allows us to study funding
-levels intermediate between those scenarios.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{evaluator} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Evaluator}\PYG{p}{(}\PYG{n}{investments}\PYG{o}{.}\PYG{n}{tranches}\PYG{p}{,} \PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Here are the categories of investment and the maximum amount that could
-be invested in each:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{max\PYGZus{}amount}
-\end{sphinxVerbatim}
-
-
-
-Here are the metrics and their units of measure:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{units}
-\end{sphinxVerbatim}
-
-
-
-
-\subsubsection{Example interpolation.}
-\label{\detokenize{tutorial:example-interpolation}}
-Let’s evaluate the case where each category is invested in at half of
-its maximum amount.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{example\PYGZus{}investments} \PYG{o}{=} \PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{max\PYGZus{}amount} \PYG{o}{/} \PYG{l+m+mi}{2}
-\PYG{n}{example\PYGZus{}investments}
-\end{sphinxVerbatim}
-
-
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Category}    \PYG{n}{Index}  \PYG{n}{Sample}
-\PYG{n}{BoS} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}     \PYG{n}{GHG}    \PYG{l+m+mi}{1}         \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.0010586097518157094}
-                   \PYG{l+m+mi}{2}          \PYG{l+m+mf}{7.493162517135921e\PYGZhy{}05}
-                   \PYG{l+m+mi}{3}           \PYG{l+m+mf}{0.001253893601450784}
-                   \PYG{l+m+mi}{4}           \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00398626797827717}
-                   \PYG{l+m+mi}{5}          \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.005572343870333896}
-                                      \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
-\PYG{n}{Module} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}  \PYG{n}{Labor}  \PYG{l+m+mi}{46}          \PYG{l+m+mf}{0.014371009324918305}
-                   \PYG{l+m+mi}{47}          \PYG{l+m+mf}{0.011128728287076228}
-                   \PYG{l+m+mi}{48}         \PYG{l+m+mf}{0.0039832773605894545}
-                   \PYG{l+m+mi}{49}          \PYG{l+m+mf}{0.006026680267950724}
-                   \PYG{l+m+mi}{50}          \PYG{l+m+mf}{0.028844695933457842}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{Length}\PYG{p}{:} \PYG{l+m+mi}{450}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n+nb}{object}
-\end{sphinxVerbatim}
-
-Let’s evaluate the mean instead of outputing the whole distribution.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}statistic}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Index}
-\PYG{n}{GHG}       \PYG{l+m+mf}{30.156830}
-\PYG{n}{LCOE}       \PYG{l+m+mf}{0.038160}
-\PYG{n}{Labor}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{246.843027}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-Here is the standard deviation:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}statistic}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{std}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Index}
-\PYG{n}{GHG}       \PYG{l+m+mf}{1.410956}
-\PYG{n}{LCOE}      \PYG{l+m+mf}{0.000850}
-\PYG{n}{Labor}    \PYG{l+m+mf}{16.070395}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-A risk-averse decision maker might be interested in the 10\% percentile:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}statistic}\PYG{p}{(}\PYG{n}{example\PYGZus{}investments}\PYG{p}{,} \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Index}
-\PYG{n}{GHG}       \PYG{l+m+mf}{28.573627}
-\PYG{n}{LCOE}       \PYG{l+m+mf}{0.037140}
-\PYG{n}{Labor}   \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{268.059699}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-
-\subsection{\(\epsilon\)-Constraint multiobjective optimization}
-\label{\detokenize{tutorial:constraint-multiobjective-optimization}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{optimizer} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{EpsilonConstraintOptimizer}\PYG{p}{(}\PYG{n}{evaluator}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-In order to meaningfully map the decision space, we need to know the
-maximum values for each of the metrics.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{metric\PYGZus{}max} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{max\PYGZus{}metrics}\PYG{p}{(}\PYG{p}{)}
-\PYG{n}{metric\PYGZus{}max}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{GHG}      \PYG{l+m+mf}{49.429976}
-\PYG{n}{LCOE}      \PYG{l+m+mf}{0.062818}
-\PYG{n}{Labor}     \PYG{l+m+mf}{0.049555}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-
-\subsubsection{Example optimization.}
-\label{\detokenize{tutorial:example-optimization}}
-Limit spending to \$3M.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}max} \PYG{o}{=} \PYG{l+m+mf}{3e6}
-\end{sphinxVerbatim}
-
-Require that the GHG reduction be at least 40 gCO2e/system and that the
-Labor wages not decrease.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{metric\PYGZus{}min} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{40}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{n}{metric\PYGZus{}min}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{GHG}      \PYG{l+m+mi}{40}
-\PYG{n}{Labor}     \PYG{l+m+mi}{0}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{int64}
-\end{sphinxVerbatim}
-
-Compute the \(\epsilon\)-constrained maximum for the LCOE.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}                       \PYG{p}{,}
-    \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}\PYG{p}{,}
-    \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{metric\PYGZus{}min}    \PYG{p}{,}
-    \PYG{n}{statistic}    \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}       \PYG{p}{,}
-\PYG{p}{)}
-\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Optimization terminated successfully.}\PYG{l+s+s1}{\PYGZsq{}}
-\end{sphinxVerbatim}
-
-Here are the optimal spending levels:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{amounts}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Category}
-\PYG{n}{BoS} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}               \PYG{l+m+mf}{0.0}
-\PYG{n}{Inverter} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}          \PYG{l+m+mf}{0.0}
-\PYG{n}{Module} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}      \PYG{l+m+mf}{3000000.0}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Amount}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-Here are the three metrics at that optimum:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Index}
-\PYG{n}{GHG}      \PYG{l+m+mf}{41.627691}
-\PYG{n}{LCOE}      \PYG{l+m+mf}{0.037566}
-\PYG{n}{Labor}     \PYG{l+m+mf}{0.028691}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-\sphinxstyleemphasis{Thus, by putting all of the investment into Module R\&D, we can expected
-to achieve a mean 3.75 ¢/kWh reduction in LCOE under the GHG and Labor
-constraints.}
-
-It turns out that there is no solution for these constraints if we
-evaluate the 10th percentile of the metrics, for a risk-averse decision
-maker.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}                       \PYG{p}{,}
-    \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}\PYG{p}{,}
-    \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{metric\PYGZus{}min}    \PYG{p}{,}
-    \PYG{n}{statistic}    \PYG{o}{=} \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}\PYG{p}{,}
-\PYG{p}{)}
-\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Iteration limit exceeded}\PYG{l+s+s1}{\PYGZsq{}}
-\end{sphinxVerbatim}
-
-Let’s try again, but with a less stringent set of constraints, only
-constraining GHG somewhat but not Labor at all.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}                                                         \PYG{p}{,}
-    \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}                                  \PYG{p}{,}
-    \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mi}{30}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
-    \PYG{n}{statistic}    \PYG{o}{=} \PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{quantile}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{l+m+mf}{0.1}\PYG{p}{)}                   \PYG{p}{,}
-\PYG{p}{)}
-\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Optimization terminated successfully.}\PYG{l+s+s1}{\PYGZsq{}}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{np}\PYG{o}{.}\PYG{n}{round}\PYG{p}{(}\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{amounts}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Category}
-\PYG{n}{BoS} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}               \PYG{l+m+mf}{0.0}
-\PYG{n}{Inverter} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}          \PYG{l+m+mf}{0.0}
-\PYG{n}{Module} \PYG{n}{R}\PYG{o}{\PYGZam{}}\PYG{n}{D}      \PYG{l+m+mf}{3000000.0}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Amount}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Index}
-\PYG{n}{GHG}      \PYG{l+m+mf}{39.046988}
-\PYG{n}{LCOE}      \PYG{l+m+mf}{0.036463}
-\PYG{n}{Labor}    \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.019725}
-\PYG{n}{Name}\PYG{p}{:} \PYG{n}{Value}\PYG{p}{,} \PYG{n}{dtype}\PYG{p}{:} \PYG{n}{float64}
-\end{sphinxVerbatim}
-
-
-\subsection{Pareto surfaces.}
-\label{\detokenize{tutorial:pareto-surfaces}}
-
-\subsubsection{Metrics constrained by total investment.}
-\label{\detokenize{tutorial:metrics-constrained-by-total-investment}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{pareto\PYGZus{}amounts} \PYG{o}{=} \PYG{k+kc}{None}
-\PYG{k}{for} \PYG{n}{investment\PYGZus{}max} \PYG{o+ow}{in} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mf}{1e6}\PYG{p}{,} \PYG{l+m+mf}{9e6}\PYG{p}{,} \PYG{l+m+mf}{0.5e6}\PYG{p}{)}\PYG{p}{:}
-    \PYG{n}{metrics} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{max\PYGZus{}metrics}\PYG{p}{(}\PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max}\PYG{p}{)}
-    \PYG{n}{pareto\PYGZus{}amounts} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}
-        \PYG{p}{[}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{values}\PYG{p}{]}                                         \PYG{p}{,}
-        \PYG{n}{columns} \PYG{o}{=} \PYG{n}{metrics}\PYG{o}{.}\PYG{n}{index}\PYG{o}{.}\PYG{n}{values}                           \PYG{p}{,}
-        \PYG{n}{index}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Index}\PYG{p}{(}\PYG{p}{[}\PYG{n}{investment\PYGZus{}max} \PYG{o}{/} \PYG{l+m+mf}{1e6}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{,}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{pareto\PYGZus{}amounts}\PYG{p}{)}
-\PYG{n}{pareto\PYGZus{}amounts}
-\end{sphinxVerbatim}
-
-
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sb}\PYG{o}{.}\PYG{n}{relplot}\PYG{p}{(}
-    \PYG{n}{x}         \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y}         \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}          \PYG{p}{,}
-    \PYG{n}{col}       \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}         \PYG{p}{,}
-    \PYG{n}{kind}      \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{line}\PYG{l+s+s2}{\PYGZdq{}}           \PYG{p}{,}
-    \PYG{n}{facet\PYGZus{}kws} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{sharey}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{k+kc}{False}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
-    \PYG{n}{data}      \PYG{o}{=} \PYG{n}{pareto\PYGZus{}amounts}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{melt}\PYG{p}{(}\PYG{n}{id\PYGZus{}vars} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{var\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{value\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o}{\PYGZlt{}}\PYG{n}{seaborn}\PYG{o}{.}\PYG{n}{axisgrid}\PYG{o}{.}\PYG{n}{FacetGrid} \PYG{n}{at} \PYG{l+m+mh}{0x7f9da11752b0}\PYG{o}{\PYGZgt{}}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_108_1}.png}
-
-\sphinxstyleemphasis{We see that the LCOE metric saturates more slowly than the GHG and
-Labor ones.}
-
-
-\subsubsection{GHG vs LCOE, constrained by total investment.}
-\label{\detokenize{tutorial:ghg-vs-lcoe-constrained-by-total-investment}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}max} \PYG{o}{=} \PYG{l+m+mi}{3}
-\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe} \PYG{o}{=} \PYG{k+kc}{None}
-\PYG{k}{for} \PYG{n}{lcoe\PYGZus{}min} \PYG{o+ow}{in} \PYG{l+m+mf}{0.95} \PYG{o}{*} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{p}{,} \PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{l+m+mf}{0.05}\PYG{p}{)} \PYG{o}{*} \PYG{n}{pareto\PYGZus{}amounts}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{n}{investment\PYGZus{}max}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{:}
-    \PYG{n}{optimum} \PYG{o}{=} \PYG{n}{optimizer}\PYG{o}{.}\PYG{n}{maximize}\PYG{p}{(}
-        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-        \PYG{n}{max\PYGZus{}amount}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{l+m+mf}{0.9e6}\PYG{p}{,} \PYG{l+m+mf}{3.0e6}\PYG{p}{,} \PYG{l+m+mf}{1.0e6}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Amount}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{BoS R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Inverter R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module R\PYGZam{}D}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
-        \PYG{n}{total\PYGZus{}amount} \PYG{o}{=} \PYG{n}{investment\PYGZus{}max} \PYG{o}{*} \PYG{l+m+mf}{1e6}                                 \PYG{p}{,}
-        \PYG{n}{min\PYGZus{}metric}   \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{(}\PYG{p}{[}\PYG{n}{lcoe\PYGZus{}min}\PYG{p}{]}\PYG{p}{,} \PYG{n}{name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}
-    \PYG{p}{)}
-    \PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}
-        \PYG{p}{[}\PYG{p}{[}\PYG{n}{investment\PYGZus{}max}\PYG{p}{,} \PYG{n}{lcoe\PYGZus{}min}\PYG{p}{,} \PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{optimum}\PYG{o}{.}\PYG{n}{metrics}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{optimum}\PYG{o}{.}\PYG{n}{exit\PYGZus{}message}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
-        \PYG{n}{columns} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE (min)}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Result}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}                               \PYG{p}{,}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}\PYG{p}{)}
-\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe} \PYG{o}{=} \PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment [M\PYGZdl{}]}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE (min)}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}
-\end{sphinxVerbatim}
-
-
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{sb}\PYG{o}{.}\PYG{n}{relplot}\PYG{p}{(}
-    \PYG{n}{x} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{y} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{kind} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{scatter}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data} \PYG{o}{=} \PYG{n}{pareto\PYGZus{}ghg\PYGZus{}lcoe}\PYG{c+c1}{\PYGZsh{}[pareto\PYGZus{}ghg\PYGZus{}lcoe.Result == \PYGZdq{}Optimization terminated successfully.\PYGZdq{}]}
-\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o}{\PYGZlt{}}\PYG{n}{seaborn}\PYG{o}{.}\PYG{n}{axisgrid}\PYG{o}{.}\PYG{n}{FacetGrid} \PYG{n}{at} \PYG{l+m+mh}{0x7f9da13ae630}\PYG{o}{\PYGZgt{}}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_112_1}.png}
-
-\sphinxstyleemphasis{The three types of investment are too decoupled to make an interesting
-pareto frontier, and we also need a better solver if we want to push to
-lower right.}
-
-
-\section{Run the interactive explorer for the decision space.}
-\label{\detokenize{tutorial:run-the-interactive-explorer-for-the-decision-space}}
-Make sure the the \sphinxcode{\sphinxupquote{tk}} package is installed on your machine. Here is
-the Anaconda link: \sphinxurl{https://anaconda.org/anaconda/tk}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{w} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{DecisionWindow}\PYG{p}{(}\PYG{n}{evaluator}\PYG{p}{)}
-\PYG{n}{w}\PYG{o}{.}\PYG{n}{mainloop}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-A new window should open that looks like the image below. Moving the
-sliders will cause a recomputation of the boxplots.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{Image}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{pv\PYGZus{}residential\PYGZus{}simple\PYGZus{}gui.png}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_118_0}.png}
-
-
-\chapter{Mock FOA Definition}
-\label{\detokenize{mock-foa:mock-foa-definition}}\label{\detokenize{mock-foa::doc}}
-
-\section{Background}
-\label{\detokenize{mock-foa:background}}
-Understanding the FOA process is essential to designing an effective
-tool to make to make technically and analytically-based decisions. The
-“Mock FOA” process takes a service design approach to understanding the
-FOA-writing process as it stands. The Mock FOA began with interviews
-with five previous DOE detailees and seven senior DOE staff who have led
-multiple FOA development efforts. A major theme emerged: effective
-communication of analysis logic and results poses one of the largest
-challenges during the FOA process.
-
-A decision-support tool could assist in the communication necessary to
-percolate this technical information up the chain. Interview findings
-were formalized in collaboration with the NREL service design team to
-understand where such a tool could make the greatest impact. The team
-considered the steps taken to issue a FOA, resources referenced, and
-decision-makers involved.
-
-
-\subsection{Phases}
-\label{\detokenize{mock-foa:phases}}
-Interviews revealed that, while all FOA processes are unique and highly
-non-linear, specific actions must occur. These characterize phases of
-the FOA journey:
-\begin{enumerate}
-\def\theenumi{\arabic{enumi}}
-\def\labelenumi{\theenumi .}
-\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
-\item {} 
-\sphinxstylestrong{Launch}. Decide to issue a FOA.
-
-\item {} 
-\sphinxstylestrong{Frame}. Formulate a plan to collect the information necessary to write the FOA
-
-\item {} 
-\sphinxstylestrong{Scope}. Investigate topic options.
-
-\item {} 
-\sphinxstylestrong{Draft}. Compile information into draft FOA.
-
-\item {} 
-\sphinxstylestrong{Refine}. Prepare FOA for distribution.
-
-\end{enumerate}
-
-The specific needs of each phase inform the tool \sphinxstylestrong{content}.
-
-
-\subsection{Roles}
-\label{\detokenize{mock-foa:roles}}
-The team considered that different staff members will interact with this
-information differently and prefer different methods of data
-communication. These roles were characterized by “personae” defined by
-level of involvement in the FOA-writing process.
-\begin{itemize}
-\item {} 
-Technical analyst
-
-\item {} 
-Technical lead
-
-\item {} 
-FOA lead
-
-\item {} 
-Approver
-
-\end{itemize}
-
-Decision makers in each of these roles will interact with tool output.
-The tool users determine how the tool will be used and how its content
-will be displayed, informing \sphinxstylestrong{interactions and data visualization}.
-For example, a user who will view the tool output in a presentation will
-need a static representation of the tool output.
-
-
-\section{Potential topics}
-\label{\detokenize{mock-foa:potential-topics}}
-Prototyping a tool requires content. The team referenced two previous
-FOAs to understand the break-down of topic areas. We then extracted FOA
-topic/subtopic areas and metrics from 2016 budget request, combining
-hard/soft cost-focused FOAs to examine how to compete the two and avoid
-directly analyzing a specific past FOA. Following this process further
-informed the team’s understanding of how decision-makers might decide
-what to input into the tool.
-
-Topics under consideration might be assessed by the following metrics:
-\begin{itemize}
-\item {} 
-\$/W$_{\text{DC}}$
-
-\item {} 
-\$/kWh
-
-\item {} 
-Strategic metal content (lifetime)
-
-\item {} 
-Hazardous waste content (lifetime)
-
-\item {} 
-Lifetime
-
-\item {} 
-Reliability
-
-\item {} 
-Emissions
-
-\item {} 
-Labor
-
-\end{itemize}
-
-The following text details topic areas considered for Tyche tool
-development.
-
-
-\subsection{1. Crystaline silicon wafer design}
-\label{\detokenize{mock-foa:crystaline-silicon-wafer-design}}\begin{itemize}
-\item {} 
-Wafer area
-
-\item {} 
-Wafer thickness
-
-\item {} 
-Wafer density
-
-\item {} 
-Silicon utilization
-
-\item {} 
-Production yield
-
-\end{itemize}
-
-
-\subsection{2. Tandem thin-films}
-\label{\detokenize{mock-foa:tandem-thin-films}}\begin{itemize}
-\item {} 
-Design parameters
-
-\item {} 
-Architectures
-
-\end{itemize}
-
-
-\subsection{3. Polysilicon module}
-\label{\detokenize{mock-foa:polysilicon-module}}\begin{itemize}
-\item {} 
-(many parameters)
-
-\end{itemize}
-
-
-\subsection{4. Module design}
-\label{\detokenize{mock-foa:module-design}}\begin{itemize}
-\item {} 
-Module Capital
-
-\item {} 
-Module Lifetime
-
-\item {} 
-Module Efficiency
-
-\item {} 
-Module Aperture
-
-\item {} 
-Module O\&M Fixed
-
-\item {} 
-Module Degradation
-
-\item {} 
-Module Soiling Loss
-
-\end{itemize}
-
-
-\subsection{5. Inverter design}
-\label{\detokenize{mock-foa:inverter-design}}\begin{itemize}
-\item {} 
-Inverter Capital
-
-\item {} 
-Inverter Lifetime
-
-\item {} 
-Inverter Replacement
-
-\item {} 
-Inverter Efficiency
-
-\end{itemize}
-
-
-\subsection{6. Balance-of-system design}
-\label{\detokenize{mock-foa:balance-of-system-design}}\begin{itemize}
-\item {} 
-Hardware Capital
-
-\item {} 
-Direct Labor
-
-\item {} 
-Permitting
-
-\item {} 
-Customer Acquisition
-
-\item {} 
-Installer Overhead \& Profit
-
-\end{itemize}
-
-
-\chapter{Mock FOA Example}
-\label{\detokenize{ioc-1:mock-foa-example}}\label{\detokenize{ioc-1::doc}}
-
-\section{Set up.}
-\label{\detokenize{ioc-1:set-up}}
-
-\subsection{Import packages.}
-\label{\detokenize{ioc-1:import-packages}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{os}
-\PYG{k+kn}{import} \PYG{n+nn}{sys}
-\PYG{n}{sys}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{abspath}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{../src}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{numpy}             \PYG{k}{as} \PYG{n+nn}{np}
-\PYG{k+kn}{import} \PYG{n+nn}{matplotlib}\PYG{n+nn}{.}\PYG{n+nn}{pyplot} \PYG{k}{as} \PYG{n+nn}{pl}
-\PYG{k+kn}{import} \PYG{n+nn}{pandas}            \PYG{k}{as} \PYG{n+nn}{pd}
-\PYG{k+kn}{import} \PYG{n+nn}{seaborn}           \PYG{k}{as} \PYG{n+nn}{sb}
-\PYG{k+kn}{import} \PYG{n+nn}{tyche}             \PYG{k}{as} \PYG{n+nn}{ty}
-
-\PYG{k+kn}{from} \PYG{n+nn}{copy}            \PYG{k+kn}{import} \PYG{n}{deepcopy}
-\PYG{k+kn}{from} \PYG{n+nn}{IPython}\PYG{n+nn}{.}\PYG{n+nn}{display} \PYG{k+kn}{import} \PYG{n}{Image}
-\end{sphinxVerbatim}
-
-
-\section{Load data.}
-\label{\detokenize{ioc-1:load-data}}
-The data are stored in a set of tab-separated value files in a folder.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Designs}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{data}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investments} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Investments}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{data}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Compile the production and metric functions for each technology in the dataset.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\section{Examine the input data.}
-\label{\detokenize{ioc-1:examine-the-input-data}}
-The \sphinxcode{\sphinxupquote{functions}} table specifies where the Python code for each technology resides.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{functions}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{indices}} table defines the subscripts for variables.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{indices}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Offset}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{axis} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{designs}} table contains the cost, input, efficiency, and price data for a scenario.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{designs}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Reference}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{level} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level} \PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{parameters}} table contains additional techno-economic parameters for each technology.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{parameters}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Offset}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{axis} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Reference}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{level} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level} \PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{results}} table specifies the units of measure for results of computations.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{results}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{tranches}} table specifies multually exclusive possibilities for investments: only one \sphinxcode{\sphinxupquote{Tranch}} may be selected for each \sphinxcode{\sphinxupquote{Category}}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investments}\PYG{o}{.}\PYG{n}{tranches}
-\end{sphinxVerbatim}
-
-
-
-The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of tranches (one per category) into an overall investment.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investments}\PYG{o}{.}\PYG{n}{investments}
-\end{sphinxVerbatim}
-
-
-
-
-\section{Evaluate the scenarios in the dataset.}
-\label{\detokenize{ioc-1:evaluate-the-scenarios-in-the-dataset}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results} \PYG{o}{=} \PYG{n}{designs}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}scenarios}\PYG{p}{(}\PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-Format results as a pivot table.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{PV Generic}\PYG{l+s+s2}{\PYGZdq{}}
-\PYG{p}{)}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}
-    \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-\PYG{p}{)}\PYG{o}{.}\PYG{n}{aggregate}\PYG{p}{(}
-    \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}
-\PYG{p}{)}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{level} \PYG{o}{=} \PYG{l+m+mi}{1}
-\PYG{p}{)}\PYG{o}{.}\PYG{n}{pivot\PYGZus{}table}\PYG{p}{(}
-    \PYG{n}{index} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{columns} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}
-\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-Print the units for the columns.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{designs}\PYG{o}{.}\PYG{n}{results}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{PV Generic}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{transpose}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-
-\section{Save results.}
-\label{\detokenize{ioc-1:save-results}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/example\PYGZhy{}scenario.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Plot the results.}
-\label{\detokenize{ioc-1:plot-the-results}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{FacetGrid}\PYG{p}{(}
-    \PYG{n}{data} \PYG{o}{=} \PYG{n}{investments}\PYG{o}{.}\PYG{n}{tranches}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{scenario\PYGZus{}results}\PYG{p}{)}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{level} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
-    \PYG{n}{row} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Category}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{col} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{sharex} \PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{,}
-    \PYG{n}{sharey} \PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{,}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}
-    \PYG{n}{sb}\PYG{o}{.}\PYG{n}{violinplot}\PYG{p}{,}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tranche}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-\PYG{p}{)}
-\end{sphinxVerbatim}
-\begin{sphinxalltt}
-/nix/store/2hqyq1p29z76wvh920r43a63sy9n1cag-python3-3.7.6-env/lib/python3.7/site-packages/seaborn/axisgrid.py:728: UserWarning: Using the violinplot function without specifying \sphinxtitleref{order} is likely to produce an incorrect plot.
-  warnings.warn(warning)
-\end{sphinxalltt}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o}{\PYGZlt{}}\PYG{n}{seaborn}\PYG{o}{.}\PYG{n}{axisgrid}\PYG{o}{.}\PYG{n}{FacetGrid} \PYG{n}{at} \PYG{l+m+mh}{0x7f93daf77d10}\PYG{o}{\PYGZgt{}}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_35_2}.png}
-
-
-\section{Evaluate the investments in the dataset.}
-\label{\detokenize{ioc-1:evaluate-the-investments-in-the-dataset}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results} \PYG{o}{=} \PYG{n}{investments}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}investments}\PYG{p}{(}\PYG{n}{designs}\PYG{p}{,} \PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Costs of investments.}
-\label{\detokenize{ioc-1:costs-of-investments}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}
-\end{sphinxVerbatim}
-
-
-
-
-\subsection{Benefits of investments.}
-\label{\detokenize{ioc-1:benefits-of-investments}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{set\PYGZus{}index}\PYG{p}{(}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Units}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{append} \PYG{o}{=} \PYG{k+kc}{True}
-\PYG{p}{)}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}
-    \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Units}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-\PYG{p}{)}\PYG{o}{.}\PYG{n}{aggregate}\PYG{p}{(}
-    \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}
-\PYG{p}{)}\PYG{o}{.}\PYG{n}{pivot\PYGZus{}table}\PYG{p}{(}
-    \PYG{n}{index} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Units}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
-    \PYG{n}{columns} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-
-
-\subsection{Save results.}
-\label{\detokenize{ioc-1:save-results-1}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{amounts}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/example\PYGZhy{}investment\PYGZhy{}amounts.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{metrics}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/example\PYGZhy{}investment\PYGZhy{}metrics.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-
-\subsection{Plot the results.}
-\label{\detokenize{ioc-1:plot-the-results-1}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}
-\end{sphinxVerbatim}
-
-
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{FacetGrid}\PYG{p}{(}
-    \PYG{n}{data} \PYG{o}{=} \PYG{n}{investment\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
-    \PYG{n}{col} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{sharex} \PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{,}
-    \PYG{n}{col\PYGZus{}wrap} \PYG{o}{=} \PYG{l+m+mi}{4}
-\PYG{p}{)}
-\PYG{n}{g}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}
-    \PYG{n}{sb}\PYG{o}{.}\PYG{n}{violinplot}\PYG{p}{,}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Investment}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-\PYG{p}{)}
-\end{sphinxVerbatim}
-\begin{sphinxalltt}
-/nix/store/2hqyq1p29z76wvh920r43a63sy9n1cag-python3-3.7.6-env/lib/python3.7/site-packages/seaborn/axisgrid.py:728: UserWarning: Using the violinplot function without specifying \sphinxtitleref{order} is likely to produce an incorrect plot.
-  warnings.warn(warning)
-\end{sphinxalltt}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{o}{\PYGZlt{}}\PYG{n}{seaborn}\PYG{o}{.}\PYG{n}{axisgrid}\PYG{o}{.}\PYG{n}{FacetGrid} \PYG{n}{at} \PYG{l+m+mh}{0x7f93dafe6750}\PYG{o}{\PYGZgt{}}
-\end{sphinxVerbatim}
-
-\noindent\sphinxincludegraphics{{output_47_2}.png}
-
 
 \chapter{Deployment Plan}
 \label{\detokenize{deployment:deployment-plan}}\label{\detokenize{deployment::doc}}
@@ -4945,83 +5077,6 @@ Ideally, the Tyche software (and its library dependencies) and its
 updates should undergo a security audit.
 
 \end{enumerate}
-
-
-\chapter{Getting Started}
-\label{\detokenize{getting-started:getting-started}}\label{\detokenize{getting-started::doc}}
-Instruction for Running the Example and the Server
-
-
-\section{Conda Environment}
-\label{\detokenize{getting-started:conda-environment}}
-Before running the example or the server, create and activate the conda
-environment:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{conda} \PYG{n}{env} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{file} \PYG{n}{conda}\PYGZbs{}\PYG{n}{win}\PYG{o}{.}\PYG{n}{yml}
-\PYG{n}{conda} \PYG{n}{activate} \PYG{n}{tyche}
-\end{sphinxVerbatim}
-
-on Windows, or on Mac
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{conda} \PYG{n}{env} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{file} \PYG{n}{conda}\PYG{o}{/}\PYG{n}{mac}\PYG{o}{.}\PYG{n}{yml}
-\PYG{n}{conda} \PYG{n}{activate} \PYG{n}{tyche}
-\end{sphinxVerbatim}
-
-If you receive an HTTPS error, consider retrying the command with the \sphinxtitleref{\textendash{}insecure} flag added.
-Note that the conda environment was created with the command:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{conda} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{n}{n} \PYG{n}{tyche} \PYG{o}{\PYGZhy{}}\PYG{n}{c} \PYG{n}{conda}\PYG{o}{\PYGZhy{}}\PYG{n}{forge} \PYG{n}{python}\PYG{o}{=}\PYG{l+m+mf}{3.7} \PYG{n}{numpy} \PYG{n}{scipy} \PYG{n}{scikit}\PYG{o}{\PYGZhy{}}\PYG{n}{learn} \PYG{n}{seaborn}\PYG{o}{=}\PYG{l+m+mf}{0.10} \PYG{n}{matplotlib}\PYG{o}{=}\PYG{l+m+mf}{3.3} \PYG{n}{quart} \PYG{n}{hypercorn} \PYG{n}{jupyter}
-\end{sphinxVerbatim}
-
-
-\section{Running the Server}
-\label{\detokenize{getting-started:running-the-server}}
-Visit the folder \sphinxcode{\sphinxupquote{src/eutychia/}} and start the server in debug mode
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{cd} \PYG{n}{src}\PYGZbs{}\PYG{n}{eutychia}
-\PYG{n}{debug}\PYG{o}{.}\PYG{n}{cmd}
-\end{sphinxVerbatim}
-
-on Windows, or on Mac
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{cd} \PYG{n}{src}\PYG{o}{/}\PYG{n}{eutychia}
-\PYG{o}{.}\PYG{o}{/}\PYG{n}{debug}\PYG{o}{.}\PYG{n}{sh}
-\end{sphinxVerbatim}
-
-or in production mode
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{cd} \PYG{n}{src}\PYGZbs{}\PYG{n}{eutychia}
-\PYG{n}{run}\PYG{o}{.}\PYG{n}{cmd}
-\end{sphinxVerbatim}
-
-on Windows, or on Mac
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{cd} \PYG{n}{src}\PYG{o}{/}\PYG{n}{eutychia}
-\PYG{o}{.}\PYG{o}{/}\PYG{n}{run}\PYG{o}{.}\PYG{n}{sh}
-\end{sphinxVerbatim}
-
-and then visit \sphinxurl{http://127.0.0.1:5000/}.
-
-
-\section{Running the Example}
-\label{\detokenize{getting-started:running-the-example}}
-Using Jupyter, first start the notebook server
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{jupyter} \PYG{n}{notebook}
-\end{sphinxVerbatim}
-
-and visit \sphinxurl{http://localhost:8888/} to select \sphinxcode{\sphinxupquote{example.ipynb}} in the folder \sphinxcode{\sphinxupquote{src/eutychia}}.
-
-Alternatively, just open \sphinxurl{example.py} in the IDE of your
-choice or run it at the command line.
 
 
 \chapter{Python API}
@@ -7805,7 +7860,7 @@ Production function.
 \label{\detokenize{technology:module-technology}}\label{\detokenize{technology:module-contents}}\index{technology (module)@\spxentry{technology}\spxextra{module}}
 
 \chapter{Indices and tables}
-\label{\detokenize{main_page:indices-and-tables}}\begin{itemize}
+\label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
 \DUrole{xref,std,std-ref}{genindex}
 
