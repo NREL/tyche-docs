@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tyche Quick Start Guide" href="cheat-sheet.html" />
+    <link rel="next" title="Quick Start Guide" href="cheat-sheet.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -41,20 +41,17 @@
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cheat-sheet.html#introduction-and-getting-started">Introduction and Getting Started</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cheat-sheet.html#set-up-tyche-package">Set up Tyche package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cheat-sheet.html#repository-organization">Repository Organization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cheat-sheet.html#defining-a-technology-model">Defining a Technology Model</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cheat-sheet.html#set-up-tyche-package">Set up Tyche package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheat-sheet.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheat-sheet.html#defining-technologies">Defining Technologies</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cheat-sheet.html#what-is-a-technology">What is a “technology”?</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cheat-sheet.html#input-datasets">Input Datasets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cheat-sheet.html#designs-dataset">Designs Dataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cheat-sheet.html#parameters-dataset">Parameters Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cheat-sheet.html#technology-model-python-file">Technology model Python file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cheat-sheet.html#technology-model">Technology Model</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cheat-sheet.html#defining-r-d-investments">Defining R&amp;D Investments</a><ul>
@@ -75,7 +72,71 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Electrolysis Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example-technology.html#production-function-a-la-leontief">Production function (à la Leontief)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-technology.html#metric-functions">Metric functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-technology.html#performance-of-current-design">Performance of current design.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-technology.html#technology-model">Technology Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analysis-tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis-tutorial.html#import-packages">Import packages.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis-tutorial.html#load-data">Load data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis-tutorial.html#examine-the-data">Examine the data.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis-tutorial.html#evaluate-the-scenarios-in-the-dataset">Evaluate the scenarios in the dataset.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#save-results">Save results.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#plot-ghg-metric">Plot GHG metric.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#plot-lcoe-metric">Plot LCOE metric.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#plot-labor-metric">Plot labor metric.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis-tutorial.html#evaluate-the-investments-in-the-dataset">Evaluate the investments in the dataset.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#costs-of-investments">Costs of investments.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#benefits-of-investments">Benefits of investments.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#save-results-1">Save results.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#plot-ghg-metric-1">Plot GHG metric.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#plot-lcoe-metric-1">Plot LCOE metric.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#plot-labor-metric-1">Plot labor metric.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis-tutorial.html#multi-objective-decision-analysis">Multi-objective decision analysis.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#compute-costs-and-metrics-for-tranches">Compute costs and metrics for tranches.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#fit-a-response-surface-to-the-results">Fit a response surface to the results.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="analysis-tutorial.html#example-interpolation">Example interpolation.</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#constraint-multiobjective-optimization">ε-Constraint multiobjective optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="analysis-tutorial.html#example-optimization">Example optimization.</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="analysis-tutorial.html#pareto-surfaces">Pareto surfaces.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="analysis-tutorial.html#metrics-constrained-by-total-investment">Metrics constrained by total investment.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="analysis-tutorial.html#ghg-vs-lcoe-constrained-by-total-investment">GHG vs LCOE, constrained by total investment.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis-tutorial.html#run-the-interactive-explorer-for-the-decision-space">Run the interactive explorer for the decision space.</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approach.html#mock-foa-definition">Mock FOA Definition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="approach.html#background">Background</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#phases">Phases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#roles">Roles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="approach.html#potential-topics">Potential topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#crystaline-silicon-wafer-design">1. Crystaline silicon wafer design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#tandem-thin-films">2. Tandem thin-films</a></li>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#polysilicon-module">3. Polysilicon module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#module-design">4. Module design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#inverter-design">5. Inverter design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="approach.html#balance-of-system-design">6. Balance-of-system design</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="formulation.html#cost">Cost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="formulation.html#waste">Waste</a></li>
@@ -85,16 +146,6 @@
 <li class="toctree-l2"><a class="reference internal" href="formulation.html#investments">Investments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="formulation.html#decision-problem">Decision problem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="formulation.html#experts">Experts</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="example-electrolysis.html#tracked-quantities">Tracked quantities.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-electrolysis.html#current-design">Current design.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-electrolysis.html#current-costs">Current costs.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-electrolysis.html#current-prices">Current prices.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-electrolysis.html#production-function-a-la-leontief">Production function (à la Leontief)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-electrolysis.html#metric-function">Metric function.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example-electrolysis.html#performance-of-current-design">Performance of current design.</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a><ul>
@@ -107,7 +158,6 @@
 <li class="toctree-l2"><a class="reference internal" href="database.html#investments">Investments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="optimizers.html#non-linear-nlp-formulation-summary">Non-Linear (NLP) Formulation Summary</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="optimizers.html#solutions-to-pv-residential-simple">Solutions to <code class="docutils literal notranslate"><span class="pre">pv_residential_simple</span></code></a></li>
@@ -140,85 +190,8 @@
 <li class="toctree-l2"><a class="reference internal" href="user-interface.html#user-input">User Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user-interface.html#modes">Modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user-interface.html#visualizations">Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-interface.html#running-the-server">Running the Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user-interface.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#import-packages">Import packages.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#load-data">Load data.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#examine-the-data">Examine the data.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#evaluate-the-scenarios-in-the-dataset">Evaluate the scenarios in the dataset.</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#save-results">Save results.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#plot-ghg-metric">Plot GHG metric.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#plot-lcoe-metric">Plot LCOE metric.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#plot-labor-metric">Plot labor metric.</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#evaluate-the-investments-in-the-dataset">Evaluate the investments in the dataset.</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#costs-of-investments">Costs of investments.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#benefits-of-investments">Benefits of investments.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#save-results-1">Save results.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#plot-ghg-metric-1">Plot GHG metric.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#plot-lcoe-metric-1">Plot LCOE metric.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#plot-labor-metric-1">Plot labor metric.</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#multi-objective-decision-analysis">Multi-objective decision analysis.</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#compute-costs-and-metrics-for-tranches">Compute costs and metrics for tranches.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#fit-a-response-surface-to-the-results">Fit a response surface to the results.</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tutorial.html#example-interpolation">Example interpolation.</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#constraint-multiobjective-optimization">ε-Constraint multiobjective optimization</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tutorial.html#example-optimization">Example optimization.</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#pareto-surfaces">Pareto surfaces.</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tutorial.html#metrics-constrained-by-total-investment">Metrics constrained by total investment.</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tutorial.html#ghg-vs-lcoe-constrained-by-total-investment">GHG vs LCOE, constrained by total investment.</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#run-the-interactive-explorer-for-the-decision-space">Run the interactive explorer for the decision space.</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mock-foa.html#background">Background</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#phases">Phases</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#roles">Roles</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="mock-foa.html#potential-topics">Potential topics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#crystaline-silicon-wafer-design">1. Crystaline silicon wafer design</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#tandem-thin-films">2. Tandem thin-films</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#polysilicon-module">3. Polysilicon module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#module-design">4. Module design</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#inverter-design">5. Inverter design</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mock-foa.html#balance-of-system-design">6. Balance-of-system design</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ioc-1.html#set-up">Set up.</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ioc-1.html#import-packages">Import packages.</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ioc-1.html#load-data">Load data.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ioc-1.html#examine-the-input-data">Examine the input data.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ioc-1.html#evaluate-the-scenarios-in-the-dataset">Evaluate the scenarios in the dataset.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ioc-1.html#save-results">Save results.</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ioc-1.html#plot-the-results">Plot the results.</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ioc-1.html#evaluate-the-investments-in-the-dataset">Evaluate the investments in the dataset.</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ioc-1.html#costs-of-investments">Costs of investments.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ioc-1.html#benefits-of-investments">Benefits of investments.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ioc-1.html#save-results-1">Save results.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ioc-1.html#plot-the-results-1">Plot the results.</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a><ul>
@@ -232,12 +205,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="deployment.html#security-considerations">Security Considerations</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#conda-environment">Conda Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#running-the-server">Running the Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting-started.html#running-the-example">Running the Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a><ul>
@@ -311,19 +278,16 @@
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Electrolysis Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis-tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approach.html#mock-foa-definition">Mock FOA Definition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
@@ -331,7 +295,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="cheat-sheet.html" title="next chapter">Tyche Quick Start Guide</a></li>
+      <li>Next: <a href="cheat-sheet.html" title="next chapter">Quick Start Guide</a></li>
   </ul></li>
 </ul>
 </div>

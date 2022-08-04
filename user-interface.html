@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="Deployment Plan" href="deployment.html" />
     <link rel="prev" title="Optimization" href="optimizers.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -162,6 +162,30 @@ select from the following options:<ul>
 (heatmap, column, grid) at the top left-hand corner of the screen. By
 default, Eutychia opens to the grid layout.</p>
 </div>
+<div class="section" id="running-the-server">
+<h2>Running the Server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h2>
+<p>Visit the folder <code class="docutils literal notranslate"><span class="pre">src/eutychia/</span></code> and start the server in debug mode</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>\<span class="n">eutychia</span>
+<span class="n">debug</span><span class="o">.</span><span class="n">cmd</span>
+</pre></div>
+</div>
+<p>on Windows, or on Mac</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span><span class="o">/</span><span class="n">eutychia</span>
+<span class="o">./</span><span class="n">debug</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>or in production mode</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>\<span class="n">eutychia</span>
+<span class="n">run</span><span class="o">.</span><span class="n">cmd</span>
+</pre></div>
+</div>
+<p>on Windows, or on Mac</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span><span class="o">/</span><span class="n">eutychia</span>
+<span class="o">./</span><span class="n">run</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>and then visit <a class="reference external" href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a>.</p>
+</div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <table class="docutils footnote" frame="void" id="footnote-1" rules="none">
@@ -195,25 +219,23 @@ Mwaskom/Seaborn: V0.11.0 (Sepetmber 2020). Zenodo.
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Electrolysis Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis-tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approach.html#mock-foa-definition">Mock FOA Definition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#user-input">User Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#modes">Modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#visualizations">Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-server">Running the Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
@@ -222,7 +244,7 @@ Mwaskom/Seaborn: V0.11.0 (Sepetmber 2020). Zenodo.
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="optimizers.html" title="previous chapter">Optimization</a></li>
-      <li>Next: <a href="tutorial.html" title="next chapter">Tutorial</a></li>
+      <li>Next: <a href="deployment.html" title="next chapter">Deployment Plan</a></li>
   </ul></li>
 </ul>
 </div>
