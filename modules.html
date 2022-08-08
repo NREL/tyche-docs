@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tyche package" href="tyche.html" />
+    <link rel="next" title="Tyche Module" href="tyche.html" />
     <link rel="prev" title="Deployment Plan" href="deployment.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -36,27 +36,26 @@
           <div class="body" role="main">
             
   <div class="section" id="python-api">
-<h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline">¶</a></h1>
+<span id="sec-modules"></span><h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline">¶</a></h1>
 <p>The module <a class="reference internal" href="tyche.html#module-tyche" title="tyche"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tyche</span></code></a> contains defines and solves multi-objective R&amp;D
 optimization problems, which the module <a class="reference internal" href="eutychia.html#module-eutychia" title="eutychia"><code class="xref py py-mod docutils literal notranslate"><span class="pre">eutychia</span></code></a> provides a server
 of a web-based user interface. The module <a class="reference internal" href="technology.html#module-technology" title="technology"><code class="xref py py-mod docutils literal notranslate"><span class="pre">technology</span></code></a> definies
 individual R&amp;D technologies.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tyche.html">tyche package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.DecisionGUI">tyche.DecisionGUI module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Designs">tyche.Designs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Distributions">tyche.Distributions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.EpsilonConstraints">tyche.EpsilonConstraints module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Evaluator">tyche.Evaluator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.IO">tyche.IO module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Investments">tyche.Investments module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Types">tyche.Types module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tyche.html">Tyche Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.DecisionGUI">tyche.DecisionGUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Designs">tyche.Designs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Distributions">tyche.Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.EpsilonConstraints">tyche.EpsilonConstraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Evaluator">tyche.Evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.IO">tyche.IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Investments">tyche.Investments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche.Types">tyche.Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tyche.html#module-tyche">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="eutychia.html">eutychia package</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="eutychia.html">Eutychia (User Interface) Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="eutychia.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eutychia.html#module-eutychia.example">eutychia.example module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eutychia.html#eutychia-main-module">eutychia.main module</a></li>
@@ -64,16 +63,16 @@ individual R&amp;D technologies.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="technology.html">Technology Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="technology.html#technology-case-studies">Technology Case Studies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="technology.html#pre-built-technology-models-and-datasets">Pre-Built Technology Models and Datasets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.pv_residential_large">Residential Photovoltaics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.pv_residential_simple">Simple Residential Photovoltaics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.utility_pv">Utiliy-Scale Photovoltaics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.utility_pv">Utility-Scale Photovoltaics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.transport_model">Transportation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="technology.html#tutorial-technologies">Tutorial Technologies</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.tutorial_biorefinery">Toy Biorefinery</a></li>
 <li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.simple_electrolysis">Simple Electrolysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.tutorial_biorefinery">Toy Biorefinery</a></li>
 <li class="toctree-l3"><a class="reference internal" href="technology.html#module-technology.tutorial_basic">Onshore Wind Turbines</a></li>
 </ul>
 </li>
@@ -104,12 +103,10 @@ individual R&amp;D technologies.</p>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Electrolysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis-tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Technology Model Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-analysis.html">Analysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="approach.html#mock-foa-definition">Mock FOA Definition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
@@ -121,7 +118,7 @@ individual R&amp;D technologies.</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="deployment.html" title="previous chapter">Deployment Plan</a></li>
-      <li>Next: <a href="tyche.html" title="next chapter">tyche package</a></li>
+      <li>Next: <a href="tyche.html" title="next chapter">Tyche Module</a></li>
   </ul></li>
 </ul>
 </div>

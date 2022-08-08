@@ -1,9 +1,9 @@
-Electrolysis Example
-====================
+.. _sec-techmodelexample:
 
-Here is a very simple model for electrolysis of water. We just have
-water, electricity, a catalyst, and some lab space. We choose the
-fundamental unit of operation to be moles of H\ :sub:`2`:
+Technology Model Example
+========================
+
+Here is a very simple model for electrolysis of water. We just have water, electricity, a catalyst, and some lab space. We choose the fundamental unit of operation to be moles of H\ :sub:`2`:
 
      H\ :sub:`2`\ O → H\ :sub:`2` + ½ O\ :sub:`2`
 
@@ -52,6 +52,28 @@ A key quantity that is not included in the *designs* dataset is our fixed cost, 
  ===================== =================== ===================================== =========== ========== =========== =====================================
 
 Within our R&D decision context, we're interested in increasing the input and output efficiencies of this process so we can produce hydrogen as cheaply as possible. Experts could assess how much R&D to increase the various efficiencies :math:`\eta` would cost. They could also suggest different catalysts, adding alkali, or replacing the process with PEM.
+
+The ``indices`` table (see :numref:`tbl-indices`) simply describes the various
+indices available for the variables. The ``Offset`` column specifies the
+memory location in the argument for the production and metric functions.
+
+.. _tbl-indices:
+
+.. table:: Example of the ``indices`` table.
+
+   =================== ======== ============ ====== =========== ===== 
+   Technology           Type     Index       Offset Description Notes
+   =================== ======== ============ ====== =========== ===== 
+   Simple electrolysis  Capital  Catalyst     0     Catalyst         
+   Simple electrolysis  Fixed    Rent         0     Rent             
+   Simple electrolysis  Input    Water        0     Water            
+   Simple electrolysis  Input    Electricity  1     Electricity      
+   Simple electrolysis  Output   Oxygen       0     Oxygen           
+   Simple electrolysis  Output   Hydrogen     1     Hydrogen         
+   Simple electrolysis  Metric   Cost         0     Cost             
+   Simple electrolysis  Metric   Jobs         1     Jobs             
+   Simple electrolysis  Metric   GHG          2     GHGs             
+   =================== ======== ============ ====== =========== ===== 
 
 Production function (à la Leontief)
 -----------------------------------
