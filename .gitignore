@@ -132,7 +132,6 @@ dmypy.json
 tmp/
 *.sw?
 .~lock.*#
-*.png
 *.sty
 *.cls
 *.xdy
