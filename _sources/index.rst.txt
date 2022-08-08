@@ -7,7 +7,7 @@ This documentation summarizes work in progress on R&D Portfolio Analysis and Eva
 
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :caption: Contents:
    
    cheat-sheet
@@ -20,11 +20,3 @@ This documentation summarizes work in progress on R&D Portfolio Analysis and Eva
    user-interface
    deployment
    modules
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
