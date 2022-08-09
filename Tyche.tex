@@ -54,7 +54,7 @@
 
 
 \title{Tyche}
-\date{Aug 08, 2022}
+\date{Aug 09, 2022}
 \release{1.0}
 \author{}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -138,7 +138,7 @@ See the \sphinxhref{https://docs.conda.io/projects/conda/en/latest/user-guide/ta
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{image1}.png}
 \caption{Tyche repository directory structure. Users should not alter this structure. New technology models and data can be saved in sub-directories under the technology folder, indicated in blue.}\label{\detokenize{cheat-sheet:figure-1}}\label{\detokenize{cheat-sheet:fig-directorystruct}}\end{figure}
 
-The directory where users should store new technology models (.py files) and the accompanying datasets discussed below is indicated in blue in :numref: \sphinxtitleref{fig-directorystruct}. We recommend that users create sub-directories for each new technology or decision context, to avoid confusing the various input datasets.
+The directory where users should store new technology models (.py files) and the accompanying datasets discussed below is indicated in blue in \hyperref[\detokenize{cheat-sheet:fig-directorystruct}]{Fig.\@ \ref{\detokenize{cheat-sheet:fig-directorystruct}}}. We recommend that users create sub-directories for each new technology or decision context, to avoid confusing the various input datasets.
 
 
 \section{Defining Technologies}
@@ -3292,7 +3292,7 @@ Labor
 
 \section{Differential Evolution}
 \label{\detokenize{optimizers:differential-evolution}}
-Differential evolution is one type of evolutionary algorithm that iteratively improves on an initial population, or set of potential solutions. {[}5{]} Differential evolution is well-suited to searching large solution spaces with multiple local minima, but does not guarantee convergence to the global minimum. A complete list of parameters and options for the \sphinxtitleref{differential\_evolution} algorithm is available in the \sphinxhref{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential\_evolution.html}{scipy.optimize.differential\_evolution} documentation.
+Differential evolution is one type of evolutionary algorithm that iteratively improves on an initial population, or set of potential solutions. {[}5{]} Differential evolution is well-suited to searching large solution spaces with multiple local minima, but does not guarantee convergence to the global minimum. Moreover, users may need to adjust the default solving parameters and options in order to obtain a solution and cut down on solve time. A complete list of parameters and options for the \sphinxtitleref{differential\_evolution} algorithm is available in the \sphinxhref{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential\_evolution.html}{scipy.optimize.differential\_evolution} documentation.
 
 Constraints for \sphinxtitleref{differential\_evolution} are defined by passing the same multi-valued function defined in \sphinxtitleref{opt\_slsqp} to the \sphinxhref{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.NonlinearConstraint.html}{NonlinearConstraint} method.
 
@@ -3450,8 +3450,7 @@ Labor
 
 \section{Simplicial Homology Global Optimization}
 \label{\detokenize{optimizers:simplicial-homology-global-optimization}}
-The Simplicial Homology Global Optimization (SHGO) algorithm applies simplicial homology to general non-linear, low-dimensional optimization problems. {[}4{]} Constraints for \sphinxtitleref{shgo} must be provided as a dictionary or sequence of
-dictionaries with the following format:
+The Simplicial Homology Global Optimization (SHGO) algorithm applies simplicial homology to general non-linear, low-dimensional optimization problems. {[}4{]} SHGO provides fast solutions using default parameters and options, but the optimum found may not be as precise as that found by the differential evolution algorithm. Constraints for \sphinxtitleref{shgo} must be provided as a dictionary or sequence of dictionaries with the following format:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{constraints} \PYG{o}{=} \PYG{p}{[} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{type}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ineq}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fun}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n}{g1}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
