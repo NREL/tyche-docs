@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Database Schema &#8212; Tyche 1.0 documentation</title>
+    <title>Database Schema &#8212; Tyche 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Optimization" href="optimizers.html" />
-    <link rel="prev" title="Mathematical Formulation" href="formulation.html" />
+    <link rel="next" title="Defining Technologies" href="example-technology.html" />
+    <link rel="prev" title="Electrolysis Example" href="example-electrolysis.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -51,11 +51,11 @@ within that technology. In the specifications for the individual tables,
 we use the simple electrolysis example to populate the table.</p>
 <div class="section" id="metadata-about-indices">
 <h2>Metadata about indices<a class="headerlink" href="#metadata-about-indices" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">indices</span></code> table (see <a class="reference internal" href="#tbl-indices"><span class="std std-numref">Table 14</span></a>) simply describes the various
+<p>The <code class="docutils literal notranslate"><span class="pre">indices</span></code> table (see <a class="reference internal" href="#tbl-indices"><span class="std std-numref">Table 3</span></a>) simply describes the various
 indices available for the variables. The <code class="docutils literal notranslate"><span class="pre">Offset</span></code> column specifies the
 memory location in the argument for the production and metric functions.</p>
 <span id="tbl-indices"></span><table border="1" class="docutils" id="table-1">
-<caption><span class="caption-number">Table 14 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">indices</span></code> table.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">indices</span></code> table.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="31%" />
 <col width="13%" />
@@ -142,7 +142,7 @@ memory location in the argument for the production and metric functions.</p>
 </div>
 <div class="section" id="design-variables">
 <h2>Design variables<a class="headerlink" href="#design-variables" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">design</span></code> table (see <a class="reference internal" href="#tbl-designs"><span class="std std-numref">Table 15</span></a>) specifies the values of all of
+<p>The <code class="docutils literal notranslate"><span class="pre">design</span></code> table (see <a class="reference internal" href="#tbl-designs"><span class="std std-numref">Table 4</span></a>) specifies the values of all of
 the variables in the mathematical formulation of the design. Note that
 the <code class="docutils literal notranslate"><span class="pre">Value</span></code> column can either contain numeric literals or Python
 expressions specifying probability distribution functions. For example,
@@ -158,7 +158,7 @@ is particularly important because it allows one to specify a first
 distribution in the case of an R&amp;D breakthrough, but a second
 distribution if no breakthrough occurs.</p>
 <span id="tbl-designs"></span><table border="1" class="docutils" id="table-2">
-<caption><span class="caption-number">Table 15 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">designs</span></code> table.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">designs</span></code> table.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="18%" />
 <col width="9%" />
@@ -280,12 +280,12 @@ distribution if no breakthrough occurs.</p>
 </div>
 <div class="section" id="metadata-for-functions">
 <h2>Metadata for functions<a class="headerlink" href="#metadata-for-functions" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">functions</span></code> table (see <a class="reference internal" href="#tbl-functions"><span class="std std-numref">Table 16</span></a>) simply documents which
+<p>The <code class="docutils literal notranslate"><span class="pre">functions</span></code> table (see <a class="reference internal" href="#tbl-functions"><span class="std std-numref">Table 5</span></a>) simply documents which
 Python module and functions to use for the technology and scenario.
 Currently only the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> style of function is supported, but later
 <code class="docutils literal notranslate"><span class="pre">plain</span></code> Python functions and <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> functions will be allowed.</p>
 <span id="tbl-functions"></span><table border="1" class="docutils" id="table-3">
-<caption><span class="caption-number">Table 16 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">functions</span></code> table.</span><a class="headerlink" href="#table-3" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">functions</span></code> table.</span><a class="headerlink" href="#table-3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="22%" />
 <col width="6%" />
@@ -322,12 +322,12 @@ Currently only the <code class="docutils literal notranslate"><span class="pre">
 </div>
 <div class="section" id="parameters-for-functions">
 <h2>Parameters for functions<a class="headerlink" href="#parameters-for-functions" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> table (see <a class="reference internal" href="#tbl-parameters"><span class="std std-numref">Table 17</span></a>) contains ad-hoc
+<p>The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> table (see <a class="reference internal" href="#tbl-parameters"><span class="std std-numref">Table 6</span></a>) contains ad-hoc
 parameters specific to the particular production and metrics functions.
 The <code class="docutils literal notranslate"><span class="pre">Offset</span></code> column specifies the memory location in the argument for
 the production and metric functions.</p>
 <span id="tbl-parameters"></span><table border="1" class="docutils" id="table-4">
-<caption><span class="caption-number">Table 17 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">parameters</span></code> table.</span><a class="headerlink" href="#table-4" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 6 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">parameters</span></code> table.</span><a class="headerlink" href="#table-4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="16%" />
 <col width="7%" />
@@ -433,10 +433,10 @@ the production and metric functions.</p>
 </div>
 <div class="section" id="units-for-results">
 <h2>Units for results<a class="headerlink" href="#units-for-results" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">results</span></code> table (see <a class="reference internal" href="#tbl-results"><span class="std std-numref">Table 18</span></a>) simply specifies the units for
+<p>The <code class="docutils literal notranslate"><span class="pre">results</span></code> table (see <a class="reference internal" href="#tbl-results"><span class="std std-numref">Table 7</span></a>) simply specifies the units for
 the results.</p>
 <span id="tbl-results"></span><table border="1" class="docutils" id="table-5">
-<caption><span class="caption-number">Table 18 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">results</span></code> table.</span><a class="headerlink" href="#table-5" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 7 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">results</span></code> table.</span><a class="headerlink" href="#table-5" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="39%" />
 <col width="16%" />
@@ -494,13 +494,13 @@ the results.</p>
 </div>
 <div class="section" id="tranches-of-investments">
 <h2>Tranches of investments.<a class="headerlink" href="#tranches-of-investments" title="Permalink to this headline">¶</a></h2>
-<p>In the <code class="docutils literal notranslate"><span class="pre">tranches</span></code> table (see <a class="reference internal" href="#tbl-tranches"><span class="std std-numref">Table 19</span></a>), each <em>category</em> of
+<p>In the <code class="docutils literal notranslate"><span class="pre">tranches</span></code> table (see <a class="reference internal" href="#tbl-tranches"><span class="std std-numref">Table 8</span></a>), each <em>category</em> of
 investment contains a set of mutually exclusive <em>tranches</em> that may be
 associated with one or more <em>scenarios</em> defined in the <code class="docutils literal notranslate"><span class="pre">designs</span></code>
 table. Typically, a category is associated with a technology area and
 each tranche corresponds to an investment strategy within that category.</p>
 <span id="tbl-tranches"></span><table border="1" class="docutils" id="table-6">
-<caption><span class="caption-number">Table 19 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">tranches</span></code> table.</span><a class="headerlink" href="#table-6" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 8 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">tranches</span></code> table.</span><a class="headerlink" href="#table-6" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="19%" />
 <col width="27%" />
@@ -546,12 +546,12 @@ each tranche corresponds to an investment strategy within that category.</p>
 </div>
 <div class="section" id="investments">
 <h2>Investments<a class="headerlink" href="#investments" title="Permalink to this headline">¶</a></h2>
-<p>In the <code class="docutils literal notranslate"><span class="pre">investments</span></code> table (see <a class="reference internal" href="#tbl-investments"><span class="std std-numref">Table 20</span></a>), each <em>investment</em>
+<p>In the <code class="docutils literal notranslate"><span class="pre">investments</span></code> table (see <a class="reference internal" href="#tbl-investments"><span class="std std-numref">Table 9</span></a>), each <em>investment</em>
 is associated with a single <em>tranche</em> in one or more <em>categories</em>. An
 investment typically combines tranches from several different investment
 categories.</p>
 <span id="tbl-investments"></span><table border="1" class="docutils" id="table-7">
-<caption><span class="caption-number">Table 20 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">investments</span></code> table.</span><a class="headerlink" href="#table-7" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 9 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">investments</span></code> table.</span><a class="headerlink" href="#table-7" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="30%" />
 <col width="25%" />
@@ -598,7 +598,7 @@ categories.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Tyche</a></h1>
+<h1 class="logo"><a href="main_page.html">Tyche</a></h1>
 
 
 
@@ -610,12 +610,10 @@ categories.</p>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Electrolysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis-tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
-<li class="toctree-l1"><a class="reference internal" href="approach.html#mock-foa-definition">Mock FOA Definition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Database Schema</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#metadata-about-indices">Metadata about indices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#design-variables">Design variables</a></li>
@@ -626,18 +624,23 @@ categories.</p>
 <li class="toctree-l2"><a class="reference internal" href="#investments">Investments</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="formulation.html" title="previous chapter">Mathematical Formulation</a></li>
-      <li>Next: <a href="optimizers.html" title="next chapter">Optimization</a></li>
+  <li><a href="main_page.html">Documentation overview</a><ul>
+      <li>Previous: <a href="example-electrolysis.html" title="previous chapter">Electrolysis Example</a></li>
+      <li>Next: <a href="example-technology.html" title="next chapter">Defining Technologies</a></li>
   </ul></li>
 </ul>
 </div>

@@ -1,5 +1,5 @@
-Eutychia (User Interface) Module
-================================
+eutychia package
+================
 
 Submodules
 ----------

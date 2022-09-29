@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Deployment Plan &#8212; Tyche 1.0 documentation</title>
+    <title>Deployment Plan &#8212; Tyche 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Python API" href="modules.html" />
-    <link rel="prev" title="User Interface" href="user-interface.html" />
+    <link rel="next" title="Getting Started" href="getting-started.html" />
+    <link rel="prev" title="Mock FOA Example" href="ioc-1.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -36,7 +36,7 @@
           <div class="body" role="main">
             
   <div class="section" id="deployment-plan">
-<span id="sec-deployment"></span><h1>Deployment Plan<a class="headerlink" href="#deployment-plan" title="Permalink to this headline">¶</a></h1>
+<h1>Deployment Plan<a class="headerlink" href="#deployment-plan" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="objectives">
 <h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
@@ -52,7 +52,7 @@ and data.</li>
 <h2>Components and Activities<a class="headerlink" href="#components-and-activities" title="Permalink to this headline">¶</a></h2>
 <div class="figure" id="fig-deployment">
 <img alt="Deployment of services and activities." src="_images/deployment.png" />
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Deployment of services and activities.</span></p>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Deployment of services and activities.</span></p>
 </div>
 </div>
 <div class="section" id="activities">
@@ -147,7 +147,7 @@ updates should undergo a security audit.</li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Tyche</a></h1>
+<h1 class="logo"><a href="main_page.html">Tyche</a></h1>
 
 
 
@@ -159,23 +159,40 @@ updates should undergo a security audit.</li>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Technology Model Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-analysis.html">Analysis Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Deployment Plan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deployment Plan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#objectives">Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#components-and-activities">Components and Activities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#activities">Activities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#components">Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#doe-server">DOE Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrel-data-lake">NREL Data Lake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#github-software-repository">GitHub Software Repository</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="user-interface.html" title="previous chapter">User Interface</a></li>
-      <li>Next: <a href="modules.html" title="next chapter">Python API</a></li>
+  <li><a href="main_page.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ioc-1.html" title="previous chapter">Mock FOA Example</a></li>
+      <li>Next: <a href="getting-started.html" title="next chapter">Getting Started</a></li>
   </ul></li>
 </ul>
 </div>

@@ -1,66 +1,67 @@
-Tyche Module
-============
+tyche package
+=============
 
-tyche.DecisionGUI
------------------
+Submodules
+----------
+
+tyche.DecisionGUI module
+------------------------
 
 .. automodule:: tyche.DecisionGUI
    :members:
    :undoc-members:
    :show-inheritance:
 
-tyche.Designs
--------------
+tyche.Designs module
+--------------------
 
 .. automodule:: tyche.Designs
    :members:
    :undoc-members:
    :show-inheritance:
 
-tyche.Distributions
--------------------
+tyche.Distributions module
+--------------------------
 
 .. automodule:: tyche.Distributions
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. _sec-epsconstraint:
-
-tyche.EpsilonConstraints
-------------------------
+tyche.EpsilonConstraints module
+-------------------------------
 
 .. automodule:: tyche.EpsilonConstraints
    :members:
    :undoc-members:
    :show-inheritance:
 
-tyche.Evaluator
----------------
+tyche.Evaluator module
+----------------------
 
 .. automodule:: tyche.Evaluator
    :members:
    :undoc-members:
    :show-inheritance:
 
-tyche.IO
---------
+tyche.IO module
+---------------
 
 .. automodule:: tyche.IO
    :members:
    :undoc-members:
    :show-inheritance:
 
-tyche.Investments
------------------
+tyche.Investments module
+------------------------
 
 .. automodule:: tyche.Investments
    :members:
    :undoc-members:
    :show-inheritance:
 
-tyche.Types
------------
+tyche.Types module
+------------------
 
 .. automodule:: tyche.Types
    :members:
