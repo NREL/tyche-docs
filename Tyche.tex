@@ -54,8 +54,8 @@
 
 
 \title{Tyche}
-\date{Aug 09, 2022}
-\release{1.0}
+\date{Sep 30, 2022}
+\release{1.1}
 \author{}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
@@ -82,8 +82,134 @@ The purpose of this quick start guide is to allow a new user to set up their fir
 An R\&D decision context involves one or more technologies that are subject to various R\&D investments with the goal of changing the technology metrics and outcomes.
 
 
+\section{Introduction and Getting Started}
+\label{\detokenize{cheat-sheet:introduction-and-getting-started}}
+The following materials walk through:
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+what the Technology Characterization and Evaluation (Tyche ) tool does and why this is of value to the user;
+
+\item {} 
+setting up the Tyche package for use, including downloading and installing Anaconda (which includes Jupyter for running Tyche and Spyder for creating/editing Python files);
+
+\item {} 
+modifying an existing model to be used to meet your particular needs;
+
+\item {} 
+developing data, including conducting expert elicitations to estimate potential impacts of different R\&D investments;
+
+\item {} 
+an overview of the code and data files used; and
+
+\item {} 
+building and running Tyche models of your technologies to evaluate the potential impacts of alternative R\&D investment strategies.
+
+\end{enumerate}
+
+
+\section{The Technology Characterization and Evaluation Tool}
+\label{\detokenize{cheat-sheet:the-technology-characterization-and-evaluation-tool}}
+The \sphinxstylestrong{Tyche} tool provides a consistent and systematic methodology to evaluate alternative R\&D investments in a technology system and determine.  This can help support decision-makers as they consider alternative R\&D investment strategies to meet their overall goals.
+
+The Tyche methodology:
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+begins with a technoeconomic model of a particular technology;
+
+\item {} 
+conducts expert elicitation to get quantitative estimates of how much a particular attribute of a component or subsystem within that technology might improve with R\&D;
+
+\item {} 
+represents these estimates as probability distributions—typically triangular distributions as these are straightforward to develop through expert elicitations—within this model; and then
+
+\item {} 
+uses multi-objective stochastic optimization to determine the potential overall improvement in the technology, identify the R\&D investments that have the greatest potential impact for improving technology attributes such as cost or environmental impact, and enables analysis of R\&D options to meet decision-maker goals.
+
+\end{enumerate}
+
+
 \section{Set up Tyche package}
 \label{\detokenize{cheat-sheet:set-up-tyche-package}}
+The following installs Anaconda (from which JupyterLab is used to run Tyche models), downloads Tyche and sets up the Tyche environment within Anaconda to run Tyche models.  There are several platforms for using Tyche.  Listed below is the process for downloading the Tyche framework to your personal computer. The Tyche repository is available on github at this {[}link{]}(\sphinxurl{https://github.com/NREL/tyche})…   A library of simple Tyche models is available to provide beginning templates for developing more complete models of technologies of interest at: (\sphinxurl{https://github.com/NREL/tyche/tree/dev/src/technology})
+\begin{itemize}
+\item {} 
+Download and install \sphinxhref{https://anaconda.org/}{Anaconda} . Most users will install the Windows version of Anaconda.  Set up an account with a password to download Anaconda to make re-installing easier if there are problems and to access tutorials and other information on Anaconda.  This can also be useful if your Jupyter link breaks.  \textless{}\textless{}For installing Anaconda for Linux or Mac systems, see below.\textgreater{}\textgreater{}
+
+\item {} 
+Download Tyche from GitHub at: \sphinxurl{https://github.com/NREL/tyche/tree/dev}
+
+\item {} 
+Paste the downloaded Tyche Zip.files on your desktop and extract the files.  It is easiest to access these files using Anaconda/Jupyter when they are on your desktop.
+
+\item {} 
+Navigate to the downloaded Tyche repository folder.
+
+\item {} \begin{description}
+\item[{Create the Tyche environment}] \leavevmode\begin{itemize}
+\item {} 
+Type the following into the Anaconda Shell (under Anaconda in the Windows Start menu).
+
+\item {} 
+For windows machines, do the following:
+
+\item {} 
+In the Windows Start menu (left-most windows icon at the bottom of your screen) open the Anaconda folder and click on the Anaconda prompt.  A window will open showing: \sphinxcode{\sphinxupquote{{}`(base) C:\textbackslash{}users\textbackslash{}xxx\textgreater{}{}`}}   Navigate to where your Tyche folder is, e.g., change directories to the tyche folder:  \sphinxcode{\sphinxupquote{{}`(base) cd:\textbackslash{}users\textbackslash{}PersonName\textbackslash{}tyche{}`}}, then install the tyche environment with:
+
+\item {} 
+\sphinxcode{\sphinxupquote{conda env create -{-}file conda\textbackslash{}win.yml}}
+
+\item {} 
+\sphinxcode{\sphinxupquote{conda activate tyche}}
+
+\item {} 
+\sphinxcode{\sphinxupquote{pip install mip}}
+
+\end{itemize}
+
+\end{description}
+
+\item {} 
+For Mac OS use system terminal.
+\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{conda env create -{-}file conda\textbackslash{}mac.yml}}
+
+\item {} 
+\sphinxcode{\sphinxupquote{conda activate tyche}}
+
+\item {} 
+\sphinxcode{\sphinxupquote{pip install mip}}
+
+\end{itemize}
+
+\end{itemize}
+\begin{itemize}
+\item {} 
+These steps create a new environment in Anaconda for running Tyche files.  This can be seen by looking at Anaconda navigator (launch Anaconda navigator by clicking the Windows start button and going to the Anaconda folder and clicking on Anaconda Navigator) under “Environment” on the left-most panel.  It will show two names: “Base (root)” and “Tyche”.  The Tyche work will be done within the Tyche environment; in particular, note that the Windows Start menu showing the Anaconda file now includes a Jupyter Notebook (Tyche) icon to launch Jupyter to run Tyche.
+
+\item {} 
+Run a Tyche Model.  To test the Tyche environment, click the Windows Start menu, go to the Anaconda folder, and click on the Jupyter Notebook (Tyche) program.  This will launch Jupyter Notebook (Tyche) in your default web browser.
+
+\item {} 
+Build a Tyche Model.  This consists of \sphinxstylestrong{xxxxx}; Examples are provided below.  Models follow a particular format as specified in the Tyche documentation Release 0.xx.  The form of these Tyche models enables consistent approaches to evaluating technologies.
+
+\item {} 
+Develop Model Data.  Much model data will be well known and should be entered directly into the respective .csv files as described below.  Other model data is developed through expert elicitations.
+
+\item {} 
+Conduct Expert Elicitations to estimate potential technology cost and performance improvements for selected levels of R\&D investment as well as to determine other needed data.
+
+\item {} 
+Input Expert Elicitation data into the Tyche model.
+
+\end{itemize}
+
 To download and use the Tyche package on a personal computer:
 \begin{itemize}
 \item {} 
@@ -140,23 +266,111 @@ See the \sphinxhref{https://docs.conda.io/projects/conda/en/latest/user-guide/ta
 
 The directory where users should store new technology models (.py files) and the accompanying datasets discussed below is indicated in blue in \hyperref[\detokenize{cheat-sheet:fig-directorystruct}]{Fig.\@ \ref{\detokenize{cheat-sheet:fig-directorystruct}}}. We recommend that users create sub-directories for each new technology or decision context, to avoid confusing the various input datasets.
 
+The content of the folders and files follows:
+\begin{itemize}
+\item {} 
+Conda: This folder has four files: “mac.yml”, “nobuilds.yml”, “tiny.yml”, and “win.yml”.  The win.yml and mac.yml files are used to install the Tyche environment and dependencies in Windows and Mac machines, respectively, as described above.  The “nobuilds.yml” and “tiny.yml” files are for use instead of “mac.yml” and “win.yml” in case the more detailed environment specifications cause problems during installation.
+
+\item {} \begin{description}
+\item[{Docs: This folder has a number of RST (reStructured Text markup language) files that describe different aspects of Tyche and its programs.  These files are for internal Tyche developer use only and should not be modified by users outside the development team.}] \leavevmode\begin{itemize}
+\item {} 
+src: The Tyche analysis codebase is stored in this directory
+
+\item {} 
+eutychia: Code for the browser-based graphical user interface (GUI) is stored in this directory
+
+\item {} 
+technology: This folder has a subfolder for each decision context (set of technologies, plus investment scenarios) that is modeled in Tyche. Also in this directory are the technology model files (.py).
+
+\end{itemize}
+
+\end{description}
+
+\end{itemize}
+
+Within each Technology folder there is one Jupyter (.ipynb) analysis notebook file that models the technology and seven input datasets in .csv format, as follow:
+\begin{itemize}
+\item {} 
+designs.
+
+\item {} 
+functions.
+
+\item {} 
+indices.
+
+\item {} 
+investments.
+
+\item {} 
+parameters.
+
+\item {} 
+results.
+
+\item {} 
+tranches.
+
+\item {} 
+Each of these .csv files is described in detail below.
+
+\end{itemize}
+
+Tyche: This folder has 10 python files which form the core of the Tyche model and should not be modified.  These do the following:
+\begin{itemize}
+\item {} 
+\_\_init\_\_: This is the Python initialization function.   The leading and trailing double underscores mean that this is a special method of the Python interpreter.
+
+\item {} 
+DecisionGUI:
+
+\item {} 
+Designs:
+
+\item {} 
+Distributions:
+
+\item {} 
+EpsilonConstraints:
+
+\item {} 
+Evaluator:
+
+\item {} 
+Investments:
+
+\item {} 
+IO:
+
+\item {} 
+Types:
+
+\item {} 
+Waterfall:
+
+\end{itemize}
+
 
 \section{Defining Technologies}
 \label{\detokenize{cheat-sheet:defining-technologies}}
 
-\subsection{What is a “technology”?}
+\section{What is a “technology”?}
 \label{\detokenize{cheat-sheet:what-is-a-technology}}
-In the R\&D decision contexts represented and analyzed by Tyche, “technology” has a very broad definition. A technology converts input(s) to output(s) using capital with a defined lifetime and incurs fixed and/or variable costs in doing so. A technology may be a manufacturing process, a biorefinery, an agricultural process, a renewable energy technology component such as a silicon wafer, a renewable energy technology unit such as a wind turbine or solar panel, a renewable power plant system such as a concentrated solar power plant, and more. Within the R\&D decision context, a technology is also subject to one or more research areas in which R\&D investments can be made to change the technology and its economic, environmental, and other metrics of interest. Multiple technologies can be modeled and compared within the same decision context, provided the same metrics are calculable for each technology. Within Tyche, a technology is represented both physically and economically using a classic but simple and generalized techno-economic analysis (TEA). The TEA is based on a user defined technology model and accompanying datasets of technological and investment information.
+In the R\&D decision contexts represented and analyzed by Tyche, “technology” has a very broad definition. A technology converts input(s) to output(s) using capital equipment with a defined lifetime and incurs fixed and/or variable costs in doing so. A technology may be a manufacturing process, a biorefinery, an agricultural process, a renewable energy technology component such as a silicon wafer or an inverter, a renewable energy technology unit such as a wind turbine or solar panel, a renewable power plant system such as a concentrated solar power plant, and more. Within the R\&D decision context, a technology is also subject to one or more research areas in which R\&D investments can be made to change the technology and its economic, environmental, and other metrics of interest. Multiple technologies can be modeled and compared within the same decision context, provided the same metrics are calculable for each technology. Within Tyche, a technology is represented both physically and economically using a classic but simple and generalized techno-economic analysis (TEA). The TEA is based on a user defined technology model and accompanying datasets of technological and investment information.
 
 
 \section{Input Datasets}
 \label{\detokenize{cheat-sheet:input-datasets}}
+The following first walks through the various .csv files that support the Tyche model within the folder for each technology, then these are put to use in the last section below to build and run a Tyche model of your technology to evaluate the potential impacts of alternative R\&D investment strategies.
 
-\subsection{Designs Dataset}
+
+\section{Designs Dataset}
 \label{\detokenize{cheat-sheet:designs-dataset}}
 A \sphinxstyleemphasis{design} is one set of technology data that results from a specific R\&D investment scenario. The \sphinxstyleemphasis{designs} dataset collects the technology versions that may result from all R\&D investment scenarios being considered in a decision context.
 
-The \sphinxstyleemphasis{designs} dataset contains information for one or more technologies being compared within an R\&D investment decision context. There will be multiple sets of data for each technology; each set represents the technology data that results from a specific R\&D investment scenario. \hyperref[\detokenize{cheat-sheet:tbl-designsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-designsdict}}} provides a data dictionary for the \sphinxstyleemphasis{designs} dataset. Additional information on mandatory Variables is provided in \hyperref[\detokenize{cheat-sheet:tbl-designsvars}]{Table \ref{\detokenize{cheat-sheet:tbl-designsvars}}}.
+The \sphinxstyleemphasis{designs} dataset contains information for one or more technologies being compared within an R\&D investment decision context using Tyche. There will be multiple sets of data for each technology; each set represents the technology data that results from a specific R\&D investment scenario.  Multiple R\&D investment scenarios are typically used, each generating a different level of technology advancement as determined through expert elicitation. \hyperref[\detokenize{cheat-sheet:tbl-designsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-designsdict}}} provides a data dictionary for the \sphinxstyleemphasis{designs} dataset. It points to the data for the technology subsystems and components in the \sphinxstyleemphasis{parameters} dataset within the technology folder, described below. Additional information on mandatory Variables is provided in \hyperref[\detokenize{cheat-sheet:tbl-designsvars}]{Table \ref{\detokenize{cheat-sheet:tbl-designsvars}}}.
+
+The \sphinxstyleemphasis{designs.csv} file within the technology folder under SRC contains the \sphinxstyleemphasis{designs} dataset.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -284,7 +498,7 @@ Description provided by user. Not used by Tyche.
 \par
 \sphinxattableend\end{savenotes}
 
-If there are no elements within a Variable for the technology under study, the Variable must still be included in the \sphinxstyleemphasis{designs} dataset: leaving out any of the Variables in this dataset will break the code. The Value for irrelevant Variables may be set to 0 or 1. Variables and their component Indexes are defined further in \hyperref[\detokenize{cheat-sheet:tbl-designsvars}]{Table \ref{\detokenize{cheat-sheet:tbl-designsvars}}}.
+If there are no elements within a Variable for the technology under study, the Variable must still be included in the \sphinxstyleemphasis{designs} dataset: leaving out any of the Variables in this dataset will break the code. The Value for irrelevant Variables may be set to 0 or 1. For instance, a technology such as a solar panel could be modeled without any Inputs, if sunlight is not explicitly being modeled. In this case, the single Index defined for the Input Variable could be simply 0, and the calculations within the technology model .py file can be defined without using this value. Variables and their component Indexes are defined further in \hyperref[\detokenize{cheat-sheet:tbl-designsvars}]{Table \ref{\detokenize{cheat-sheet:tbl-designsvars}}}.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -357,16 +571,18 @@ No index.
 \sphinxattableend\end{savenotes}
 
 
-\subsection{Parameters Dataset}
+\section{Parameters Dataset}
 \label{\detokenize{cheat-sheet:parameters-dataset}}
-The \sphinxstyleemphasis{parameters} dataset contains any ad hoc data, other than that contained in the \sphinxstyleemphasis{designs} dataset, that is required to calculate a technology’s capital cost, fixed cost, production (actual output amount(s)), and metrics. If the information in the \sphinxstyleemphasis{designs} dataset completely defines the technology and its metrics of interest, then the \sphinxstyleemphasis{parameters} dataset can be left blank except for the column names. Identically to the \sphinxstyleemphasis{designs} dataset, the \sphinxstyleemphasis{parameters} dataset contains multiple sets of data corresponding to different R\&D investment scenarios.
+The \sphinxstyleemphasis{parameters} dataset contains any additional technology-related data, other than that contained in the \sphinxstyleemphasis{designs} dataset, that is required to calculate a technology’s capital cost, fixed cost, production (actual output amount(s)), and metrics.
+
+If the information in the \sphinxstyleemphasis{designs} dataset completely defines the technology and its metrics of interest, then the \sphinxstyleemphasis{parameters} dataset can be left blank except for the column names. Identically to the \sphinxstyleemphasis{designs} dataset, the \sphinxstyleemphasis{parameters} dataset contains multiple sets of data corresponding to different R\&D investment scenarios. A data dictionary for the \sphinxstyleemphasis{parameters} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-paramsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-paramsdict}}}.
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
-\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{parameters} dataset, which contains ad-hoc technology parameters other than those in the \sphinxstyleemphasis{designs} dataset.}\label{\detokenize{cheat-sheet:table-3}}\label{\detokenize{cheat-sheet:tbl-paramsdict}}
+\sphinxcaption{Data dictionary for the \sphinxstyleemphasis{parameters} dataset, which, if necessary, provides additional technology-related data other than that in the \sphinxstyleemphasis{designs} dataset.}\label{\detokenize{cheat-sheet:table-3}}\label{\detokenize{cheat-sheet:tbl-paramsdict}}
 \sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{|T|T|T|}
 \hline
@@ -403,7 +619,7 @@ Offset
 &
 String
 &
-Numerical location of the parameter.
+Numerical location of the parameter in the parameter vector.
 \\
 \hline
 Value
@@ -434,9 +650,9 @@ Any additional information defined by the user. Not used during Tyche calculatio
 Including the Offset value in the \sphinxstyleemphasis{parameters} dataset creates a user reference that makes it easier to access parameter values when defining the technology model.
 
 
-\subsection{Technology Model}
-\label{\detokenize{cheat-sheet:technology-model}}
-The technology model is a Python file (.py) which is user defined and contains methods for calculating capital cost, fixed cost, production (the actual output amount), and any metrics of interest, using the content of the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}} describes methods that must be included in the technology model Python file. The names of the methods are user-defined and must match the contents of the \sphinxstyleemphasis{functions} dataset, discussed below. Additional methods can be included in the technology model, if necessary, but the methods in \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}} are required. All return values for the required methods must be formatted as \sphinxhref{https://numpy.org/doc/stable/reference/generated/numpy.stack.html}{Numpy stacks}
+\subsection{Technology model (Python file)}
+\label{\detokenize{cheat-sheet:technology-model-python-file}}
+The technology model is a Python file (.py) which is user defined and contains methods for calculating capital cost, fixed cost, production (the actual output amount), and any metrics of interest, using the content of the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}} describes methods that must be included in the technology model Python file. The names of the methods are user-defined and must match the contents of the \sphinxstyleemphasis{functions} dataset, discussed below. Additional methods can be included in the technology model, if necessary, but the methods in \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}} are required. All return values for the required methods, even if only a single value is returned, must be formatted as \sphinxhref{https://numpy.org/doc/stable/reference/generated/numpy.stack.html}{Numpy stacks}. The parameters (inputs) for the methods, listed in \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}}, are also fixed and cannot be changed. In the case that a method does not require all of the mandatory input parameters, they can simply be left out of the method’s calculations.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -450,7 +666,7 @@ The technology model is a Python file (.py) which is user defined and contains m
 \sphinxstyletheadfamily 
 Recommended Method Name
 &\sphinxstyletheadfamily 
-Parameters
+Parameters (method inputs)
 &\sphinxstyletheadfamily 
 Returns
 \\
@@ -493,7 +709,7 @@ The production method can access the actual input amount, which is the ideal or 
 \section{Defining R\&D Investments}
 \label{\detokenize{cheat-sheet:defining-r-d-investments}}
 
-\subsection{Tranches Dataset}
+\section{Tranches Dataset}
 \label{\detokenize{cheat-sheet:tranches-dataset}}
 A \sphinxstyleemphasis{tranche} is a discrete unit of R\&D investment (dollar amount) in a specific research category. Tranches within the same research category are mutually exclusive: one cannot simultaneously invest \$1M and \$5M in a research category. A \sphinxstyleemphasis{scenario} is a combination of tranches that represents one option for making R\&D investments.
 
@@ -556,7 +772,7 @@ Additional user-defined information. Not used by Tyche.
 \sphinxattableend\end{savenotes}
 
 
-\subsection{Investment Dataset}
+\section{Investment Dataset}
 \label{\detokenize{cheat-sheet:investment-dataset}}
 An \sphinxstyleemphasis{investment}, similar to a \sphinxstyleemphasis{scenario}, is a combination of tranches that represents a particular R\&D strategy.
 
@@ -623,7 +839,7 @@ In the second use case, a user knows what technological changes must be achieved
 It is critical to note that these use cases are \sphinxstylestrong{mutually exclusive}. Tyche cannot be used to evaluate a scenario in which desired technological changes as well as the investment amounts are both uncertain. What this means for the user is that probability distributions, or mixtures of distributions, can be used to specify values either in the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets or in the \sphinxstyleemphasis{tranches} dataset, but not both. If distributions are used in all three datasets, the code will break by design.
 
 
-\subsection{Defining values as probability distributions and mixtures}
+\section{Defining values as probability distributions and mixtures}
 \label{\detokenize{cheat-sheet:defining-values-as-probability-distributions-and-mixtures}}
 An uncertain value can be defined within a dataset using any of the built-in distributions of the \sphinxhref{https://docs.scipy.org/doc/scipy/reference/stats.html}{scipy.stats} package. A list of available distributions is provided at the hyperlink. Uncertain values can also be defined as a weighted average or mixture of probability distributions using the Tyche \sphinxstyleemphasis{mixture} method.
 
@@ -631,7 +847,7 @@ An uncertain value can be defined within a dataset using any of the built-in dis
 \section{Additional Input Datasets}
 \label{\detokenize{cheat-sheet:additional-input-datasets}}
 
-\subsection{Indices Dataset}
+\section{Indices Dataset}
 \label{\detokenize{cheat-sheet:indices-dataset}}
 The \sphinxstyleemphasis{indices} dataset contains the numerical indexes (location within a list or array) used to access content in the other datasets. \hyperref[\detokenize{cheat-sheet:tbl-indicesdict}]{Table \ref{\detokenize{cheat-sheet:tbl-indicesdict}}} describes the columns required for the indices table. Numerical locations for parameters should not be listed in this dataset.
 
@@ -727,14 +943,14 @@ Additional user-defined information. Not used during Tyche calculations.
 All four Types must be listed in the \sphinxstyleemphasis{indices} dataset. If a particular Type is not relevant to the technology under study, it still must be included in this dataset.
 
 
-\subsection{Relationship between \sphinxstyleemphasis{indices} and other datasets}
+\section{Relationship between \sphinxstyleemphasis{indices} and other datasets}
 \label{\detokenize{cheat-sheet:relationship-between-indices-and-other-datasets}}
 A technology in the Tyche context is quantified using five sets of attribute values and one technology-level attribute value. The five sets of attribute values are Capital, Input, Output, Parameter, and Metric, and the technology-level attribute is Scale. Elements within each of the five sets are defined with an Index which simply names the element (for instance, Electricity might be one of the Index values within the Input set). Elements of Capital have an associated Lifetime. Elements of the Input set have an associated ideal amount (also called Input), an Input efficiency value, and an Input price. Elements of the Output set have only an Output efficiency and an Output price; the ideal output amounts are calculated from the technology model. Elements of the Metric set are named with an Index and are likewise calculated from the technology model. Elements of the Parameter set have only a value.
 
 The \sphinxstyleemphasis{indices} dataset lists the elements of the Capital, Input, Output, and Metric sets, and contains an Offset column giving the numerical location of each element within its set. The \sphinxstyleemphasis{designs} dataset contains values for each element of the Capital, Input, Output, and Metric sets as well as the technology-level Scale value. The \sphinxstyleemphasis{parameters} dataset names and gives values for each element of the Parameter set.
 
 
-\subsection{Functions Dataset}
+\section{Functions Dataset}
 \label{\detokenize{cheat-sheet:functions-dataset}}
 The \sphinxstyleemphasis{functions} dataset is used internally by Tyche to locate the technology model file and identify the four required methods listed in \hyperref[\detokenize{cheat-sheet:tbl-techmethods}]{Table \ref{\detokenize{cheat-sheet:tbl-techmethods}}}. \hyperref[\detokenize{cheat-sheet:tbl-functionsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-functionsdict}}} provides a data dictionary for the \sphinxstyleemphasis{functions} dataset.
 
@@ -781,7 +997,7 @@ String
 &
 Any
 &
-Filename of the technology model Python file, discussed below. Do not include the file extension.
+Filename of the technology model Python file, discussed below. Do not include the file extension.\textless{}This name must be the same as the Python file or the system will not run\textgreater{}
 \\
 \hline
 Capital
@@ -838,7 +1054,7 @@ The Style should remain \sphinxtitleref{numpy} in Tyche 1.0. This indicates that
 If only one technology model is used within a decision context, then the \sphinxstyleemphasis{functions} dataset will contain a single row.
 
 
-\subsection{Results Dataset}
+\section{Results Dataset}
 \label{\detokenize{cheat-sheet:results-dataset}}
 The \sphinxstyleemphasis{results} dataset lists the Tyche outcomes that are of interest within a decision context, organized into categories defined by the Variable column. This dataset is used internally by Tyche for organizing and labeling results tables for easier user comprehension. A data dictionary for the \sphinxstyleemphasis{results} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-resultsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-resultsdict}}}.
 
@@ -2283,8 +2499,8 @@ tables and Python functions. This approach not only minimizes the labor
 needed to add new technologies, but it also enforces uniformity of
 financial, mass-balance, and other assumptions in the analysis.
 
-The framework is scalable, supporting rapid computation on laptops
-computer and large-ensemble studies on high-performance computers (HPC).
+The framework is scalable, supporting rapid computation on laptop
+computers and large-ensemble studies on high-performance computers (HPC).
 The use of vectorized operations for the stochastic calculations and of
 response-surface fits for the portfolio evaluations minimizes the
 computational resources needed for complex multi-objective
@@ -2296,235 +2512,18 @@ All values in the data tables may be probability distributions,
 specified by Python expressions using a large library of standard
 distributions, or the values may be simple numbers. Expert opinion is
 encoded through these distributions. The opinions may be combined prior
-to simulator or subsequent to it.
+to simulation or subsequent to it.
 
-Four example technologies have been implemented as examples illustrating
+Four example technologies have been implemented as examples illustrating the
 framework’s use: biorefineries, electrolysis, residential photovoltaics
 (PV), and utility-scale PV. A desktop user interface allows exploration
 of the cost-benefit trade-offs in portfolio decision problems.
 
-
-\section{Mock FOA Definition}
-\label{\detokenize{approach:mock-foa-definition}}
-
-\subsection{Background}
-\label{\detokenize{approach:background}}
-Understanding the FOA process is essential to designing an effective
-tool to make to make technically and analytically-based decisions. The
-“Mock FOA” process takes a service design approach to understanding the
-FOA-writing process as it stands. The Mock FOA began with interviews
-with five previous DOE detailees and seven senior DOE staff who have led
-multiple FOA development efforts. A major theme emerged: effective
-communication of analysis logic and results poses one of the largest
-challenges during the FOA process.
-
-A decision-support tool could assist in the communication necessary to
-percolate this technical information up the chain. Interview findings
-were formalized in collaboration with the NREL service design team to
-understand where such a tool could make the greatest impact. The team
-considered the steps taken to issue a FOA, resources referenced, and
-decision-makers involved.
-
-
-\subsubsection{Phases}
-\label{\detokenize{approach:phases}}
-Interviews revealed that, while all FOA processes are unique and highly
-non-linear, specific actions must occur. These characterize phases of
-the FOA journey:
-\begin{enumerate}
-\def\theenumi{\arabic{enumi}}
-\def\labelenumi{\theenumi .}
-\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
-\item {} 
-\sphinxstylestrong{Launch}. Decide to issue a FOA.
-
-\item {} 
-\sphinxstylestrong{Frame}. Formulate a plan to collect the information necessary to write the FOA
-
-\item {} 
-\sphinxstylestrong{Scope}. Investigate topic options.
-
-\item {} 
-\sphinxstylestrong{Draft}. Compile information into draft FOA.
-
-\item {} 
-\sphinxstylestrong{Refine}. Prepare FOA for distribution.
-
-\end{enumerate}
-
-The specific needs of each phase inform the tool \sphinxstylestrong{content}.
-
-
-\subsubsection{Roles}
-\label{\detokenize{approach:roles}}
-The team considered that different staff members will interact with this
-information differently and prefer different methods of data
-communication. These roles were characterized by “personae” defined by
-level of involvement in the FOA-writing process.
-\begin{itemize}
-\item {} 
-Technical analyst
-
-\item {} 
-Technical lead
-
-\item {} 
-FOA lead
-
-\item {} 
-Approver
-
-\end{itemize}
-
-Decision makers in each of these roles will interact with tool output.
-The tool users determine how the tool will be used and how its content
-will be displayed, informing \sphinxstylestrong{interactions and data visualization}.
-For example, a user who will view the tool output in a presentation will
-need a static representation of the tool output.
-
-
-\subsection{Potential topics}
-\label{\detokenize{approach:potential-topics}}
-Prototyping a tool requires content. The team referenced two previous
-FOAs to understand the break-down of topic areas. We then extracted FOA
-topic/subtopic areas and metrics from 2016 budget request, combining
-hard/soft cost-focused FOAs to examine how to compete the two and avoid
-directly analyzing a specific past FOA. Following this process further
-informed the team’s understanding of how decision-makers might decide
-what to input into the tool.
-
-Topics under consideration might be assessed by the following metrics:
-\begin{itemize}
-\item {} 
-\$/W$_{\text{DC}}$
-
-\item {} 
-\$/kWh
-
-\item {} 
-Strategic metal content (lifetime)
-
-\item {} 
-Hazardous waste content (lifetime)
-
-\item {} 
-Lifetime
-
-\item {} 
-Reliability
-
-\item {} 
-Emissions
-
-\item {} 
-Labor
-
-\end{itemize}
-
-The following text details topic areas considered for Tyche tool
-development.
-
-
-\subsubsection{1. Crystaline silicon wafer design}
-\label{\detokenize{approach:crystaline-silicon-wafer-design}}\begin{itemize}
-\item {} 
-Wafer area
-
-\item {} 
-Wafer thickness
-
-\item {} 
-Wafer density
-
-\item {} 
-Silicon utilization
-
-\item {} 
-Production yield
-
-\end{itemize}
-
-
-\subsubsection{2. Tandem thin-films}
-\label{\detokenize{approach:tandem-thin-films}}\begin{itemize}
-\item {} 
-Design parameters
-
-\item {} 
-Architectures
-
-\end{itemize}
-
-
-\subsubsection{3. Polysilicon module}
-\label{\detokenize{approach:polysilicon-module}}\begin{itemize}
-\item {} 
-(many parameters)
-
-\end{itemize}
-
-
-\subsubsection{4. Module design}
-\label{\detokenize{approach:module-design}}\begin{itemize}
-\item {} 
-Module Capital
-
-\item {} 
-Module Lifetime
-
-\item {} 
-Module Efficiency
-
-\item {} 
-Module Aperture
-
-\item {} 
-Module O\&M Fixed
-
-\item {} 
-Module Degradation
-
-\item {} 
-Module Soiling Loss
-
-\end{itemize}
-
-
-\subsubsection{5. Inverter design}
-\label{\detokenize{approach:inverter-design}}\begin{itemize}
-\item {} 
-Inverter Capital
-
-\item {} 
-Inverter Lifetime
-
-\item {} 
-Inverter Replacement
-
-\item {} 
-Inverter Efficiency
-
-\end{itemize}
-
-
-\subsubsection{6. Balance-of-system design}
-\label{\detokenize{approach:balance-of-system-design}}\begin{itemize}
-\item {} 
-Hardware Capital
-
-\item {} 
-Direct Labor
-
-\item {} 
-Permitting
-
-\item {} 
-Customer Acquisition
-
-\item {} 
-Installer Overhead \& Profit
-
-\end{itemize}
+Below we detail the mathematical formulation and its implementation as a
+Python module with user-specified data tables and technology functions.
+
+We also provide a sample analysis that exercises the framework’s main
+features.
 
 
 \chapter{Mathematical Formulation}
