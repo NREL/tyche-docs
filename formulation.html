@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Mathematical Formulation &#8212; Tyche 0.1.0 documentation</title>
+    <title>Mathematical Formulation &#8212; Tyche 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Electrolysis Example" href="example-electrolysis.html" />
+    <link rel="next" title="Optimization" href="optimizers.html" />
     <link rel="prev" title="Approach" href="approach.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -36,7 +36,7 @@
           <div class="body" role="main">
             
   <div class="section" id="mathematical-formulation">
-<h1>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h1>
+<span id="sec-formulation"></span><h1>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h1>
 <p>We separate the financial and conversion-efficiency aspects of a
 production process, which are generic across all technologies, from the
 physical and technical aspects, which are necessarily specific to the
@@ -44,10 +44,10 @@ particular process. The motivation for this is that the financial and
 waste computations can be done uniformly for any technology (even for
 disparate ones such as PV cells and biofuels) and that different experts
 may be required to assess the cost, waste, and techno-physical aspects
-of technological progress. <a class="reference internal" href="#tbl-sets"><span class="std std-numref">Table 1</span></a> defines the indices that are used
-for the variables that are defined in <a class="reference internal" href="#tbl-variables"><span class="std std-numref">Table 2</span></a>.</p>
+of technological progress. <a class="reference internal" href="#tbl-sets"><span class="std std-numref">Table 13</span></a> defines the indices that are used
+for the variables that are defined in <a class="reference internal" href="#tbl-variables"><span class="std std-numref">Table 14</span></a>.</p>
 <span id="tbl-sets"></span><table border="1" class="docutils" id="table-1">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">Definitions for set indices used for variable subscripts.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 13 </span><span class="caption-text">Definitions for set indices used for variable subscripts.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="27%" />
 <col width="20%" />
@@ -107,7 +107,7 @@ for the variables that are defined in <a class="reference internal" href="#tbl-v
 </tbody>
 </table>
 <span id="tbl-variables"></span><table border="1" class="docutils" id="table-2">
-<caption><span class="caption-number">Table 2 </span><span class="caption-text">Definitions for variables.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-number">Table 14 </span><span class="caption-text">Definitions for variables.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="43%" />
 <col width="17%" />
@@ -404,7 +404,7 @@ each potential scenario <span class="math notranslate nohighlight">\(\theta\)</s
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="main_page.html">Tyche</a></h1>
+<h1 class="logo"><a href="index.html">Tyche</a></h1>
 
 
 
@@ -416,38 +416,23 @@ each potential scenario <span class="math notranslate nohighlight">\(\theta\)</s
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Technology Model Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-analysis.html">Analysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Mathematical Formulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cost">Cost</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#waste">Waste</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#production">Production</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#metrics">Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scenarios">Scenarios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#investments">Investments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#decision-problem">Decision problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#experts">Experts</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="main_page.html">Documentation overview</a><ul>
+  <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="approach.html" title="previous chapter">Approach</a></li>
-      <li>Next: <a href="example-electrolysis.html" title="next chapter">Electrolysis Example</a></li>
+      <li>Next: <a href="optimizers.html" title="next chapter">Optimization</a></li>
   </ul></li>
 </ul>
 </div>

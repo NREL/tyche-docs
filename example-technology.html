@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Defining Technologies &#8212; Tyche 0.1.0 documentation</title>
+    <title>Technology Model Example &#8212; Tyche 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Optimization" href="optimizers.html" />
-    <link rel="prev" title="Database Schema" href="database.html" />
+    <link rel="next" title="Analysis Example" href="example-analysis.html" />
+    <link rel="prev" title="Quick Start Guide" href="cheat-sheet.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,11 +35,350 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="defining-technologies">
-<h1>Defining Technologies<a class="headerlink" href="#defining-technologies" title="Permalink to this headline">¶</a></h1>
-<p>Each technology design requires a Python module with a capital cost, a
-fixed cost, a production, and a metrics function. <a class="reference internal" href="#lst-electrolysis"><span class="std std-numref">Listing 1</span></a>
-shows these functions for the simple electrolysis example.</p>
+  <div class="section" id="technology-model-example">
+<span id="sec-techmodelexample"></span><h1>Technology Model Example<a class="headerlink" href="#technology-model-example" title="Permalink to this headline">¶</a></h1>
+<p>Here is a very simple model for electrolysis of water. We just have water, electricity, a catalyst, and some lab space. We choose the fundamental unit of operation to be moles of H<sub>2</sub>:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;H<sub>2</sub>O → H<sub>2</sub> + ½ O<sub>2</sub></p>
+<p>For this example, we treat the catalyst as the capital that we use to transform inputs into outputs. Our inputs are water and electricity, and our outputs are oxygen and hydrogen. Our only fixed cost is the rent on the lab space at $1000/year. Using our past experience with electrolysis technology as well as some historical data, we estimate that we’ll be able to produce 6650 mol/year of hydrogen and at this scale, our catalyst has a lifetime of about 3 years. The metrics we’d like to calculate for our electrolysis technology are cost, greenhouse gas (GHG) emissions, and jobs created. Based on this information, the <em>designs</em> dataset for the base case electrolysis technology is as shown in <a class="reference internal" href="#tbl-electrolysisdesigns"><span class="std std-numref">Table 10</span></a>.</p>
+<span id="tbl-electrolysisdesigns"></span><table border="1" class="docutils" id="table-1">
+<caption><span class="caption-number">Table 10 </span><span class="caption-text"><em>designs</em> dataset for the base case (without any R&amp;D) of the simple electrolysis example technology.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="16%" />
+<col width="15%" />
+<col width="15%" />
+<col width="10%" />
+<col width="8%" />
+<col width="7%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Technology</th>
+<th class="head">Scenario</th>
+<th class="head">Variable</th>
+<th class="head">Index</th>
+<th class="head">Value</th>
+<th class="head">Units</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Input</td>
+<td>Water</td>
+<td>19.04</td>
+<td>g/mole</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Input efficiency</td>
+<td>Water</td>
+<td>0.95</td>
+<td>1</td>
+<td>Due to mass transport loss on input.</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Input</td>
+<td>Electricity</td>
+<td>279</td>
+<td>kJ/mole</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Input efficiency</td>
+<td>Electricity</td>
+<td>0.85</td>
+<td>l</td>
+<td>Due to ohmic losses on input.</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Output efficiency</td>
+<td>Oxygen</td>
+<td>0.9</td>
+<td>1</td>
+<td>Due to mass transport loss on output.</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Output efficiency</td>
+<td>Hydrogen</td>
+<td>0.9</td>
+<td>1</td>
+<td>Due to mass transport loss on output.</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Lifetime</td>
+<td>Catalyst</td>
+<td>3</td>
+<td>yr</td>
+<td>Effective lifetime of Al-Ni catalyst.</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Scale</td>
+<td>n/a</td>
+<td>6650</td>
+<td>mole/yr</td>
+<td>Rough estimate for a 50W setup.</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Input price</td>
+<td>Water</td>
+<td>4.80E-03</td>
+<td>USD/mole</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Input price</td>
+<td>Electricity</td>
+<td>3.33E-05</td>
+<td>USD/kJ</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Output price</td>
+<td>Oxygen</td>
+<td>3.00E-03</td>
+<td>USD/g</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Output price</td>
+<td>Hydrogen</td>
+<td>1.00E-02</td>
+<td>USD/g</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>Note that this is not the only way to model the electrolysis technology. We could choose to purchase lab space and equipment instead of renting, in which case we would have more types of capital, each with a particular lifetime. We could treat the oxygen output from our technology as waste instead of a coproduct and remove it from the model entirely. We could operate at a different scale and perhaps change our fixed or capital costs by doing so. Depending on where we operate this technology, our input and output prices will likely change. The Tyche framework offers great flexibility in representing technologies and technology systems; it is unlikely that there will only be a single correct way to model a decision context.</p>
+<p>A key quantity that is not included in the <em>designs</em> dataset is our fixed cost, rent for the lab space. This quantity is included in the <em>parameters</em> dataset in <a class="reference internal" href="#tbl-electrolysisparams"><span class="std std-numref">Table 11</span></a>, along with the necessary data to calculate our metrics of interest (cost, GHG, jobs).</p>
+<span id="tbl-electrolysisparams"></span><table border="1" class="docutils" id="table-2">
+<caption><span class="caption-number">Table 11 </span><span class="caption-text"><em>parameters</em> dataset for the base case (without any R&amp;D) of the simple electrolysis example technology.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="14%" />
+<col width="13%" />
+<col width="25%" />
+<col width="8%" />
+<col width="7%" />
+<col width="8%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Technology</th>
+<th class="head">Scenario</th>
+<th class="head">Parameter</th>
+<th class="head">Offset</th>
+<th class="head">Value</th>
+<th class="head">Units</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Oxygen production</td>
+<td>0</td>
+<td>16</td>
+<td>g</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Hydrogen production</td>
+<td>1</td>
+<td>2</td>
+<td>g</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Water consumption</td>
+<td>2</td>
+<td>18.08</td>
+<td>g</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Electricity consumption</td>
+<td>3</td>
+<td>237</td>
+<td>kJ</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Jobs</td>
+<td>4</td>
+<td>1.50E-04</td>
+<td>job/mole</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Reference scale</td>
+<td>5</td>
+<td>6650</td>
+<td>mole/yr</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Reference capital cost for catalyst</td>
+<td>6</td>
+<td>0.63</td>
+<td>USD</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>Reference fixed cost for rent</td>
+<td>7</td>
+<td>1000</td>
+<td>USD/yr</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>GHG factor for water</td>
+<td>8</td>
+<td>0.00108</td>
+<td>gCO2e/g</td>
+<td>based on 244,956 gallons = 1 Mg CO2e</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Base Electrolysis</td>
+<td>GHG factor for electricity</td>
+<td>9</td>
+<td>0.138</td>
+<td>gCO2e/kJ</td>
+<td>based on 1 kWh = 0.5 kg CO2e</td>
+</tr>
+</tbody>
+</table>
+<p>Within our R&amp;D decision context, we’re interested in increasing the input and output efficiencies of this process so we can produce hydrogen as cheaply as possible. Experts could assess how much R&amp;D to increase the various efficiencies <span class="math notranslate nohighlight">\(\eta\)</span> would cost. They could also suggest different catalysts, adding alkali, or replacing the process with PEM.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">indices</span></code> table (see <a class="reference internal" href="#tbl-indices"><span class="std std-numref">Table 12</span></a>) simply describes the various
+indices available for the variables. The <code class="docutils literal notranslate"><span class="pre">Offset</span></code> column specifies the
+memory location in the argument for the production and metric functions.</p>
+<span id="tbl-indices"></span><table border="1" class="docutils" id="table-3">
+<caption><span class="caption-number">Table 12 </span><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">indices</span></code> table.</span><a class="headerlink" href="#table-3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="31%" />
+<col width="13%" />
+<col width="20%" />
+<col width="10%" />
+<col width="18%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Technology</th>
+<th class="head">Type</th>
+<th class="head">Index</th>
+<th class="head">Offset</th>
+<th class="head">Description</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Capital</td>
+<td>Catalyst</td>
+<td>0</td>
+<td>Catalyst</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Fixed</td>
+<td>Rent</td>
+<td>0</td>
+<td>Rent</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Input</td>
+<td>Water</td>
+<td>0</td>
+<td>Water</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Input</td>
+<td>Electricity</td>
+<td>1</td>
+<td>Electricity</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Output</td>
+<td>Oxygen</td>
+<td>0</td>
+<td>Oxygen</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Output</td>
+<td>Hydrogen</td>
+<td>1</td>
+<td>Hydrogen</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Metric</td>
+<td>Cost</td>
+<td>0</td>
+<td>Cost</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Simple electrolysis</td>
+<td>Metric</td>
+<td>Jobs</td>
+<td>1</td>
+<td>Jobs</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Simple electrolysis</td>
+<td>Metric</td>
+<td>GHG</td>
+<td>2</td>
+<td>GHGs</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="production-function-a-la-leontief">
+<h2>Production function (à la Leontief)<a class="headerlink" href="#production-function-a-la-leontief" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\(P_\mathrm{oxygen} = \left( 16.00~\mathrm{g} \right) \cdot \min \left\{ \frac{I^*_\mathrm{water}}{18.08~\mathrm{g}}, \frac{I^*_\mathrm{electricity}}{237~\mathrm{kJ}} \right\}\)</span></p>
+<p><span class="math notranslate nohighlight">\(P_\mathrm{hydrogen} = \left( 2.00~\mathrm{g} \right) \cdot \min \left\{ \frac{I^*_\mathrm{water}}{18.08~\mathrm{g}}, \frac{I^*_\mathrm{electricity}}{237~\mathrm{kJ}} \right\}\)</span></p>
+</div>
+<div class="section" id="metric-functions">
+<h2>Metric functions<a class="headerlink" href="#metric-functions" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\(M_\mathrm{cost} = K / O_\mathrm{hydrogen}\)</span></p>
+<p><span class="math notranslate nohighlight">\(M_\mathrm{GHG} = \left( \left( 0.00108~\mathrm{gCO2e/gH20} \right) I_\mathrm{water} + \left( 0.138~\mathrm{gCO2e/kJ} \right) I_\mathrm{electricity} \right) / O_\mathrm{hydrogen}\)</span></p>
+<p><span class="math notranslate nohighlight">\(M_\mathrm{jobs} = \left( 0.00015~\mathrm{job/mole} \right) / O_\mathrm{hydrogen}\)</span></p>
+</div>
+<div class="section" id="performance-of-current-design">
+<h2>Performance of current design.<a class="headerlink" href="#performance-of-current-design" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\(K = 0.18~\mathrm{USD/mole}\)</span> (i.e., not profitable since it is
+positive)</p>
+<p><span class="math notranslate nohighlight">\(O_\mathrm{oxygen} = 14~\mathrm{g/mole}\)</span></p>
+<p><span class="math notranslate nohighlight">\(O_\mathrm{hydrogen} = 1.8~\mathrm{g/mole}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\mu_\mathrm{cost} = 0.102~\mathrm{USD/gH2}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\mu_\mathrm{GHG} = 21.4~\mathrm{gCO2e/gH2}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\mu_\mathrm{jobs} = 0.000083~\mathrm{job/gH2}\)</span></p>
+</div>
+<div class="section" id="technology-model">
+<h2>Technology Model<a class="headerlink" href="#technology-model" title="Permalink to this headline">¶</a></h2>
+<p>Each technology design requires a Python file with a capital cost, a fixed cost, a production, and a metrics function. <a class="reference internal" href="#lst-electrolysis"><span class="std std-numref">Listing 1</span></a> shows these functions for the simple electrolysis example.</p>
 <div class="literal-block-wrapper docutils container" id="lst-electrolysis">
 <div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Example technology-defining functions.</span><a class="headerlink" href="#lst-electrolysis" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple electrolysis.</span>
@@ -129,6 +468,7 @@ shows these functions for the simple electrolysis example.</p>
 </div>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -137,7 +477,7 @@ shows these functions for the simple electrolysis example.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="main_page.html">Tyche</a></h1>
+<h1 class="logo"><a href="index.html">Tyche</a></h1>
 
 
 
@@ -149,28 +489,23 @@ shows these functions for the simple electrolysis example.</p>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Technology Model Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-analysis.html">Analysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Defining Technologies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="main_page.html">Documentation overview</a><ul>
-      <li>Previous: <a href="database.html" title="previous chapter">Database Schema</a></li>
-      <li>Next: <a href="optimizers.html" title="next chapter">Optimization</a></li>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cheat-sheet.html" title="previous chapter">Quick Start Guide</a></li>
+      <li>Next: <a href="example-analysis.html" title="next chapter">Analysis Example</a></li>
   </ul></li>
 </ul>
 </div>

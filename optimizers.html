@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Optimization &#8212; Tyche 0.1.0 documentation</title>
+    <title>Optimization &#8212; Tyche 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="User Interface" href="user-interface.html" />
-    <link rel="prev" title="Defining Technologies" href="example-technology.html" />
+    <link rel="prev" title="Mathematical Formulation" href="formulation.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -36,38 +36,22 @@
           <div class="body" role="main">
             
   <div class="section" id="optimization">
-<h1>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="non-linear-nlp-formulation-summary">
-<h2>Non-Linear (NLP) Formulation Summary<a class="headerlink" href="#non-linear-nlp-formulation-summary" title="Permalink to this headline">¶</a></h2>
-<p>Technology models and data are defined before the optimizer is called.
-Three methods in the <code class="docutils literal notranslate"><span class="pre">EpsilonConstraintOptimizer</span></code> class,
-<code class="docutils literal notranslate"><span class="pre">maximize_slsqp</span></code>, <code class="docutils literal notranslate"><span class="pre">maximize_shgo</span></code> and <code class="docutils literal notranslate"><span class="pre">maximize_diffev</span></code>, are
-wrappers for the algorithm calls. The optimization methods define the
-optimization problem according to each algorithm’s requirements, call
-the algorithm, and provide either optimized results in a standard format
-for postprocessing, or an error messages if the optimization did not
-complete successfully. The SLSQP algorithm, which is not a global
-optimizer, is provided to assess problem feasibility and provide
-reasonable upper and lower bounds on metrics being optimized. Global
-optimization algorithms to implement were chosen according to the
-following criteria.</p>
+<span id="sec-optimizers"></span><h1>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="nonlinear-programming-formulation">
+<h2>Nonlinear Programming Formulation<a class="headerlink" href="#nonlinear-programming-formulation" title="Permalink to this headline">¶</a></h2>
+<p>Three methods in the <code class="docutils literal notranslate"><span class="pre">EpsilonConstraintOptimizer</span></code> class, <code class="docutils literal notranslate"><span class="pre">opt_slsqp</span></code>, <code class="docutils literal notranslate"><span class="pre">opt_shgo</span></code> and <code class="docutils literal notranslate"><span class="pre">opt_diffev</span></code>, are
+wrappers for optimization algorithm calls. (The <a class="reference internal" href="tyche.html#sec-epsconstraint"><span class="std std-ref">tyche.EpsilonConstraints</span></a> section provides full parameter and return value information for these methods.) The optimization methods define the optimization problem according to each algorithm’s requirements, call the algorithm, and provide either optimized results in a standard format for postprocessing, or an error messages if the optimization did not complete successfully. The SLSQP algorithm, which is not a global optimizer, is provided to assess problem feasibility and provide reasonable upper and lower bounds on metrics being optimized. Because the technology models within an R&amp;D decision context may be arbitrarily complex, two global optimization algorithms were also implemented. The global algorithms were chosen according to the following criteria.</p>
 <ul class="simple">
-<li>Ability to perform constrained optimization with inequality
-constraints</li>
-<li>Ability to optimize without specified Jacobian or Hessian functions</li>
-<li>Ability to specify bounds on individual decision variables</li>
-<li>Ability to work on a variety of potentially non-convex and otherwise
-complex problems</li>
+<li>Ability to perform constrained optimization with inequality constraints, for instance on metric values or investment amounts.</li>
+<li>Ability to optimize without specified Jacobian or Hessian functions (derivative-less optimization).</li>
+<li>Ability to specify bounds on individual decision variables, which allows constraints on single research areas.</li>
+<li>Ability to work on a variety of potentially non-convex and otherwise complex problems.</li>
 </ul>
-<div class="section" id="solutions-to-pv-residential-simple">
-<h3>Solutions to <code class="docutils literal notranslate"><span class="pre">pv_residential_simple</span></code><a class="headerlink" href="#solutions-to-pv-residential-simple" title="Permalink to this headline">¶</a></h3>
-<p>The solve times listed are in addition to the time required to set up
-the problem and solve for the maximum allowable metric values, which
-currently uses the SLSQP algorithm. This setup time is between 10 and 15
-seconds.</p>
-<p>Minimizing LCOE subject to a total investment amount of $3 MM USD and
-GHG being at least 40.</p>
-<table border="1" class="docutils">
+<div class="section" id="algorithm-testing">
+<h3>Algorithm Testing<a class="headerlink" href="#algorithm-testing" title="Permalink to this headline">¶</a></h3>
+<p>As a point of comparison between algorithms, the <a class="reference internal" href="technology.html#sec-simplerespv"><span class="std std-ref">Simple Residential Photovoltaics</span></a> decision context was optimized for minimum levelized cost of electricity (LCOE) subject to an investment constraint and a metric constraint (GHG). The solutions are given in <a class="reference internal" href="#tbl-algoperformance"><span class="std std-numref">Table 15</span></a>. The solve times listed are in addition to the time required to set up the problem and solve for the optimum metric values; this procedure currently uses the SLSQP algorithm by default. This setup time is between 10 and 15 seconds.</p>
+<span id="tbl-algoperformance"></span><table border="1" class="docutils" id="table-1">
+<caption><span class="caption-number">Table 15 </span><span class="caption-text">Minimizing LCOE subject to a total investment amount of $3 MM USD and GHG being at least 40.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="28%" />
 <col width="30%" />
@@ -100,78 +84,22 @@ GHG being at least 40.</p>
 <tr class="row-odd"><td>SHGO</td>
 <td>None found</td>
 <td>None found</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
+<td>None found</td>
 </tr>
 </tbody>
 </table>
-<p>Additional details for each solution are given below under the section
-for the corresponding algorithm.</p>
+<p>Additional details for each solution are given below under the section for the corresponding algorithm.</p>
 </div>
 </div>
-<div class="section" id="sequential-least-squares-programming">
-<h2>Sequential Least Squares Programming<a class="headerlink" href="#sequential-least-squares-programming" title="Permalink to this headline">¶</a></h2>
-<p>The Sequential Least Squares Programming algorithm uses a gradient
-search method to locate a possibly local optimum. [6]</p>
-<p><code class="docutils literal notranslate"><span class="pre">EpsilonConstraintOptimizer.maximize_slsqp(self,</span> <span class="pre">metric,</span> <span class="pre">max_amount=None,</span> <span class="pre">total_amount=None,</span> <span class="pre">min_metric=None,</span> <span class="pre">statistic=np.mean,</span> <span class="pre">initial=None,</span> <span class="pre">tol=1e-8,</span> <span class="pre">maxiter=50,</span> <span class="pre">verbose=0)</span></code></p>
-<p>Maximize the objective function using the <code class="docutils literal notranslate"><span class="pre">fmin_slsqp</span></code> algorithm.</p>
-<p><strong>Parameters</strong></p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">metric</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd>Name of metric to maximize. No default.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">max_amount</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd>Maximum investment amounts by R&amp;D category (defined in investments
-data) and maximum metric values. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">total_amount</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Upper limit on total investments summed across all R&amp;D categories.
-Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">min_metric</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd>Lower limits on all metrics. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">statistic</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
-<dd>Summary statistic used on the sample evaluations; the metric measure
-that is fed to the optimizer. Defaults to <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> such that the
-optimization is performed on the means of relevant metrics.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">initial</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">array of float</span></dt>
-<dd>Initial value of decision variable(s) fed to the optimizer. Defaults
-to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">tol</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Requested accuracy of the optimized solution. Defaults to 1E-08.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">maxiter</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd>Maximum number of iterations the optimizer is permitted to execute.
-Defaults to 50.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">verbose</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd>Amount of information provided by the wrapper as the optimization is
-performed. Defaults to 0.
-* verbose = 0 : No messages.
-* verbose = 1 : Summary message when fmin_slsqp completes.
-* verbose = 2 : Status of each algorithm iteration and summary message.
-* verbose = 3 : Investment constraint status, metric constraint status, status of each algorithm iteration, and summary message.
-* verbose &gt; 3 : All metric values, decision variable values, investment constraint status, metric constraint status, status of each algorithm iteration, and summary message.</dd>
-</dl>
-<p><strong>Return</strong></p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">results</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">Optimum</span></code> instance</span></dt>
-<dd>Container for an <code class="docutils literal notranslate"><span class="pre">exit_code</span></code> and <code class="docutils literal notranslate"><span class="pre">exit_message</span></code> received from the
-<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> call, a list of optimized <code class="docutils literal notranslate"><span class="pre">amounts</span></code> and
-a list of optimized <code class="docutils literal notranslate"><span class="pre">metrics</span></code>.</dd>
-</dl>
-<p>A complete list of parameters and options for the <code class="docutils literal notranslate"><span class="pre">fmin_slsqp</span></code>
-algorithm is available in the documentation. [3]</p>
-<div class="section" id="defining-constraints">
-<h3>Defining Constraints<a class="headerlink" href="#defining-constraints" title="Permalink to this headline">¶</a></h3>
-<p>Constraints for <code class="docutils literal notranslate"><span class="pre">fmin_slsqp</span></code> are defined either as a single function
-that takes as input a vector of decision variable values and returns an
-array containing the value of all constraints in the problem
-simultaneously. Both equality and inequality constraints can be defined,
-although they must be as separate functions and are provided to the
-<code class="docutils literal notranslate"><span class="pre">fmin_slsqp</span></code> algorithm under separate arguments.</p>
-</div>
-<div class="section" id="slsqp-solution-to-pv-residential-simple">
-<h3>SLSQP Solution to <code class="docutils literal notranslate"><span class="pre">pv_residential_simple</span></code><a class="headerlink" href="#slsqp-solution-to-pv-residential-simple" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="sequential-least-squares-programming-slsqp">
+<h2>Sequential Least Squares Programming (SLSQP)<a class="headerlink" href="#sequential-least-squares-programming-slsqp" title="Permalink to this headline">¶</a></h2>
+<p>The Sequential Least Squares Programming algorithm uses a gradient search method to locate a possibly local optimum. [6] A complete list of parameters and options for the <code class="docutils literal notranslate"><span class="pre">fmin_slsqp</span></code> algorithm is available in the  <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_slsqp.html">scipy.optimize.fmin_slsqp</a> documentation.</p>
+<p>Constraints for <code class="docutils literal notranslate"><span class="pre">fmin_slsqp</span></code> are defined either as a single function that takes as input a vector of decision variable values and returns an array containing the value of all constraints in the problem simultaneously. Both equality and inequality constraints can be defined, although they must be as separate functions and are provided to the <code class="docutils literal notranslate"><span class="pre">fmin_slsqp</span></code> algorithm under separate arguments.</p>
+<div class="section" id="slsqp-solution-to-simple-residential-photovoltaics">
+<h3>SLSQP Solution to Simple Residential Photovoltaics<a class="headerlink" href="#slsqp-solution-to-simple-residential-photovoltaics" title="Permalink to this headline">¶</a></h3>
 <p>Solve time: 1.5 s</p>
-<table border="1" class="docutils">
+<span id="tbl-slsqpvars"></span><table border="1" class="docutils" id="table-2">
+<caption><span class="caption-number">Table 16 </span><span class="caption-text">Optimal decision variables found by the SLSQP algorithm.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="53%" />
 <col width="47%" />
@@ -193,7 +121,8 @@ although they must be as separate functions and are provided to the
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils">
+<span id="tbl-slsqpmetrics"></span><table border="1" class="docutils" id="table-3">
+<caption><span class="caption-number">Table 17 </span><span class="caption-text">Optimal system metrics found by the SLSQP algorithm.</span><a class="headerlink" href="#table-3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="46%" />
 <col width="54%" />
@@ -219,93 +148,16 @@ although they must be as separate functions and are provided to the
 </div>
 <div class="section" id="differential-evolution">
 <h2>Differential Evolution<a class="headerlink" href="#differential-evolution" title="Permalink to this headline">¶</a></h2>
-<p>Differential evolution is one type of evolutionary algorithm that
-iteratively improves on an initial population, or set of potential
-solutions. [5] Differential evolution is well-suited to searching large
-solution spaces with multiple local minima, but does not guarantee
-convergence to the global minimum.</p>
-<p><code class="docutils literal notranslate"><span class="pre">EpsilonConstraintOptimizer.maximize_diffev(self,</span> <span class="pre">metric,</span> <span class="pre">max_amount=None,</span> <span class="pre">total_amount=None,</span> <span class="pre">min_metric=None,</span> <span class="pre">statistic=np.mean,</span> <span class="pre">strategy='best1bin',</span> <span class="pre">tol=1e-8,</span> <span class="pre">maxiter=50,</span> <span class="pre">init='latinhypercube',</span> <span class="pre">verbose=0)</span></code></p>
-<p><strong>Parameters</strong></p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">metric</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd>Name of metric to maximize. No default value.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">max_amount</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd>Maximum investment amounts by R&amp;D category (defined in investments
-data) and maximum metric values. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">total_amount</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Upper limit on total investments summed across all R&amp;D categories.
-Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">min_metric</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd>Lower limits on all metrics. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">statistic</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
-<dd>Summary statistic used on the sample evaluations; the metric measure
-that is fed to the optimizer. Defaults to <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> such that the
-optimization is performed on the means of relevant metrics.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">strategy</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd>Which differential evolution strategy to use. Defaults to ‘best1bin’.
-See [2] for full list.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">seed</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd>Sets the random seed for optimization by creating a new
-<code class="docutils literal notranslate"><span class="pre">RandomState</span></code> instance. Defaults to 2 for reproducible solutions.
-If a value is not provided, then <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> will
-return slightly different solutions for the same optimization problem
-every time it is called.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">init</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">str or array-like</span></dt>
-<dd>Type of population initialization. Defaults to ‘latinhypercube’.
-Alternative initializations are ‘random’ (which does not guarantee
-good coverage of the solution space) or specifying every member of
-the initial population in an array of shape (<code class="docutils literal notranslate"><span class="pre">popsize</span></code>,
-<code class="docutils literal notranslate"><span class="pre">len(variables)</span></code>). The latter option is useful when the global
-minimum is known to be in a small portion of the solution space, and
-the initialization can seed the population in this area. However,
-this parameter is not analogous to specifying initial values for
-decision variables, as each candidate solution in the population must
-be unique for the algorithm to optimize correctly.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">tol</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Relative tolerance for convergence, which provides an upper limit on
-the standard deviation of candidate solutions. When this upper limit
-is met, the optimization has converged. Defaults to 0.01. The
-convergence tolerance for this algorithm was loosened compared to the
-other algorithms to lessen the execution time and increase the
-changes of the algorithm converging. Tighter tolerances (lower values
-of <code class="docutils literal notranslate"><span class="pre">tol</span></code>) tended to prevent the algorithm converging.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">maxiter</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd>Upper limit on generations of candidate solution evolution, which
-corresponds to the number of algorithm iterations. Each iteration
-involves many function evaluations as each solution in the population
-evolves. Defaults to 75.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">verbose</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd>Verbosity level returned by this outer function and the differential_evolution algorithm. Defaults to 0.
-* verbose = 0 : No messages.
-* verbose = 1 : Objective function value at every algorithm iteration.
-* verbose = 2 : Investment constraint status, metric constraint status, and objective function value.
-* verbose = 3 : Decision variable values, investment constraint status, metric constraint status, and objective function value.
-* verbose &gt; 3 : All metric values, decision variable values, investment constraint status, metric constraint status, and objective function value.</dd>
-</dl>
-<p><strong>Returns</strong></p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">out</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">Optimum</span></code> instance</span></dt>
-<dd>Container for an <code class="docutils literal notranslate"><span class="pre">exit_code</span></code> and <code class="docutils literal notranslate"><span class="pre">exit_message</span></code> received from the
-<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> call, a list of optimized <code class="docutils literal notranslate"><span class="pre">amounts</span></code> and
-a list of optimized <code class="docutils literal notranslate"><span class="pre">metrics</span></code>.</dd>
-</dl>
-<p>A complete list of parameters and options for the
-<code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> algorithm is available in the documentation.
-[2]</p>
-<div class="section" id="defining-constraints-2">
-<span id="defining-constraints-1"></span><h3>Defining Constraints<a class="headerlink" href="#defining-constraints-2" title="Permalink to this headline">¶</a></h3>
-<p>Constraints for <code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code> are defined by passing the
-same multi-valued function defined in <code class="docutils literal notranslate"><span class="pre">maximize_slsqp</span></code> to the
-<code class="docutils literal notranslate"><span class="pre">NonLinearConstraint</span></code> method. [7]</p>
-</div>
-<div class="section" id="differential-evolution-solutions-to-pv-residential-simple">
-<h3>Differential Evolution Solutions to <code class="docutils literal notranslate"><span class="pre">pv_residential_simple</span></code><a class="headerlink" href="#differential-evolution-solutions-to-pv-residential-simple" title="Permalink to this headline">¶</a></h3>
-<p><strong>Solution 1</strong></p>
-<ul class="simple">
-<li>Seed = 2</li>
-<li>Solve time = 145 s</li>
-</ul>
-<table border="1" class="docutils">
+<p>Differential evolution is one type of evolutionary algorithm that iteratively improves on an initial population, or set of potential solutions. [5] Differential evolution is well-suited to searching large solution spaces with multiple local minima, but does not guarantee convergence to the global minimum. Moreover, users may need to adjust the default solving parameters and options in order to obtain a solution and cut down on solve time. A complete list of parameters and options for the <cite>differential_evolution</cite> algorithm is available in the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html">scipy.optimize.differential_evolution</a> documentation.</p>
+<p>Constraints for <cite>differential_evolution</cite> are defined by passing the same multi-valued function defined in <cite>opt_slsqp</cite> to the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.NonlinearConstraint.html">NonlinearConstraint</a> method.</p>
+<div class="section" id="differential-evolution-solutions-to-simple-residential-photovoltaics">
+<h3>Differential Evolution Solutions to Simple Residential Photovoltaics<a class="headerlink" href="#differential-evolution-solutions-to-simple-residential-photovoltaics" title="Permalink to this headline">¶</a></h3>
+<p>Differential evolution stochastically populates the initial set of potential solutions, and so the optimal solution and solve time may vary with the random seed used.</p>
+<div class="section" id="solution-1">
+<h4>Solution 1<a class="headerlink" href="#solution-1" title="Permalink to this headline">¶</a></h4>
+<p>Starting with a random seed of 2, the solution time was 145 seconds.</p>
+<span id="tbl-diffevvars1"></span><table border="1" class="docutils" id="table-4">
+<caption><span class="caption-number">Table 18 </span><span class="caption-text">Optimal decision variables found by the differential evolution algorithm with a seed of 2.</span><a class="headerlink" href="#table-4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="53%" />
 <col width="47%" />
@@ -327,7 +179,8 @@ same multi-valued function defined in <code class="docutils literal notranslate"
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils">
+<span id="tbl-diffevmetrics1"></span><table border="1" class="docutils" id="table-5">
+<caption><span class="caption-number">Table 19 </span><span class="caption-text">Optimal system metrics found by the differential evolution algorithm with a seed of 2.</span><a class="headerlink" href="#table-5" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="46%" />
 <col width="54%" />
@@ -349,12 +202,12 @@ same multi-valued function defined in <code class="docutils literal notranslate"
 </tr>
 </tbody>
 </table>
-<p><strong>Solution 2</strong></p>
-<ul class="simple">
-<li>Seed = 1</li>
-<li>Solve time = 589</li>
-</ul>
-<table border="1" class="docutils">
+</div>
+<div class="section" id="solution-2">
+<h4>Solution 2<a class="headerlink" href="#solution-2" title="Permalink to this headline">¶</a></h4>
+<p>Starting with a random seed of 1, the solution time was 589 seconds.</p>
+<span id="tbl-diffevvars2"></span><table border="1" class="docutils" id="table-6">
+<caption><span class="caption-number">Table 20 </span><span class="caption-text">Optimal decision variables found by <cite>differential_evolution</cite> as called by <cite>EpsilonConstraints.opt_diffev</cite> with a seed of 1.</span><a class="headerlink" href="#table-6" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="53%" />
 <col width="47%" />
@@ -376,7 +229,8 @@ same multi-valued function defined in <code class="docutils literal notranslate"
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils">
+<span id="tbl-diffevmetrics2"></span><table border="1" class="docutils" id="table-7">
+<caption><span class="caption-number">Table 21 </span><span class="caption-text">Optimal system metrics found by <cite>differential_evolution</cite> as called by <cite>EpsilonConstraints.opt_diffev</cite> with a seed of 1.</span><a class="headerlink" href="#table-7" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="46%" />
 <col width="54%" />
@@ -400,64 +254,10 @@ same multi-valued function defined in <code class="docutils literal notranslate"
 </table>
 </div>
 </div>
+</div>
 <div class="section" id="simplicial-homology-global-optimization">
 <h2>Simplicial Homology Global Optimization<a class="headerlink" href="#simplicial-homology-global-optimization" title="Permalink to this headline">¶</a></h2>
-<p>The Simplicial Homology Global Optimization (SHGO) algorithm applies
-simplicial homology to general non-linear, low-dimensional optimization
-problems. [4]</p>
-<p><code class="docutils literal notranslate"><span class="pre">EpsilonConstraintOptimizer.maximize_shgo(self,</span> <span class="pre">metric,</span> <span class="pre">max_amount=None,</span> <span class="pre">total_amount=None,</span> <span class="pre">min_metric=None,</span> <span class="pre">statistic=np.mean,</span> <span class="pre">tol=1e-8,</span> <span class="pre">maxiter=50,</span> <span class="pre">sampling_method='simplicial',</span> <span class="pre">verbose=0)</span></code></p>
-<p>Maximize the objective function using the shgo global optimization
-algorithm.</p>
-<p><strong>Parameters</strong></p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">metric</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd>Name of metric to maximize. No default value.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">max_amount</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd>Maximum investment amounts by R&amp;D category (defined in investments
-data) and maximum metric values. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">total_amount</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Upper metric_limit on total investments summed across all R&amp;D
-categories. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">min_metric</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd>Lower limits on all metrics. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">statistic</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
-<dd>Summary statistic used on the sample evaluations; the metric measure
-that is fed to the optimizer. Defaults to <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> such that the
-optimization is performed on the means of relevant metrics.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">tol</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Objective function tolerance in stopping criterion. Defaults to
-1E-08.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">maxiter</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd>Upper limit on algorithm iterations that can be performed. One
-iteration involves many function evaluations. Defaults to 50.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">sampling_method</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd>Allowable values are ‘sobol and ’simplicial’. Simplicial is default,
-uses less memory, and guarantees convergence (theoretically). Sobol
-is faster, uses more memory and does not guarantee convergence. Per
-documentation, Sobol is better for “easier” problems. Defaults to
-‘simplicial’.</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">verbose</span></code> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd>Verbosity level returned by this outer function and the SHGO algorithm. Defaults to 0.
-*  verbose = 0 : No messages.
-*  verbose = 1 : Convergence messages from SHGO algorithm.
-*  verbose = 2 : Investment constraint status, metric constraint status, and convergence messages.
-*  verbose = 3 : Decision variable values, investment constraint status, metric constraint status, and convergence messages.
-*  verbose &gt; 3 : All metric values, decision variable values, investment constraint status, metric constraint status, and convergence messages .</dd>
-</dl>
-<p><strong>Returns</strong></p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">out</span></code> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">Optimum</span></code> instance</span></dt>
-<dd>: Container for an <code class="docutils literal notranslate"><span class="pre">exit_code</span></code> and <code class="docutils literal notranslate"><span class="pre">exit_message</span></code> received from
-the <code class="docutils literal notranslate"><span class="pre">shgo</span></code> call, a list of optimized <code class="docutils literal notranslate"><span class="pre">amounts</span></code> and a list of
-optimized <code class="docutils literal notranslate"><span class="pre">metrics</span></code>.</dd>
-</dl>
-<p><code class="docutils literal notranslate"><span class="pre">shgo</span></code> does not have a parameter that sets the initial decision
-variable values. A complete list of parameters available for the
-<code class="docutils literal notranslate"><span class="pre">shgo</span></code> algorithm is available in the documentation. [1]</p>
-<div class="section" id="defining-constraints-3">
-<span id="defining-constraints-2-1"></span><h3>Defining Constraints<a class="headerlink" href="#defining-constraints-3" title="Permalink to this headline">¶</a></h3>
-<p>Constraints for <code class="docutils literal notranslate"><span class="pre">shgo</span></code> must be provided as a dictionary or sequence of
-dictionaries with the following format:</p>
+<p>The Simplicial Homology Global Optimization (SHGO) algorithm applies simplicial homology to general non-linear, low-dimensional optimization problems. [4] SHGO provides fast solutions using default parameters and options, but the optimum found may not be as precise as that found by the differential evolution algorithm. Constraints for <cite>shgo</cite> must be provided as a dictionary or sequence of dictionaries with the following format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="n">g1</span><span class="p">(</span><span class="n">x</span><span class="p">)},</span>
                 <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="n">g2</span><span class="p">(</span><span class="n">x</span><span class="p">)},</span>
                 <span class="o">...</span>
@@ -466,23 +266,14 @@ dictionaries with the following format:</p>
                 <span class="o">...</span> <span class="p">]</span>
 </pre></div>
 </div>
-<p>Each of the constraint functions <code class="docutils literal notranslate"><span class="pre">g1(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">h1(x)</span></code>, and so on are
-functions that take decision variable values as inputs and return the
-value of the constraint. Inequality constraints (<code class="docutils literal notranslate"><span class="pre">g1(x)</span></code> and <code class="docutils literal notranslate"><span class="pre">g2(x)</span></code>
-above) are formulated as <span class="math notranslate nohighlight">\(g(x) \geq 0\)</span> and equality constraints
-(<code class="docutils literal notranslate"><span class="pre">h1(x)</span></code> and <code class="docutils literal notranslate"><span class="pre">h2(x)</span></code> above) are formulated as <span class="math notranslate nohighlight">\(h(x) = 0\)</span>. Each
-constraint in the optimization problem is defined as a separate
-function, with a separate dictionary giving the constraint type. With
-<code class="docutils literal notranslate"><span class="pre">shgo</span></code> it is not possible to use one function that returns a vector of
-constraint values.</p>
+<p>Each of the constraint functions <cite>g1(x)</cite>, <cite>h1(x)</cite>, and so on are functions that take decision variable values as inputs and return the value of the constraint. Inequality constraints (<cite>g1(x)</cite> and <cite>g2(x)</cite> above) are formulated as <span class="math notranslate nohighlight">\(g(x) \geq 0\)</span> and equality constraints (<cite>h1(x)</cite> and <cite>h2(x)</cite> above) are formulated as <span class="math notranslate nohighlight">\(h(x) = 0\)</span>. Each constraint in the optimization problem is defined as a separate function, with a separate dictionary giving the constraint type. With <cite>shgo</cite> it is not possible to use one function that returns a vector of constraint values.</p>
 </div>
-</div>
-<div class="section" id="piecewise-linear-milp-formulation-summary">
-<h2>Piecewise Linear (MILP) Formulation Summary<a class="headerlink" href="#piecewise-linear-milp-formulation-summary" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="piecewise-linear-milp-formulation">
+<h2>Piecewise Linear (MILP) Formulation<a class="headerlink" href="#piecewise-linear-milp-formulation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="notation">
 <h3>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">¶</a></h3>
-<span id="tbl-milpindex"></span><table border="1" class="docutils" id="table-1">
-<caption><span class="caption-number">Table 10 </span><span class="caption-text">Index definitions for the MILP formulation.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
+<span id="tbl-milpindex"></span><table border="1" class="docutils" id="table-8">
+<caption><span class="caption-number">Table 22 </span><span class="caption-text">Index definitions for the MILP formulation.</span><a class="headerlink" href="#table-8" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="14%" />
 <col width="86%" />
@@ -504,8 +295,8 @@ constraint values.</p>
 </tr>
 </tbody>
 </table>
-<span id="tbl-milpdat"></span><table border="1" class="docutils" id="table-2">
-<caption><span class="caption-number">Table 11 </span><span class="caption-text">Data definitions for the MILP formulation.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
+<span id="tbl-milpdat"></span><table border="1" class="docutils" id="table-9">
+<caption><span class="caption-number">Table 23 </span><span class="caption-text">Data definitions for the MILP formulation.</span><a class="headerlink" href="#table-9" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="12%" />
 <col width="34%" />
@@ -528,8 +319,8 @@ constraint values.</p>
 </tr>
 </tbody>
 </table>
-<span id="tbl-milpvar"></span><table border="1" class="docutils" id="table-3">
-<caption><span class="caption-number">Table 12 </span><span class="caption-text">Variable definitions for the MILP formulation.</span><a class="headerlink" href="#table-3" title="Permalink to this table">¶</a></caption>
+<span id="tbl-milpvar"></span><table border="1" class="docutils" id="table-10">
+<caption><span class="caption-number">Table 24 </span><span class="caption-text">Variable definitions for the MILP formulation.</span><a class="headerlink" href="#table-10" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="12%" />
 <col width="29%" />
@@ -566,14 +357,14 @@ constraint values.</p>
 <p>The MILP that uses this formulation to minimize a technology metric subject to a investment budget <span class="math notranslate nohighlight">\(B\)</span> is as follows:</p>
 <p><span class="math notranslate nohighlight">\(\min_{y, \lambda} \lambda_{1}q_{11} + \lambda_{2}q_{21} + \lambda_{3}q_{31}\)</span></p>
 <p>subject to</p>
-<p><span class="math notranslate nohighlight">\(\lambda_{1}c_{11} + \lambda_{2}c_{21} + \lambda_{3}c_{31} \leq B\)</span> , (1) Total budget constraint
-<span class="math notranslate nohighlight">\(\lambda_1 + \lambda_2 + \lambda_3 = 1\)</span> , (2)
-<span class="math notranslate nohighlight">\(y_{12} + y_{23} + y_{13} = 1\)</span> , (3)
-<span class="math notranslate nohighlight">\(y_{12} \leq \lambda_1 + \lambda_2\)</span> , (4)
-<span class="math notranslate nohighlight">\(y_{23} \leq \lambda_2 + \lambda_3\)</span> , (5)
-<span class="math notranslate nohighlight">\(y_{13} \leq \lambda_1 + \lambda_3\)</span> , (6)
-<span class="math notranslate nohighlight">\(0 \leq \lambda_1, \lambda_2, \lambda_3 \leq 1\)</span> , (7)
-<span class="math notranslate nohighlight">\(y_{12}, y_{23}, y_{13} \in \{ 0, 1 \}\)</span> , (8)</p>
+<p><span class="math notranslate nohighlight">\(\lambda_{1}c_{11} + \lambda_{2}c_{21} + \lambda_{3}c_{31} \leq B\)</span> , (1) Total budget constraint</p>
+<p><span class="math notranslate nohighlight">\(\lambda_1 + \lambda_2 + \lambda_3 = 1\)</span> , (2)</p>
+<p><span class="math notranslate nohighlight">\(y_{12} + y_{23} + y_{13} = 1\)</span> , (3)</p>
+<p><span class="math notranslate nohighlight">\(y_{12} \leq \lambda_1 + \lambda_2\)</span> , (4)</p>
+<p><span class="math notranslate nohighlight">\(y_{23} \leq \lambda_2 + \lambda_3\)</span> , (5)</p>
+<p><span class="math notranslate nohighlight">\(y_{13} \leq \lambda_1 + \lambda_3\)</span> , (6)</p>
+<p><span class="math notranslate nohighlight">\(0 \leq \lambda_1, \lambda_2, \lambda_3 \leq 1\)</span> , (7)</p>
+<p><span class="math notranslate nohighlight">\(y_{12}, y_{23}, y_{13} \in \{ 0, 1 \}\)</span> , (8)</p>
 <p>(We’ve effectively removed the investments and the metrics as variables, replacing them with the elicited data points and the new <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(y\)</span> variables.)</p>
 </div>
 <div class="section" id="extension-to-n-x-n-problem">
@@ -582,33 +373,33 @@ constraint values.</p>
 <p><strong>No metric constraint or investment category-specific budget constraint</strong></p>
 <p><span class="math notranslate nohighlight">\(\min_{y, \lambda} \sum_i \lambda_{i}q_{ik*}\)</span></p>
 <p>subject to</p>
-<p><span class="math notranslate nohighlight">\(\sum_i \sum_j \lambda_{i}c_{ij} \leq B\)</span> , (1) Total budget constraint
-<span class="math notranslate nohighlight">\(\sum_i \lambda_i = 1\)</span> , (2)
-<span class="math notranslate nohighlight">\(\sum_{i,i'} y_{ii'} = 1\)</span> , (3)
-<span class="math notranslate nohighlight">\(y_{ii'} \leq \lambda_i + \lambda_{i'} \forall i, i'\)</span> , (4)
-<span class="math notranslate nohighlight">\(0 \leq \lambda_i \leq 1 \forall i\)</span> , (5)
-<span class="math notranslate nohighlight">\(y_{ii'} \in \{ 0, 1 \} \forall i, i'\)</span> , (6)</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \sum_j \lambda_{i}c_{ij} \leq B\)</span> , (1) Total budget constraint</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \lambda_i = 1\)</span> , (2)</p>
+<p><span class="math notranslate nohighlight">\(\sum_{i,i'} y_{ii'} = 1\)</span> , (3)</p>
+<p><span class="math notranslate nohighlight">\(y_{ii'} \leq \lambda_i + \lambda_{i'} \forall i, i'\)</span> , (4)</p>
+<p><span class="math notranslate nohighlight">\(0 \leq \lambda_i \leq 1 \forall i\)</span> , (5)</p>
+<p><span class="math notranslate nohighlight">\(y_{ii'} \in \{ 0, 1 \} \forall i, i'\)</span> , (6)</p>
 <p><strong>With investment category-specific budget constraint</strong></p>
 <p><span class="math notranslate nohighlight">\(\min_{y, \lambda} \sum_i \lambda_{i}q_{ik*}\)</span></p>
 <p>subject to</p>
-<p><span class="math notranslate nohighlight">\(\sum_i \sum_j \lambda_{i}c_{ij} \leq B\)</span> , (1) Total budget constraint
-<span class="math notranslate nohighlight">\(\sum_i \lambda_{i}c_{ij'} \leq B_{j'} \forall j' \in J'\)</span>,   (2) Investment category budget constraint(s)
-<span class="math notranslate nohighlight">\(\sum_i \lambda_i = 1\)</span> , (3)
-<span class="math notranslate nohighlight">\(\sum_{i,i'} y_{ii'} = 1\)</span> , (4)
-<span class="math notranslate nohighlight">\(y_{ii'} \leq \lambda_i + \lambda_{i'} \forall i, i'\)</span> , (5)
-<span class="math notranslate nohighlight">\(0 \leq \lambda_i \leq 1 \forall i\)</span> , (6)
-<span class="math notranslate nohighlight">\(y_{ii'} \in \{ 0, 1 \} \forall i, i'\)</span> , (7)</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \sum_j \lambda_{i}c_{ij} \leq B\)</span> , (1) Total budget constraint</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \lambda_{i}c_{ij'} \leq B_{j'} \forall j' \in J'\)</span>,   (2) Investment category budget constraint(s)</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \lambda_i = 1\)</span> , (3)</p>
+<p><span class="math notranslate nohighlight">\(\sum_{i,i'} y_{ii'} = 1\)</span> , (4)</p>
+<p><span class="math notranslate nohighlight">\(y_{ii'} \leq \lambda_i + \lambda_{i'} \forall i, i'\)</span> , (5)</p>
+<p><span class="math notranslate nohighlight">\(0 \leq \lambda_i \leq 1 \forall i\)</span> , (6)</p>
+<p><span class="math notranslate nohighlight">\(y_{ii'} \in \{ 0, 1 \} \forall i, i'\)</span> , (7)</p>
 <p><strong>With metric constraint and investment category-specific budget constraint</strong></p>
 <p><span class="math notranslate nohighlight">\(\min_{y, \lambda} \sum_i \lambda_{i}q_{ik*}\)</span></p>
 <p>subject to</p>
-<p><span class="math notranslate nohighlight">\(\sum_i \sum_j \lambda_{i}c_{ij} \leq B\)</span>, (1) Total budget constraint
-<span class="math notranslate nohighlight">\(\sum_i \lambda_{i}c_{ij'} \leq B_{j'} \forall j' \in J'\)</span>   (2) Investment category budget constraint(s)
-<span class="math notranslate nohighlight">\(\sum_i \lambda_{i}q_{ik'} \leq M_{k'}\)</span> , (3) Metric constraint
-<span class="math notranslate nohighlight">\(\sum_i \lambda_i = 1\)</span> , (4)
-<span class="math notranslate nohighlight">\(\sum_{i,i'} y_{ii'} = 1\)</span> , (5)
-<span class="math notranslate nohighlight">\(y_{ii'} \leq \lambda_i + \lambda_{i'} \forall i, i'\)</span> , (6)
-<span class="math notranslate nohighlight">\(0 \leq \lambda_i \leq 1 \forall i\)</span> , (7)
-<span class="math notranslate nohighlight">\(y_{ii'} \in \{ 0, 1 \} \forall i, i'\)</span> , (8)</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \sum_j \lambda_{i}c_{ij} \leq B\)</span>, (1) Total budget constraint</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \lambda_{i}c_{ij'} \leq B_{j'} \forall j' \in J'\)</span>   (2) Investment category budget constraint(s)</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \lambda_{i}q_{ik'} \leq M_{k'}\)</span> , (3) Metric constraint</p>
+<p><span class="math notranslate nohighlight">\(\sum_i \lambda_i = 1\)</span> , (4)</p>
+<p><span class="math notranslate nohighlight">\(\sum_{i,i'} y_{ii'} = 1\)</span> , (5)</p>
+<p><span class="math notranslate nohighlight">\(y_{ii'} \leq \lambda_i + \lambda_{i'} \forall i, i'\)</span> , (6)</p>
+<p><span class="math notranslate nohighlight">\(0 \leq \lambda_i \leq 1 \forall i\)</span> , (7)</p>
+<p><span class="math notranslate nohighlight">\(y_{ii'} \in \{ 0, 1 \} \forall i, i'\)</span> , (8)</p>
 <p><strong>Problem Size</strong></p>
 <p>In general, <span class="math notranslate nohighlight">\(I\)</span> is the number of rows in the dataset of elicited data. In the case that all investment categories have elicited data at the same number of levels (not necessarily the same levels themselves), <span class="math notranslate nohighlight">\(I\)</span> can also be calculated as <span class="math notranslate nohighlight">\(l^J\)</span> where <span class="math notranslate nohighlight">\(l\)</span> is the number of investment levels.</p>
 <p>The problem will involve <span class="math notranslate nohighlight">\(\frac{I(I-1)}{2}\)</span> binary variables and <span class="math notranslate nohighlight">\(I\)</span> continuous (<span class="math notranslate nohighlight">\(\lambda\)</span>) variables.</p>
@@ -655,7 +446,7 @@ Last accessed 12/29/2020.</li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="main_page.html">Tyche</a></h1>
+<h1 class="logo"><a href="index.html">Tyche</a></h1>
 
 
 
@@ -667,54 +458,22 @@ Last accessed 12/29/2020.</li>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Tyche Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Technology Model Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-analysis.html">Analysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Optimization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#non-linear-nlp-formulation-summary">Non-Linear (NLP) Formulation Summary</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#solutions-to-pv-residential-simple">Solutions to <code class="docutils literal notranslate"><span class="pre">pv_residential_simple</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#sequential-least-squares-programming">Sequential Least Squares Programming</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defining-constraints">Defining Constraints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#slsqp-solution-to-pv-residential-simple">SLSQP Solution to <code class="docutils literal notranslate"><span class="pre">pv_residential_simple</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#differential-evolution">Differential Evolution</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defining-constraints-2">Defining Constraints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#differential-evolution-solutions-to-pv-residential-simple">Differential Evolution Solutions to <code class="docutils literal notranslate"><span class="pre">pv_residential_simple</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#simplicial-homology-global-optimization">Simplicial Homology Global Optimization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defining-constraints-3">Defining Constraints</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#piecewise-linear-milp-formulation-summary">Piecewise Linear (MILP) Formulation Summary</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#notation">Notation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#one-investment-category-one-metric-example">One-Investment-Category, One-Metric Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#extension-to-n-x-n-problem">Extension to N x N Problem</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="main_page.html">Documentation overview</a><ul>
-      <li>Previous: <a href="example-technology.html" title="previous chapter">Defining Technologies</a></li>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="formulation.html" title="previous chapter">Mathematical Formulation</a></li>
       <li>Next: <a href="user-interface.html" title="next chapter">User Interface</a></li>
   </ul></li>
 </ul>

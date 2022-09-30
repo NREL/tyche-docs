@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Tyche Quick Start Guide &#8212; Tyche 0.1.0 documentation</title>
+    <title>Quick Start Guide &#8212; Tyche 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Approach" href="approach.html" />
-    <link rel="prev" title="Tyche: Technology Characterization and Evaluation" href="main_page.html" />
+    <link rel="next" title="Technology Model Example" href="example-technology.html" />
+    <link rel="prev" title="Tyche: Technology Characterization and Evaluation" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,52 +35,166 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="tyche-quick-start-guide">
-<h1>Tyche Quick Start Guide<a class="headerlink" href="#tyche-quick-start-guide" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="quick-start-guide">
+<span id="sec-quickstart"></span><h1>Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this quick start guide is to allow a new user to set up their first R&amp;D decision context using Tyche, and to provide some examples of using Tyche for decision support analyses.</p>
+<p>An R&amp;D decision context involves one or more technologies that are subject to various R&amp;D investments with the goal of changing the technology metrics and outcomes.</p>
 <div class="section" id="introduction-and-getting-started">
 <h2>Introduction and Getting Started<a class="headerlink" href="#introduction-and-getting-started" title="Permalink to this headline">¶</a></h2>
+<p>The following materials walk through:</p>
+<ol class="arabic simple">
+<li>what the Technology Characterization and Evaluation (Tyche ) tool does and why this is of value to the user;</li>
+<li>setting up the Tyche package for use, including downloading and installing Anaconda (which includes Jupyter for running Tyche and Spyder for creating/editing Python files);</li>
+<li>modifying an existing model to be used to meet your particular needs;</li>
+<li>developing data, including conducting expert elicitations to estimate potential impacts of different R&amp;D investments;</li>
+<li>an overview of the code and data files used; and</li>
+<li>building and running Tyche models of your technologies to evaluate the potential impacts of alternative R&amp;D investment strategies.</li>
+</ol>
+</div>
+<div class="section" id="the-technology-characterization-and-evaluation-tool">
+<h2>The Technology Characterization and Evaluation Tool<a class="headerlink" href="#the-technology-characterization-and-evaluation-tool" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Tyche</strong> tool provides a consistent and systematic methodology to evaluate alternative R&amp;D investments in a technology system and determine.  This can help support decision-makers as they consider alternative R&amp;D investment strategies to meet their overall goals.</p>
+<p>The Tyche methodology:</p>
+<ol class="arabic simple">
+<li>begins with a technoeconomic model of a particular technology;</li>
+<li>conducts expert elicitation to get quantitative estimates of how much a particular attribute of a component or subsystem within that technology might improve with R&amp;D;</li>
+<li>represents these estimates as probability distributions—typically triangular distributions as these are straightforward to develop through expert elicitations—within this model; and then</li>
+<li>uses multi-objective stochastic optimization to determine the potential overall improvement in the technology, identify the R&amp;D investments that have the greatest potential impact for improving technology attributes such as cost or environmental impact, and enables analysis of R&amp;D options to meet decision-maker goals.</li>
+</ol>
+</div>
 <div class="section" id="set-up-tyche-package">
-<h3>Set up Tyche package<a class="headerlink" href="#set-up-tyche-package" title="Permalink to this headline">¶</a></h3>
-<p>There are several platforms for using Tyche.  Listed below is the process of downloading the Tyche framework to your personal computer. The Tyche repository is available on github at this [link](<a class="reference external" href="https://github.com/NREL/tyche">https://github.com/NREL/tyche</a>).   A library of simple Tyche models is available at to provide beginning templates for developing more complete models of technologies of interest [here.](<a class="reference external" href="https://github.com/NREL/tyche/tree/dev/src/technology">https://github.com/NREL/tyche/tree/dev/src/technology</a>)</p>
-<ul class="simple">
-<li>Download and install [Anaconda](<a class="reference external" href="https://www.anaconda.com/">https://www.anaconda.com/</a>). No need for installing Anaconda for Linux or Mac systems.</li>
-<li>Download Tyche from GitHub</li>
-<li>Navigate to the downloaded Tyche repository folder.</li>
+<h2>Set up Tyche package<a class="headerlink" href="#set-up-tyche-package" title="Permalink to this headline">¶</a></h2>
+<p>The following installs Anaconda (from which JupyterLab is used to run Tyche models), downloads Tyche and sets up the Tyche environment within Anaconda to run Tyche models.  There are several platforms for using Tyche.  Listed below is the process for downloading the Tyche framework to your personal computer. The Tyche repository is available on github at this [link](<a class="reference external" href="https://github.com/NREL/tyche">https://github.com/NREL/tyche</a>)…   A library of simple Tyche models is available to provide beginning templates for developing more complete models of technologies of interest at: (<a class="reference external" href="https://github.com/NREL/tyche/tree/dev/src/technology">https://github.com/NREL/tyche/tree/dev/src/technology</a>)</p>
+<ul>
+<li><p class="first">Download and install <a class="reference external" href="https://anaconda.org/">Anaconda</a> . Most users will install the Windows version of Anaconda.  Set up an account with a password to download Anaconda to make re-installing easier if there are problems and to access tutorials and other information on Anaconda.  This can also be useful if your Jupyter link breaks.  &lt;&lt;For installing Anaconda for Linux or Mac systems, see below.&gt;&gt;</p>
+</li>
+<li><p class="first">Download Tyche from GitHub at: <a class="reference external" href="https://github.com/NREL/tyche/tree/dev">https://github.com/NREL/tyche/tree/dev</a></p>
+</li>
+<li><p class="first">Paste the downloaded Tyche Zip.files on your desktop and extract the files.  It is easiest to access these files using Anaconda/Jupyter when they are on your desktop.</p>
+</li>
+<li><p class="first">Navigate to the downloaded Tyche repository folder.</p>
+</li>
 <li><dl class="first docutils">
 <dt>Create the Tyche environment</dt>
+<dd><ul class="first last simple">
+<li>Type the following into the Anaconda Shell (under Anaconda in the Windows Start menu).</li>
+<li>For windows machines, do the following:</li>
+<li>In the Windows Start menu (left-most windows icon at the bottom of your screen) open the Anaconda folder and click on the Anaconda prompt.  A window will open showing: <code class="docutils literal notranslate"><span class="pre">`(base)</span> <span class="pre">C:\users\xxx&gt;`</span></code>   Navigate to where your Tyche folder is, e.g., change directories to the tyche folder:  <code class="docutils literal notranslate"><span class="pre">`(base)</span> <span class="pre">cd:\users\PersonName\tyche`</span></code>, then install the tyche environment with:</li>
+<li><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">--file</span> <span class="pre">conda\win.yml</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">tyche</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">mip</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">For Mac OS use system terminal.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">--file</span> <span class="pre">conda\mac.yml</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">tyche</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">mip</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<ul class="simple">
+<li>These steps create a new environment in Anaconda for running Tyche files.  This can be seen by looking at Anaconda navigator (launch Anaconda navigator by clicking the Windows start button and going to the Anaconda folder and clicking on Anaconda Navigator) under “Environment” on the left-most panel.  It will show two names: “Base (root)” and “Tyche”.  The Tyche work will be done within the Tyche environment; in particular, note that the Windows Start menu showing the Anaconda file now includes a Jupyter Notebook (Tyche) icon to launch Jupyter to run Tyche.</li>
+<li>Run a Tyche Model.  To test the Tyche environment, click the Windows Start menu, go to the Anaconda folder, and click on the Jupyter Notebook (Tyche) program.  This will launch Jupyter Notebook (Tyche) in your default web browser.</li>
+<li>Build a Tyche Model.  This consists of <strong>xxxxx</strong>; Examples are provided below.  Models follow a particular format as specified in the Tyche documentation Release 0.xx.  The form of these Tyche models enables consistent approaches to evaluating technologies.</li>
+<li>Develop Model Data.  Much model data will be well known and should be entered directly into the respective .csv files as described below.  Other model data is developed through expert elicitations.</li>
+<li>Conduct Expert Elicitations to estimate potential technology cost and performance improvements for selected levels of R&amp;D investment as well as to determine other needed data.</li>
+<li>Input Expert Elicitation data into the Tyche model.</li>
+</ul>
+<p>To download and use the Tyche package on a personal computer:</p>
+<ul class="simple">
+<li>On Windows only, for users without a Python distribution: First download and install <a class="reference external" href="https://anaconda.org/">Anaconda</a>.</li>
+<li>Download the <a class="reference external" href="https://github.com/NREL/tyche/releases/">source code</a>.</li>
+<li>Navigate to the Tyche repository folder.</li>
+<li>Create the Tyche environment</li>
+</ul>
+<p>On Windows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">--</span><span class="n">file</span> <span class="n">conda</span>\<span class="n">win</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">tyche</span>
+</pre></div>
+</div>
+<p>On Mac:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">--</span><span class="n">file</span> <span class="n">conda</span><span class="o">/</span><span class="n">mac</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">tyche</span>
+</pre></div>
+</div>
+<p>Note that the conda environment was created with the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">tyche</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.7</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span> <span class="n">seaborn</span><span class="o">=</span><span class="mf">0.10</span> <span class="n">matplotlib</span><span class="o">=</span><span class="mf">3.3</span> <span class="n">quart</span> <span class="n">hypercorn</span> <span class="n">jupyter</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>If you receive an HTTPS error, consider retrying the command with the <cite>–insecure</cite> flag added.</li>
+<li>See the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file">conda documentation</a> for additional information on installing and troubleshooting environments.</li>
+</ul>
+</div>
+<div class="section" id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="figure-1">
+<span id="fig-directorystruct"></span><a class="reference internal image-reference" href="_images/image1.png"><img alt="Tyche repository directory structure." src="_images/image1.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Tyche repository directory structure. Users should not alter this structure. New technology models and data can be saved in sub-directories under the technology folder, indicated in blue.</span></p>
+</div>
+<p>The directory where users should store new technology models (.py files) and the accompanying datasets discussed below is indicated in blue in <a class="reference internal" href="#fig-directorystruct"><span class="std std-numref">Fig. 1</span></a>. We recommend that users create sub-directories for each new technology or decision context, to avoid confusing the various input datasets.</p>
+<p>The content of the folders and files follows:</p>
+<ul class="simple">
+<li>Conda: This folder has four files: “mac.yml”, “nobuilds.yml”, “tiny.yml”, and “win.yml”.  The win.yml and mac.yml files are used to install the Tyche environment and dependencies in Windows and Mac machines, respectively, as described above.  The “nobuilds.yml” and “tiny.yml” files are for use instead of “mac.yml” and “win.yml” in case the more detailed environment specifications cause problems during installation.</li>
+<li><dl class="first docutils">
+<dt>Docs: This folder has a number of RST (reStructured Text markup language) files that describe different aspects of Tyche and its programs.  These files are for internal Tyche developer use only and should not be modified by users outside the development team.</dt>
 <dd><ul class="first last">
-<li>Type the following into the Anaconda Shell (under Anaconda in the Windows Start menu). For Mac use system terminal.</li>
-<li>Windows OS:  <code class="docutils literal notranslate"><span class="pre">`conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">--file</span> <span class="pre">conda\win.yml</span> <span class="pre">`</span></code></li>
-<li>Mac OS:  <code class="docutils literal notranslate"><span class="pre">`conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">--file</span> <span class="pre">conda\mac.yml</span> <span class="pre">`</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">`conda</span> <span class="pre">activate</span> <span class="pre">tyche`</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">`pip</span> <span class="pre">install</span> <span class="pre">mip`</span></code></li>
+<li>src: The Tyche analysis codebase is stored in this directory</li>
+<li>eutychia: Code for the browser-based graphical user interface (GUI) is stored in this directory</li>
+<li>technology: This folder has a subfolder for each decision context (set of technologies, plus investment scenarios) that is modeled in Tyche. Also in this directory are the technology model files (.py).</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
+<p>Within each Technology folder there is one Jupyter (.ipynb) analysis notebook file that models the technology and seven input datasets in .csv format, as follow:</p>
+<ul class="simple">
+<li>designs.</li>
+<li>functions.</li>
+<li>indices.</li>
+<li>investments.</li>
+<li>parameters.</li>
+<li>results.</li>
+<li>tranches.</li>
+<li>Each of these .csv files is described in detail below.</li>
+</ul>
+<p>Tyche: This folder has 10 python files which form the core of the Tyche model and should not be modified.  These do the following:</p>
+<ul class="simple">
+<li>__init__: This is the Python initialization function.   The leading and trailing double underscores mean that this is a special method of the Python interpreter.</li>
+<li>DecisionGUI:</li>
+<li>Designs:</li>
+<li>Distributions:</li>
+<li>EpsilonConstraints:</li>
+<li>Evaluator:</li>
+<li>Investments:</li>
+<li>IO:</li>
+<li>Types:</li>
+<li>Waterfall:</li>
+</ul>
 </div>
-<div class="section" id="repository-organization">
-<h3>Repository Organization<a class="headerlink" href="#repository-organization" title="Permalink to this headline">¶</a></h3>
-<p>The directory where users should store new technology models (.py files) and the accompanying datasets (discussed below) is indicated in blue. We recommend that users create sub-directories under technology for each new technology or decision context, to avoid confusing the various input datasets.</p>
+<div class="section" id="defining-technologies">
+<h2>Defining Technologies<a class="headerlink" href="#defining-technologies" title="Permalink to this headline">¶</a></h2>
 </div>
-</div>
-<div class="section" id="defining-a-technology-model">
-<h2>Defining a Technology Model<a class="headerlink" href="#defining-a-technology-model" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="what-is-a-technology">
-<h3>What is a “technology”?<a class="headerlink" href="#what-is-a-technology" title="Permalink to this headline">¶</a></h3>
-<p>In the R&amp;D decision contexts represented and analyzed by Tyche, “technology” has a very broad definition. A technology converts input(s) to output(s) using capital with a defined lifetime and incurs fixed and/or variable costs in doing so. A technology may be a manufacturing process, a biorefinery, an agricultural process, a renewable energy technology component such as a silicon wafer, a renewable energy technology unit such as a wind turbine or solar panel, a renewable power plant system such as a concentrated solar power plant, and more. Within the R&amp;D decision context, a technology is also subject to one or more research areas in which R&amp;D investments can be made to change the technology and its economic, environmental, and other metrics of interest. Multiple technologies can be modeled and compared within the same decision context, provided the same metrics are calculable for each technology. Within Tyche, a technology is represented both physically and economically using a classic but simple and generalized techno-economic analysis (TEA). The TEA is based on a user defined technology model and accompanying datasets of technological and investment information.</p>
-</div>
+<h2>What is a “technology”?<a class="headerlink" href="#what-is-a-technology" title="Permalink to this headline">¶</a></h2>
+<p>In the R&amp;D decision contexts represented and analyzed by Tyche, “technology” has a very broad definition. A technology converts input(s) to output(s) using capital equipment with a defined lifetime and incurs fixed and/or variable costs in doing so. A technology may be a manufacturing process, a biorefinery, an agricultural process, a renewable energy technology component such as a silicon wafer or an inverter, a renewable energy technology unit such as a wind turbine or solar panel, a renewable power plant system such as a concentrated solar power plant, and more. Within the R&amp;D decision context, a technology is also subject to one or more research areas in which R&amp;D investments can be made to change the technology and its economic, environmental, and other metrics of interest. Multiple technologies can be modeled and compared within the same decision context, provided the same metrics are calculable for each technology. Within Tyche, a technology is represented both physically and economically using a classic but simple and generalized techno-economic analysis (TEA). The TEA is based on a user defined technology model and accompanying datasets of technological and investment information.</p>
 </div>
 <div class="section" id="input-datasets">
 <h2>Input Datasets<a class="headerlink" href="#input-datasets" title="Permalink to this headline">¶</a></h2>
+<p>The following first walks through the various .csv files that support the Tyche model within the folder for each technology, then these are put to use in the last section below to build and run a Tyche model of your technology to evaluate the potential impacts of alternative R&amp;D investment strategies.</p>
+</div>
 <div class="section" id="designs-dataset">
-<h3>Designs Dataset<a class="headerlink" href="#designs-dataset" title="Permalink to this headline">¶</a></h3>
-<p>A <em>design</em> is one set of technology data that results from a specific R&amp;D investment scenario. The <em>designs</em> dataset collects the technologies and technology versions that may result from all R&amp;D investment scenarios being considered in a decision context.</p>
-<p>The <em>designs</em> dataset contains information for one or more technologies being compared within an R&amp;D investment decision context. There will be multiple sets of data for each technology; each set represents the technology data that results from a specific R&amp;D investment scenario. Tables 2 and 3 provide a data dictionary for the <em>designs</em> dataset.</p>
-<p><strong>Table 1:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<h2>Designs Dataset<a class="headerlink" href="#designs-dataset" title="Permalink to this headline">¶</a></h2>
+<p>A <em>design</em> is one set of technology data that results from a specific R&amp;D investment scenario. The <em>designs</em> dataset collects the technology versions that may result from all R&amp;D investment scenarios being considered in a decision context.</p>
+<p>The <em>designs</em> dataset contains information for one or more technologies being compared within an R&amp;D investment decision context using Tyche. There will be multiple sets of data for each technology; each set represents the technology data that results from a specific R&amp;D investment scenario.  Multiple R&amp;D investment scenarios are typically used, each generating a different level of technology advancement as determined through expert elicitation. <a class="reference internal" href="#tbl-designsdict"><span class="std std-numref">Table 1</span></a> provides a data dictionary for the <em>designs</em> dataset. It points to the data for the technology subsystems and components in the <em>parameters</em> dataset within the technology folder, described below. Additional information on mandatory Variables is provided in <a class="reference internal" href="#tbl-designsvars"><span class="std std-numref">Table 2</span></a>.</p>
+<p>The <em>designs.csv</em> file within the technology folder under SRC contains the <em>designs</em> dataset.</p>
+<span id="tbl-designsdict"></span><table border="1" class="docutils" id="table-1">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Data dictionary for the <em>designs</em> dataset which defines various technology versions resulting from R&amp;D investments.</span><a class="headerlink" href="#table-1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="7%" />
 <col width="23%" />
@@ -152,11 +266,9 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-<p>If there are no elements within a Variable for the technology under study, the Variable must still be included in the <em>designs</em> dataset: leaving out any of the Variables in this dataset will break the code. The Value for irrelevant Variables may be set to 0 or 1. Variables and their component Indexes are defined further in Table 2.</p>
-<p><strong>Table 2:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<p>If there are no elements within a Variable for the technology under study, the Variable must still be included in the <em>designs</em> dataset: leaving out any of the Variables in this dataset will break the code. The Value for irrelevant Variables may be set to 0 or 1. For instance, a technology such as a solar panel could be modeled without any Inputs, if sunlight is not explicitly being modeled. In this case, the single Index defined for the Input Variable could be simply 0, and the calculations within the technology model .py file can be defined without using this value. Variables and their component Indexes are defined further in <a class="reference internal" href="#tbl-designsvars"><span class="std std-numref">Table 2</span></a>.</p>
+<span id="tbl-designsvars"></span><table border="1" class="docutils" id="table-2">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Mandatory values for Variables in the <em>designs</em> dataset.</span><a class="headerlink" href="#table-2" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="7%" />
 <col width="42%" />
@@ -199,14 +311,13 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </div>
 <div class="section" id="parameters-dataset">
-<h3>Parameters Dataset<a class="headerlink" href="#parameters-dataset" title="Permalink to this headline">¶</a></h3>
-<p>The <em>parameters</em> dataset contains any ad hoc data, other than that contained in the <em>designs</em> dataset, that is required to calculate a technology’s capital cost, fixed cost, production (actual output amount(s)), and metrics. If the information in the <em>designs</em> dataset completely defines the technology and its metrics of interest, then the <em>parameters</em> dataset can be left blank except for the column names. Identically to the <em>designs</em> dataset, the <em>parameters</em> dataset contains multiple sets of data corresponding to different R&amp;D investment scenarios.</p>
-<p><strong>Table 3:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<h2>Parameters Dataset<a class="headerlink" href="#parameters-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The <em>parameters</em> dataset contains any additional technology-related data, other than that contained in the <em>designs</em> dataset, that is required to calculate a technology’s capital cost, fixed cost, production (actual output amount(s)), and metrics.</p>
+<p>If the information in the <em>designs</em> dataset completely defines the technology and its metrics of interest, then the <em>parameters</em> dataset can be left blank except for the column names. Identically to the <em>designs</em> dataset, the <em>parameters</em> dataset contains multiple sets of data corresponding to different R&amp;D investment scenarios. A data dictionary for the <em>parameters</em> dataset is given in <a class="reference internal" href="#tbl-paramsdict"><span class="std std-numref">Table 3</span></a>.</p>
+<span id="tbl-paramsdict"></span><table border="1" class="docutils" id="table-3">
+<caption><span class="caption-number">Table 3 </span><span class="caption-text">Data dictionary for the <em>parameters</em> dataset, which, if necessary, provides additional technology-related data other than that in the <em>designs</em> dataset.</span><a class="headerlink" href="#table-3" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="6%" />
 <col width="22%" />
@@ -233,7 +344,7 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 <tr class="row-odd"><td>Offset</td>
 <td>String</td>
-<td>Numerical location of the parameter.</td>
+<td>Numerical location of the parameter in the parameter vector.</td>
 </tr>
 <tr class="row-even"><td>Value</td>
 <td>Float; Distribution; Mixture of distributions</td>
@@ -249,15 +360,12 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <p>Including the Offset value in the <em>parameters</em> dataset creates a user reference that makes it easier to access parameter values when defining the technology model.</p>
-</div>
 <div class="section" id="technology-model-python-file">
-<h3>Technology model Python file<a class="headerlink" href="#technology-model-python-file" title="Permalink to this headline">¶</a></h3>
-<p>The technology model is a Python file (.py) which is user defined and contains methods for calculating capital cost, fixed cost, production (the actual output amount), and any metrics of interest, using the content of the <em>designs</em> and <em>parameters</em> datasets. Table 4 describes methods that must be included in the technology model Python file. The names of the methods are user-defined and must match the contents of the <em>functions</em> dataset, discussed below. Additional methods can be included in the technology model, if necessary, but the methods in Table 4 are required. All return values for the required methods must be formatted as numpy “stacks” of values; for more information, see the numpy documentation.</p>
-<p><strong>Table 4:</strong> Methods required within the technology model Python file. Method names are user-defined and should match the contents of the functions dataset. Additional methods can be defined within the technology model as necessary._</p>
-<blockquote>
-<div><table border="1" class="docutils">
+<h3>Technology model (Python file)<a class="headerlink" href="#technology-model-python-file" title="Permalink to this headline">¶</a></h3>
+<p>The technology model is a Python file (.py) which is user defined and contains methods for calculating capital cost, fixed cost, production (the actual output amount), and any metrics of interest, using the content of the <em>designs</em> and <em>parameters</em> datasets. <a class="reference internal" href="#tbl-techmethods"><span class="std std-numref">Table 4</span></a> describes methods that must be included in the technology model Python file. The names of the methods are user-defined and must match the contents of the <em>functions</em> dataset, discussed below. Additional methods can be included in the technology model, if necessary, but the methods in <a class="reference internal" href="#tbl-techmethods"><span class="std std-numref">Table 4</span></a> are required. All return values for the required methods, even if only a single value is returned, must be formatted as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.stack.html">Numpy stacks</a>. The parameters (inputs) for the methods, listed in <a class="reference internal" href="#tbl-techmethods"><span class="std std-numref">Table 4</span></a>, are also fixed and cannot be changed. In the case that a method does not require all of the mandatory input parameters, they can simply be left out of the method’s calculations.</p>
+<span id="tbl-techmethods"></span><table border="1" class="docutils" id="table-4">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Methods required within the technology model Python file. Method names are user-defined and should match the contents of the functions dataset. Additional methods can be defined within the technology model as necessary.</span><a class="headerlink" href="#table-4" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="14%" />
 <col width="55%" />
@@ -265,7 +373,7 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Recommended Method Name</th>
-<th class="head">Parameters</th>
+<th class="head">Parameters (method inputs)</th>
 <th class="head">Returns</th>
 </tr>
 </thead>
@@ -288,19 +396,18 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <p>The production method can access the actual input amount, which is the ideal or raw input amount value multiplied by the input efficiency value (both defined in the <em>designs</em> dataset). In contrast, the metrics method can access both the ideal input amount (<em>input_raw</em>) and the actual input amount (<em>input</em>).</p>
 </div>
 </div>
 <div class="section" id="defining-r-d-investments">
 <h2>Defining R&amp;D Investments<a class="headerlink" href="#defining-r-d-investments" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="tranches-dataset">
-<h3>Tranches Dataset<a class="headerlink" href="#tranches-dataset" title="Permalink to this headline">¶</a></h3>
+<h2>Tranches Dataset<a class="headerlink" href="#tranches-dataset" title="Permalink to this headline">¶</a></h2>
 <p>A <em>tranche</em> is a discrete unit of R&amp;D investment (dollar amount) in a specific research category. Tranches within the same research category are mutually exclusive: one cannot simultaneously invest $1M and $5M in a research category. A <em>scenario</em> is a combination of tranches that represents one option for making R&amp;D investments.</p>
-<p>The <em>tranches</em> dataset defines the allowed set of R&amp;D investments across the research categories that are relevant to the technology under study. Tranches are combined into investment Scenarios – the same Scenarios found in the <em>designs</em> and <em>parameters</em> datasets. The impact of each Scenario on the technology is highly uncertain and is quantified using expert elicitation. A data dictionary for the <em>tranches</em> dataset is given in Table 5.</p>
-<p><strong>Table 5:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<p>The <em>tranches</em> dataset defines the allowed set of R&amp;D investments across the research categories that are relevant to the technology under study. Tranches are combined into investment Scenarios – the same Scenarios found in the <em>designs</em> and <em>parameters</em> datasets. The impact of each Scenario on the technology is highly uncertain and is quantified using expert elicitation. A data dictionary for the <em>tranches</em> dataset is given in <a class="reference internal" href="#tbl-tranchesdict"><span class="std std-numref">Table 5</span></a>.</p>
+<span id="tbl-tranchesdict"></span><table border="1" class="docutils" id="table-5">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">Data dictionary for the <em>tranches</em> dataset.</span><a class="headerlink" href="#table-5" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="6%" />
 <col width="19%" />
@@ -335,15 +442,13 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 </div>
 <div class="section" id="investment-dataset">
-<h3>Investment Dataset<a class="headerlink" href="#investment-dataset" title="Permalink to this headline">¶</a></h3>
+<h2>Investment Dataset<a class="headerlink" href="#investment-dataset" title="Permalink to this headline">¶</a></h2>
 <p>An <em>investment</em>, similar to a <em>scenario</em>, is a combination of tranches that represents a particular R&amp;D strategy.</p>
-<p>The <em>investments</em> dataset provides a separate way to look at making R&amp;D investments. Combining individual tranches allows users to explore and optimize R&amp;D investment amounts, but it may be the case that there are specific strategies that users wish to explore, without optimizing. In this case, the <em>investments</em> dataset is used to define specific combinations of tranches that are of interest. A data dictionary for the <em>investments</em> dataset is given in Table 6.</p>
-<p><strong>Table 6:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<p>The <em>investments</em> dataset provides a separate way to look at making R&amp;D investments. Combining individual tranches allows users to explore and optimize R&amp;D investment amounts, but it may be the case that there are specific strategies that users wish to explore, without optimizing. In this case, the <em>investments</em> dataset is used to define specific combinations of tranches that are of interest. A data dictionary for the <em>investments</em> dataset is given in <a class="reference internal" href="#tbl-investmentsdict"><span class="std std-numref">Table 6</span></a>.</p>
+<span id="tbl-investmentsdict"></span><table border="1" class="docutils" id="table-6">
+<caption><span class="caption-number">Table 6 </span><span class="caption-text">Data dictionary for the <em>investments</em> dataset.</span><a class="headerlink" href="#table-6" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="10%" />
 <col width="8%" />
@@ -373,27 +478,25 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
-</div>
 </div>
 <div class="section" id="uncertainty-in-the-input-datasets">
 <h2>Uncertainty in the Input Datasets<a class="headerlink" href="#uncertainty-in-the-input-datasets" title="Permalink to this headline">¶</a></h2>
 <p>Tyche provides two general use cases for exploring the relationship between R&amp;D investments and technological changes, both of which rely on expert elicitation to quantify inherent uncertainty. In the first and likely more common use case, a user knows what the R&amp;D investment options are for a technology or set of technologies and is interested in determining what impact these investment options have on the technology(ies) in order to decide how to allocate an R&amp;D budget. In other words, in this use case the user already knows the contents of the <em>tranches</em> and <em>investments</em> datasets, which are deterministic (fixed), and uses expert elicitation to fill in key values in the <em>designs</em> and <em>parameters</em> datasets with probability distributions.</p>
 <p>In the second use case, a user knows what technological changes must be achieved with R&amp;D investment and is interested in determining the investment amount that will be required to achieve these changes. In this case the user already knows the contents of the <em>designs</em> and <em>parameters</em> dataset, which are deterministic, and uses expert elicitation to fill in the investment amounts in the <em>tranches</em> dataset.</p>
 <p>It is critical to note that these use cases are <strong>mutually exclusive</strong>. Tyche cannot be used to evaluate a scenario in which desired technological changes as well as the investment amounts are both uncertain. What this means for the user is that probability distributions, or mixtures of distributions, can be used to specify values either in the <em>designs</em> and <em>parameters</em> datasets or in the <em>tranches</em> dataset, but not both. If distributions are used in all three datasets, the code will break by design.</p>
-<div class="section" id="defining-values-as-probability-distributions-and-mixtures">
-<h3>Defining values as probability distributions and mixtures<a class="headerlink" href="#defining-values-as-probability-distributions-and-mixtures" title="Permalink to this headline">¶</a></h3>
-<p>An uncertain value can be defined within a dataset using any of the built-in distributions of the [scipy.stats](<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">https://docs.scipy.org/doc/scipy/reference/stats.html</a>) package. A list of available distributions is provided at the hyperlink. Uncertain values can also be defined as a weighted average or mixture of probability distributions using the Tyche <em>mixture</em> method.</p>
 </div>
+<div class="section" id="defining-values-as-probability-distributions-and-mixtures">
+<h2>Defining values as probability distributions and mixtures<a class="headerlink" href="#defining-values-as-probability-distributions-and-mixtures" title="Permalink to this headline">¶</a></h2>
+<p>An uncertain value can be defined within a dataset using any of the built-in distributions of the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">scipy.stats</a> package. A list of available distributions is provided at the hyperlink. Uncertain values can also be defined as a weighted average or mixture of probability distributions using the Tyche <em>mixture</em> method.</p>
 </div>
 <div class="section" id="additional-input-datasets">
 <h2>Additional Input Datasets<a class="headerlink" href="#additional-input-datasets" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="indices-dataset">
-<h3>Indices Dataset<a class="headerlink" href="#indices-dataset" title="Permalink to this headline">¶</a></h3>
-<p>The <em>indices</em> dataset contains the numerical indexes (location within a list or array) used to access content in the other datasets. Table 7 describes the columns required for the indices table. Numerical locations for parameters should not be listed in this dataset.</p>
-<p><strong>Table 7:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<h2>Indices Dataset<a class="headerlink" href="#indices-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The <em>indices</em> dataset contains the numerical indexes (location within a list or array) used to access content in the other datasets. <a class="reference internal" href="#tbl-indicesdict"><span class="std std-numref">Table 7</span></a> describes the columns required for the indices table. Numerical locations for parameters should not be listed in this dataset.</p>
+<span id="tbl-indicesdict"></span><table border="1" class="docutils" id="table-7">
+<caption><span class="caption-number">Table 7 </span><span class="caption-text">Data dictionary for the <em>indices</em> dataset.</span><a class="headerlink" href="#table-7" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="11%" />
 <col width="9%" />
@@ -422,25 +525,11 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </td>
 <td>Names of the Types defined within the designs dataset.</td>
 </tr>
-</tbody>
-</table>
-</div></blockquote>
-<dl class="docutils">
-<dt>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</dt>
-<dd><div class="first last line-block">
-<div class="line">Index        | String     | Any            | Name of the elements within each Type. For instance, names of elements in Input type     |</div>
-</div>
-</dd>
-</dl>
-<blockquote>
-<div><table border="1" class="docutils">
-<colgroup>
-<col width="11%" />
-<col width="9%" />
-<col width="12%" />
-<col width="68%" />
-</colgroup>
-<tbody valign="top">
+<tr class="row-even"><td>Index</td>
+<td>String</td>
+<td>Any</td>
+<td>Name of the elements within each Type. For instance, names of the Input types.</td>
+</tr>
 <tr class="row-odd"><td>Offset</td>
 <td>Integer</td>
 <td>$geq$ 0</td>
@@ -458,25 +547,23 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <p>All four Types must be listed in the <em>indices</em> dataset. If a particular Type is not relevant to the technology under study, it still must be included in this dataset.</p>
 </div>
 <div class="section" id="relationship-between-indices-and-other-datasets">
-<h3>Relationship between <em>indices</em> and other datasets<a class="headerlink" href="#relationship-between-indices-and-other-datasets" title="Permalink to this headline">¶</a></h3>
+<h2>Relationship between <em>indices</em> and other datasets<a class="headerlink" href="#relationship-between-indices-and-other-datasets" title="Permalink to this headline">¶</a></h2>
 <p>A technology in the Tyche context is quantified using five sets of attribute values and one technology-level attribute value. The five sets of attribute values are Capital, Input, Output, Parameter, and Metric, and the technology-level attribute is Scale. Elements within each of the five sets are defined with an Index which simply names the element (for instance, Electricity might be one of the Index values within the Input set). Elements of Capital have an associated Lifetime. Elements of the Input set have an associated ideal amount (also called Input), an Input efficiency value, and an Input price. Elements of the Output set have only an Output efficiency and an Output price; the ideal output amounts are calculated from the technology model. Elements of the Metric set are named with an Index and are likewise calculated from the technology model. Elements of the Parameter set have only a value.</p>
 <p>The <em>indices</em> dataset lists the elements of the Capital, Input, Output, and Metric sets, and contains an Offset column giving the numerical location of each element within its set. The <em>designs</em> dataset contains values for each element of the Capital, Input, Output, and Metric sets as well as the technology-level Scale value. The <em>parameters</em> dataset names and gives values for each element of the Parameter set.</p>
 </div>
 <div class="section" id="functions-dataset">
-<h3>Functions Dataset<a class="headerlink" href="#functions-dataset" title="Permalink to this headline">¶</a></h3>
-<p>The <em>functions</em> dataset is used internally by Tyche to locate the technology model file and identify the four required methods listed in Table 4. Table 8 provides a data dictionary for the <em>functions</em> dataset.</p>
-<p><strong>Table 8:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<h2>Functions Dataset<a class="headerlink" href="#functions-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The <em>functions</em> dataset is used internally by Tyche to locate the technology model file and identify the four required methods listed in <a class="reference internal" href="#tbl-techmethods"><span class="std std-numref">Table 4</span></a>. <a class="reference internal" href="#tbl-functionsdict"><span class="std std-numref">Table 8</span></a> provides a data dictionary for the <em>functions</em> dataset.</p>
+<span id="tbl-functionsdict"></span><table border="1" class="docutils" id="table-8">
+<caption><span class="caption-number">Table 8 </span><span class="caption-text">Data dictionary for the <em>functions</em> dataset.</span><a class="headerlink" href="#table-8" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="9%" />
+<col width="7%" />
+<col width="6%" />
 <col width="8%" />
-<col width="11%" />
-<col width="71%" />
+<col width="80%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Column Name</th>
@@ -499,7 +586,7 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 <tr class="row-even"><td>Module</td>
 <td>String</td>
 <td>Any</td>
-<td>Filename of the technology model Python file, discussed below. Do not include the file extension.</td>
+<td>Filename of the technology model Python file, discussed below. Do not include the file extension.&lt;This name must be the same as the Python file or the system will not run&gt;</td>
 </tr>
 <tr class="row-odd"><td>Capital</td>
 <td>String</td>
@@ -528,16 +615,14 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <p>The Style should remain <cite>numpy</cite> in Tyche 1.0. This indicates that inputs and outputs from the methods within the technology model Python file are treated as arrays rather than higher-dimensional (i.e., tensor) structures.</p>
 <p>If only one technology model is used within a decision context, then the <em>functions</em> dataset will contain a single row.</p>
 </div>
 <div class="section" id="results-dataset">
-<h3>Results Dataset<a class="headerlink" href="#results-dataset" title="Permalink to this headline">¶</a></h3>
-<p>The <em>results</em> dataset lists the Tyche outcomes that are of interest within a decision context, organized into categories defined by the Variable column. This dataset is used internally by Tyche for organizing and labeling results tables for easier user comprehension. A data dictionary for the <em>results</em> dataset is given in Table 9.</p>
-<p><strong>Table 9:</strong></p>
-<blockquote>
-<div><table border="1" class="docutils">
+<h2>Results Dataset<a class="headerlink" href="#results-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The <em>results</em> dataset lists the Tyche outcomes that are of interest within a decision context, organized into categories defined by the Variable column. This dataset is used internally by Tyche for organizing and labeling results tables for easier user comprehension. A data dictionary for the <em>results</em> dataset is given in <a class="reference internal" href="#tbl-resultsdict"><span class="std std-numref">Table 9</span></a>.</p>
+<span id="tbl-resultsdict"></span><table border="1" class="docutils" id="table-9">
+<caption><span class="caption-number">Table 9 </span><span class="caption-text">Data dictionary for the <em>results</em> dataset.</span><a class="headerlink" href="#table-9" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="10%" />
 <col width="9%" />
@@ -582,9 +667,7 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 </tr>
 </tbody>
 </table>
-</div></blockquote>
 <p>The Variable “Cost” is a technology-wide lifetime cost, and as such may not be relevant within all decision contexts. To fill in the Index values for the “Output” and “Metric” Variables, see the <em>designs</em> dataset.</p>
-</div>
 </div>
 </div>
 
@@ -595,7 +678,7 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="main_page.html">Tyche</a></h1>
+<h1 class="logo"><a href="index.html">Tyche</a></h1>
 
 
 
@@ -607,61 +690,23 @@ Example: st.triang(1,loc=5,scale=0.1)</td>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tyche Quick Start Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction-and-getting-started">Introduction and Getting Started</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#set-up-tyche-package">Set up Tyche package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#repository-organization">Repository Organization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#defining-a-technology-model">Defining a Technology Model</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#what-is-a-technology">What is a “technology”?</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#input-datasets">Input Datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#designs-dataset">Designs Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#parameters-dataset">Parameters Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#technology-model-python-file">Technology model Python file</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#defining-r-d-investments">Defining R&amp;D Investments</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#tranches-dataset">Tranches Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#investment-dataset">Investment Dataset</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#uncertainty-in-the-input-datasets">Uncertainty in the Input Datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defining-values-as-probability-distributions-and-mixtures">Defining values as probability distributions and mixtures</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#additional-input-datasets">Additional Input Datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#indices-dataset">Indices Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#relationship-between-indices-and-other-datasets">Relationship between <em>indices</em> and other datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions-dataset">Functions Dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#results-dataset">Results Dataset</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Technology Model Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-analysis.html">Analysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-electrolysis.html">Electrolysis Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example-technology.html">Defining Technologies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mock-foa.html">Mock FOA Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioc-1.html">Mock FOA Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="main_page.html">Documentation overview</a><ul>
-      <li>Previous: <a href="main_page.html" title="previous chapter"><em>Tyche:</em> <em>T</em>echnolog<em>y</em> <em>Ch</em>aracterization and <em>E</em>valuation</a></li>
-      <li>Next: <a href="approach.html" title="next chapter">Approach</a></li>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter"><em>Tyche:</em> <em>T</em>echnolog<em>y</em> <em>Ch</em>aracterization and <em>E</em>valuation</a></li>
+      <li>Next: <a href="example-technology.html" title="next chapter">Technology Model Example</a></li>
   </ul></li>
 </ul>
 </div>
