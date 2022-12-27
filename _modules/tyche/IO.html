@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tyche.IO &#8212; Tyche 1.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -39,48 +37,368 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>     <span class="k">as</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">importlib</span> <span class="k">as</span> <span class="nn">il</span>
+
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getmembers</span><span class="p">,</span> <span class="n">isfunction</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span>
+
+<span class="kn">from</span> <span class="nn">.DataManager</span> <span class="kn">import</span> <span class="n">DesignsDataset</span><span class="p">,</span> <span class="n">FunctionsDataset</span><span class="p">,</span> <span class="n">IndicesDataset</span><span class="p">,</span> <span class="n">InvestmentsDataset</span><span class="p">,</span> <span class="n">ParametersDataset</span><span class="p">,</span> <span class="n">ResultsDataset</span><span class="p">,</span> <span class="n">TranchesDataset</span>
 
 
-<div class="viewcode-block" id="make_table"><a class="viewcode-back" href="../../tyche.html#tyche.IO.make_table">[docs]</a><span class="k">def</span> <span class="nf">make_table</span><span class="p">(</span><span class="n">dtypes</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  Make a data frame from column types and an index.</span>
+<div class="viewcode-block" id="check_tables"><a class="viewcode-back" href="../../tyche.html#tyche.IO.check_tables">[docs]</a><span class="k">def</span> <span class="nf">check_tables</span><span class="p">(</span>
+  <span class="n">path</span><span class="p">,</span>
+  <span class="n">name</span>
+  <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform validity checks on input datasets.</span>
 
-<span class="sd">  Parameters</span>
-<span class="sd">  ----------</span>
-<span class="sd">  dtypes : array</span>
-<span class="sd">    The column types.</span>
-<span class="sd">  index : array</span>
-<span class="sd">    The index.</span>
-<span class="sd">  &quot;&quot;&quot;</span>
+<span class="sd">    All checks are run before this method terminates; that is, data errors are found</span>
+<span class="sd">    all at once rather than one at a time from several calls to this method. A list of</span>
+<span class="sd">    errors found is printed if any check fails. The errors include a summary of the check</span>
+<span class="sd">    and identify the dataset that needs to be changed.</span>
 
-  <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">[</span><span class="n">v</span><span class="p">()]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">index</span>
-  <span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span></div>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path:str</span>
+<span class="sd">      Path to directory of datasets</span>
+<span class="sd">    name:str</span>
+<span class="sd">      Name of datasets file (XLSX)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Boolean: True if data is valid, False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_list</span> <span class="o">=</span> <span class="p">[]</span>
 
+    <span class="c1"># Get the datasets as distinct DataFrames.</span>
+    <span class="c1"># The DataManager performs column name checks and enforces data types.</span>
+    <span class="n">indices</span>     <span class="o">=</span> <span class="n">IndicesDataset</span><span class="p">(</span>    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">functions</span>   <span class="o">=</span> <span class="n">FunctionsDataset</span><span class="p">(</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">designs</span>     <span class="o">=</span> <span class="n">DesignsDataset</span><span class="p">(</span>    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">parameters</span>  <span class="o">=</span> <span class="n">ParametersDataset</span><span class="p">(</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">results</span>     <span class="o">=</span> <span class="n">ResultsDataset</span><span class="p">(</span>    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">tranches</span>    <span class="o">=</span> <span class="n">TranchesDataset</span><span class="p">(</span>   <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="n">investments</span> <span class="o">=</span> <span class="n">InvestmentsDataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
 
-<div class="viewcode-block" id="read_table"><a class="viewcode-back" href="../../tyche.html#tyche.IO.read_table">[docs]</a><span class="k">def</span> <span class="nf">read_table</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  Read a data table from a file.</span>
+    <span class="c1"># Cross-check: Identical sets of Technology across designs, indices,</span>
+    <span class="c1"># parameters, and results datasets</span>
+    <span class="n">_odd_tech_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;Technology&#39;</span><span class="p">)</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;Technology&#39;</span><span class="p">))</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">parameters</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;Technology&#39;</span><span class="p">))</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;Technology&#39;</span><span class="p">))</span>
+      <span class="p">)</span>
+    <span class="c1"># If there are any technologies that DON&#39;T appear in all four</span>
+    <span class="c1"># datasets, add an error message to the check_list.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_tech_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>        
+        <span class="p">(</span><span class="s1">&#39;Data Validation: Technology names are inconsistent. Check in &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;designs, indices, parameters, and results.</span><span class="se">\n</span><span class="si">{</span><span class="n">_odd_tech_set</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+    
+    <span class="c1"># Cross-check: Lifetime-Index set in designs dataset must equal the</span>
+    <span class="c1"># Capital-Index set in indices dataset</span>
+    <span class="c1"># The set of levels in the Index index level that have the Variable </span>
+    <span class="c1"># index level Lifetime</span>
+    <span class="n">_des_idx</span> <span class="o">=</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+    <span class="n">_ind_idx</span> <span class="o">=</span> <span class="n">indices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+    <span class="n">_odd_cap_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+      <span class="n">_des_idx</span><span class="o">.</span><span class="n">Index</span><span class="p">[</span><span class="n">_des_idx</span><span class="o">.</span><span class="n">Variable</span> <span class="o">==</span> <span class="s1">&#39;Lifetime&#39;</span><span class="p">]</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">_ind_idx</span><span class="o">.</span><span class="n">Index</span><span class="p">[</span><span class="n">_ind_idx</span><span class="o">.</span><span class="n">Type</span> <span class="o">==</span> <span class="s1">&#39;Capital&#39;</span><span class="p">])</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_cap_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;Data Validation: Capital types are inconsistent. Check in designs&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39; and indices.</span><span class="se">\n</span><span class="si">{</span><span class="n">_odd_cap_set</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+    
+    <span class="c1"># Cross-check: Category-Tranche combinations in investments must be a subset of</span>
+    <span class="c1"># the Category-Tranche combinations in tranches</span>
+    <span class="n">_inv_idx</span> <span class="o">=</span> <span class="n">investments</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+    <span class="n">_tra_idx</span> <span class="o">=</span> <span class="n">tranches</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+    <span class="n">_odd_cattra_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+      <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_inv_idx</span><span class="p">[[</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span><span class="s1">&#39;Tranche&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+      <span class="nb">set</span><span class="p">([</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_tra_idx</span><span class="p">[[</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span><span class="s1">&#39;Tranche&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_cattra_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;Data Validation: Category-Tranche combinations are inconsistent. Check &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;in investments and tranches.</span><span class="se">\n</span><span class="si">{</span><span class="n">_odd_cattra_set</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
 
-<span class="sd">  Parameters</span>
-<span class="sd">  ----------</span>
-<span class="sd">  path : str</span>
-<span class="sd">    The path to the folder.</span>
-<span class="sd">  name : str</span>
-<span class="sd">    The filename for the table.</span>
-<span class="sd">  dtypes : array</span>
-<span class="sd">    The column types.</span>
-<span class="sd">  index : array</span>
-<span class="sd">    The index.</span>
-<span class="sd">  &quot;&quot;&quot;</span>
+    <span class="c1"># Cross-check: Technology-Scenario values in designs must be exactly the</span>
+    <span class="c1"># set of Technology-Scenario values in parameters</span>
+    <span class="n">_par_idx</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+    <span class="n">_odd_tecsce_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+      <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_des_idx</span><span class="p">[[</span><span class="s1">&#39;Technology&#39;</span><span class="p">,</span><span class="s1">&#39;Scenario&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+      <span class="nb">set</span><span class="p">([</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_par_idx</span><span class="p">[[</span><span class="s1">&#39;Technology&#39;</span><span class="p">,</span><span class="s1">&#39;Scenario&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+    <span class="p">)</span>
 
-  <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span>
-    <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="n">dtypes</span>
-  <span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span></div>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_tecsce_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;Data Validation: Technology-Scenario combinations are inconsistent. &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;Check in designs and parameters.</span><span class="se">\n</span><span class="si">{</span><span class="n">_odd_tecsce_set</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+
+    <span class="c1"># Designs check: Variable index levels are exactly Input, Input efficiency,</span>
+    <span class="c1"># Input price, Lifetime, Output efficiency, Output price, Scale</span>
+    <span class="c1"># Check if something&#39;s in designs Variable index levels that shouldn&#39;t be</span>
+    <span class="n">_des_var_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+      <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s1">&#39;Variable&#39;</span><span class="p">)</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span>
+          <span class="p">[</span><span class="s1">&#39;Input&#39;</span><span class="p">,</span> <span class="s1">&#39;Input efficiency&#39;</span><span class="p">,</span> <span class="s1">&#39;Input price&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Lifetime&#39;</span><span class="p">,</span> <span class="s1">&#39;Output efficiency&#39;</span><span class="p">,</span> <span class="s1">&#39;Output price&#39;</span><span class="p">,</span> <span class="s1">&#39;Scale&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_des_var_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;Data Validation: Variable column in designs has unexpected &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;value(s).</span><span class="se">\n</span><span class="si">{</span><span class="n">_des_var_set</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+
+    <span class="c1"># Designs check: Every Technology-Scenario combination must have</span>
+    <span class="c1"># the same Index levels within each mandatory Variable</span>
+    <span class="c1"># Designs check: Every Technology-Scenario combination must have</span>
+    <span class="c1"># all mandatory Variables</span>
+    <span class="c1"># Get a list of all Technology-Scenario combinations in Designs</span>
+    <span class="n">_des_tecsce</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">]))</span>    
+    <span class="c1"># Get the set (no duplicates) of all Variable-Value combinations across </span>
+    <span class="c1"># all Tech-Sce combinations</span>
+    <span class="n">_var_val_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">_j</span> <span class="ow">in</span> <span class="n">_des_tecsce</span><span class="p">:</span>
+      <span class="n">_des_tecsce_var_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">i</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">_j</span><span class="p">])</span>
+      <span class="n">_des_tecsce_varval_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">i</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">_j</span><span class="p">])</span>
+      <span class="c1"># Check if the Tech-Scen combo is missing any mandatory Variables</span>
+      <span class="n">_odd_des_tecsce_var_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+        <span class="p">[</span><span class="s1">&#39;Input&#39;</span><span class="p">,</span> <span class="s1">&#39;Input efficiency&#39;</span><span class="p">,</span> <span class="s1">&#39;Input price&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Lifetime&#39;</span><span class="p">,</span> <span class="s1">&#39;Output efficiency&#39;</span><span class="p">,</span> <span class="s1">&#39;Output price&#39;</span><span class="p">,</span> <span class="s1">&#39;Scale&#39;</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span>
+          <span class="n">_des_tecsce_var_set</span>
+        <span class="p">)</span>
+      <span class="c1"># Check if the Tech-Scen combo is missing any Variable Indexes</span>
+      <span class="n">_odd_des_tecsce_varval_set</span> <span class="o">=</span> <span class="n">_var_val_set</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span>
+        <span class="n">_des_tecsce_varval_set</span>
+      <span class="p">)</span>
+      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_des_tecsce_var_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Technology-Scenario combination </span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s1"> has &#39;</span>
+          <span class="sa">f</span><span class="s1">&#39;missing mandatory Variables. Check in designs.</span><span class="se">\n</span><span class="si">{</span><span class="n">_odd_des_tecsce_var_set</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_des_tecsce_varval_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Technology-Scenario combination </span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s1"> has&#39;</span>
+          <span class="sa">f</span><span class="s1">&#39; missing Variable Indexes. Check in designs.</span><span class="se">\n</span><span class="si">{</span><span class="n">_odd_des_tecsce_varval_set</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Functions check: All unique entries under Model must be a .py file containing the</span>
+    <span class="c1"># methods defined in the Capital, Fixed, Production, and Metrics columns</span>
+    <span class="c1"># For every technology model,</span>
+    <span class="k">for</span> <span class="n">_tech</span><span class="p">,</span> <span class="n">_meta</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+      <span class="c1"># First check that the model exists as a .py file in the correct location</span>
+      <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;../&#39;</span> <span class="o">+</span> <span class="n">_meta</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span><span class="p">):</span>
+        <span class="c1"># If the file does exist, use a try/except structure to attempt import</span>
+        <span class="k">try</span><span class="p">:</span>
+          <span class="n">_model</span> <span class="o">=</span> <span class="n">il</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">_meta</span><span class="p">[</span><span class="s2">&quot;Model&quot;</span><span class="p">],</span> <span class="n">package</span><span class="o">=</span><span class="s2">&quot;technology&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+          <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Technology model </span><span class="si">{</span><span class="n">_tech</span><span class="si">}</span><span class="s1"> is not importable.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+          <span class="p">)</span>
+        <span class="c1"># If the model imported successfully, compare the set of methods</span>
+        <span class="c1"># within the model to the set of methods named in the Functions dataset</span>
+        <span class="c1"># The set of methods within the model must contain all elements of the set of</span>
+        <span class="c1"># methods named in the Functions dataset, BUT can also contain additional methods</span>
+        <span class="n">_odd_model_funs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_meta</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span>
+          <span class="nb">set</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">getmembers</span><span class="p">(</span><span class="n">_model</span><span class="p">,</span> <span class="n">isfunction</span><span class="p">)]</span>
+          <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># If the two sets of method names don&#39;t match, append to check_list</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_model_funs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+          <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Technology model </span><span class="si">{</span><span class="n">_tech</span><span class="si">}</span><span class="s1"> has inconsistent methods. &#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;Revise the Functions dataset or the </span><span class="si">{</span><span class="n">_tech</span><span class="si">}</span><span class="s1"> model (.py).</span><span class="se">\n</span><span class="si">{</span><span class="n">_odd_model_funs</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+          <span class="p">)</span>
+      <span class="c1"># If the file does not exist, add the missing file to check_list and exit the loop</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Technology model </span><span class="si">{</span><span class="n">_tech</span><span class="si">}</span><span class="s1"> (.py) does not exist in &#39;</span>
+          <span class="s1">&#39;the technology directory.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    
+    <span class="c1"># Indices check: Type column contains exactly Capital, Input, Output, Metric</span>
+    <span class="n">_ind_type_odd</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+      <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span>
+          <span class="p">[</span><span class="s1">&#39;Capital&#39;</span><span class="p">,</span> <span class="s1">&#39;Input&#39;</span><span class="p">,</span> <span class="s1">&#39;Output&#39;</span><span class="p">,</span> <span class="s1">&#39;Metric&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_ind_type_odd</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Type column in Indices is missing values or &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;has unexpected values.</span><span class="se">\n</span><span class="si">{</span><span class="n">_ind_type_odd</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+    
+    <span class="c1"># Indices check: Offset values within each Type must be sequential integers</span>
+    <span class="c1"># beginning at zero.</span>
+    <span class="c1"># Step 1: Check that all Offset values are integers using column dtype</span>
+    <span class="k">if</span> <span class="n">indices</span><span class="o">.</span><span class="n">Offset</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data validation: Offset values in Indices must be integers.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># Step 2: If all Offsets are integers, check for sequential values</span>
+      <span class="n">_ind_val</span> <span class="o">=</span> <span class="n">indices</span><span class="o">.</span><span class="n">Offset</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+      <span class="n">_ind_val_odd</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">set</span><span class="p">(</span>
+          <span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_ind_val</span><span class="o">.</span><span class="n">Index</span><span class="p">[</span><span class="n">_ind_val</span><span class="o">.</span><span class="n">Type</span><span class="o">==</span><span class="n">_t</span><span class="p">]))</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+          <span class="nb">set</span><span class="p">(</span><span class="n">_ind_val</span><span class="o">.</span><span class="n">Offset</span><span class="p">[</span><span class="n">_ind_val</span><span class="o">.</span><span class="n">Type</span><span class="o">==</span><span class="n">_t</span><span class="p">])</span>
+        <span class="p">)</span> <span class="k">for</span> <span class="n">_t</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Capital&#39;</span><span class="p">,</span> <span class="s1">&#39;Input&#39;</span><span class="p">,</span> <span class="s1">&#39;Output&#39;</span><span class="p">,</span> <span class="s1">&#39;Metric&#39;</span><span class="p">]</span>
+      <span class="p">]</span>
+
+      <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_ind_val_odd</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Check that Offset values in Indices are &#39;</span>
+          <span class="s1">&#39;sequential integers beginning at zero, within each Type.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Cross-check: The Index values for Output Type in the indices dataset, </span>
+    <span class="c1"># the Index values for Output Variable in results, and the Output </span>
+    <span class="c1"># efficiency (and Output price) Variable values in designs must be identical.</span>
+    <span class="n">_out_val_odd</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="nb">set</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Output&#39;</span><span class="p">]</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span>
+          <span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Output&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+      <span class="p">),</span>
+        <span class="nb">set</span><span class="p">(</span>
+          <span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Output&#39;</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+          <span class="nb">set</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">k</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;Output price&#39;</span><span class="p">,</span><span class="s1">&#39;Output efficiency&#39;</span><span class="p">}]</span>
+          <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_out_val_odd</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Output Index values </span><span class="si">{</span><span class="n">_out_val_odd</span><span class="si">}</span><span class="s1"> are inconsistent in one of &#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;indices, results, and designs.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+
+    <span class="c1"># Cross-check: The index values for Input Type in the indices dataset must match </span>
+    <span class="c1"># the Index values for Input, Input price, and Input efficiency Variable in designs.</span>
+    <span class="n">_inp_val_odd</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Input&#39;</span><span class="p">]</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span>
+          <span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">designs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;Input&#39;</span><span class="p">,</span> <span class="s1">&#39;Input price&#39;</span><span class="p">,</span> <span class="s1">&#39;Input efficiency&#39;</span><span class="p">}]</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_inp_val_odd</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Input Index values </span><span class="si">{</span><span class="n">_inp_val_odd</span><span class="si">}</span><span class="s1"> are inconsistent in either &#39;</span>
+        <span class="s1">&#39;indices or in designs.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+
+    <span class="c1"># Parameters check: Offset values within every Tech-Scen combo must be </span>
+    <span class="c1"># sequential integers beginning at zero</span>
+    <span class="c1"># Step 1: Check that all Offset values are integers using column dtype</span>
+    <span class="k">if</span> <span class="n">parameters</span><span class="o">.</span><span class="n">Offset</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data validation: Offset values in Parameters must be integers.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># Step 2: If all Offsets are integers, check for sequential values</span>
+      <span class="n">_par_off_val</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">Offset</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+      <span class="n">_par_off_val_odd</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+      <span class="k">for</span> <span class="n">_t</span> <span class="ow">in</span> <span class="n">_par_off_val</span><span class="o">.</span><span class="n">Technology</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">_s</span> <span class="ow">in</span> <span class="n">_par_off_val</span><span class="o">.</span><span class="n">Scenario</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+          <span class="n">_par_off_val_odd</span> <span class="o">=</span> <span class="n">_par_off_val_odd</span> <span class="o">+</span> \
+            <span class="p">[</span><span class="nb">set</span><span class="p">(</span>
+              <span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_par_off_val</span><span class="o">.</span><span class="n">Offset</span><span class="p">[(</span><span class="n">_par_off_val</span><span class="o">.</span><span class="n">Technology</span><span class="o">==</span><span class="n">_t</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_par_off_val</span><span class="o">.</span><span class="n">Scenario</span><span class="o">==</span><span class="n">_s</span><span class="p">)]))</span>
+              <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+                <span class="nb">set</span><span class="p">(</span>
+                  <span class="n">_par_off_val</span><span class="o">.</span><span class="n">Offset</span><span class="p">[(</span><span class="n">_par_off_val</span><span class="o">.</span><span class="n">Technology</span><span class="o">==</span><span class="n">_t</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_par_off_val</span><span class="o">.</span><span class="n">Scenario</span><span class="o">==</span><span class="n">_s</span><span class="p">)]</span>
+                <span class="p">)</span>
+              <span class="p">)</span>
+            <span class="p">]</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_par_off_val_odd</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;Data Validation: Check that Offset values in Parameters are &#39;</span>
+        <span class="s1">&#39;sequential integers beginning at zero, within each Technology-Scenario &#39;</span>
+        <span class="s1">&#39;combination.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>           
+
+    <span class="c1"># Parameters check: Every Parameter Offset must be the same across </span>
+    <span class="c1"># all Technology-Scenario combinations</span>
+    <span class="c1"># Get a list of all Technology-Scenario combinations in Parameters</span>
+    <span class="n">parameters</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">_par_tecsce_paroff</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="n">parameters</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;Offset&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">([</span><span class="n">j</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+      <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">for</span> <span class="n">_j</span> <span class="ow">in</span> <span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_par_tecsce_paroff</span><span class="p">)):</span>
+      <span class="k">if</span> <span class="n">_j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">_par_tecsce_paroff</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_par_tecsce_paroff</span><span class="p">[</span><span class="n">_j</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">_par_tecsce_paroff</span><span class="p">[</span><span class="n">_j</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+          <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">(</span><span class="s1">&#39;Data Validation: Parameter Offsets are inconsistent. Check &#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;in Parameters.</span><span class="se">\n</span><span class="si">{</span><span class="n">_par_tecsce_paroff</span><span class="p">[</span><span class="n">_j</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+          <span class="p">)</span>
+    
+    <span class="c1"># Results check: Every Technology must have a result where both the Variable</span>
+    <span class="c1"># and the Index are &quot;Cost&quot;.</span>
+    <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">Technology</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+      <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="p">(</span><span class="s1">&#39;Cost&#39;</span><span class="p">,</span><span class="s1">&#39;Cost&#39;</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">_i</span><span class="p">)])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Technology </span><span class="si">{</span><span class="n">_i</span><span class="si">}</span><span class="s1"> in Results needs a row where both &#39;</span>
+          <span class="s1">&#39;the Variable and the Index are &quot;Cost&quot;.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    
+    <span class="c1"># Tranches check: Within every Category, the Amounts for each Tranche must be unique</span>
+    <span class="n">_tra_amt_unique</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="n">tranches</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Amount</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">tranches</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Amount</span><span class="o">.</span><span class="n">nunique</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> 
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arange</span><span class="p">(</span><span class="n">tranches</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">Category</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">_tra_amt_unique</span><span class="p">):</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Category </span><span class="si">{</span><span class="n">tranches</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">Category</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="n">_tra_amt_unique</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="s1">&#39; in Tranches has duplicate Amounts.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+
+    <span class="c1"># Cross-check: Metric Index values are identical in results and in indices</span>
+    <span class="n">_met_odd_val</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
+      <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Metric&#39;</span><span class="p">]</span>
+      <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span>
+          <span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Metric&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_met_odd_val</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">check_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data Validation: Metric Index values </span><span class="si">{</span><span class="n">_met_odd_val</span><span class="si">}</span><span class="s1"> are inconsistent either &#39;</span>
+        <span class="s1">&#39;in results or in indices.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">check_list</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">check_list</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="kc">True</span></div>
+
 </pre></div>
 
           </div>
@@ -99,7 +417,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../cheat-sheet.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example-technology.html">Technology Model Example</a></li>
@@ -107,7 +425,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../formulation.html">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../optimizers.html">Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user-interface.html">User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment Plan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">Python API</a></li>
 </ul>
@@ -122,17 +439,15 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -149,7 +464,7 @@
       &copy;2021, National Renewable Energy Laboratory.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

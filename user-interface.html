@@ -1,24 +1,21 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>User Interface &#8212; Tyche 1.0 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Deployment Plan" href="deployment.html" />
-    <link rel="prev" title="Optimization" href="optimizers.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,8 +32,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="user-interface">
-<span id="sec-userinterface"></span><h1>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this headline">¶</a></h1>
+  <section id="user-interface">
+<span id="sec-userinterface"></span><h1>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this heading">¶</a></h1>
 <p>The Eutychia interface is a user’s portal to interact with the Tyche
 decision support tool. Users can make decisions to change investments
 and the metrics by which they will be assessed (as described in the
@@ -45,25 +42,25 @@ processes to make technically and analytically-based decisions, through
 modeling possible scenarios and generating visualizations to communicate
 these results. Tool output aims to aide decision-makers in</p>
 <ol class="arabic simple">
-<li><strong>Focused analysis</strong> comparing investment scenarios to examine impact
+<li><p><strong>Focused analysis</strong> comparing investment scenarios to examine impact
 across metrics when exploring options during the decision-making
-process and</li>
-<li><strong>Broader communication</strong> of Office goals externally, such as through
-the dissemination of a funding opportunity announcement.</li>
+process and</p></li>
+<li><p><strong>Broader communication</strong> of Office goals externally, such as through
+the dissemination of a funding opportunity announcement.</p></li>
 </ol>
 <p><strong>Feedback is appreciated to enhance the interface to best meet user
 needs.</strong></p>
-<div class="section" id="user-input">
-<h2>User Input<a class="headerlink" href="#user-input" title="Permalink to this headline">¶</a></h2>
+<section id="user-input">
+<h2>User Input<a class="headerlink" href="#user-input" title="Permalink to this heading">¶</a></h2>
 <p><strong>Investment Categories</strong> A user can suggest research foci by selecting
 <strong>investment categories</strong> and <strong>investment levels</strong> ($) in each topic
 area and/or across the investment portfolio. In the current iteration of
 the Eutychia prototype, users have the option to select a budget for
 each of the following investment categories:</p>
 <ol class="arabic simple">
-<li>Balance of System R&amp;D</li>
-<li>Inverter R&amp;D</li>
-<li>Module R&amp;D</li>
+<li><p>Balance of System R&amp;D</p></li>
+<li><p>Inverter R&amp;D</p></li>
+<li><p>Module R&amp;D</p></li>
 </ol>
 <p>Later-stage iterations of the prototype will include as many categories
 as the user selects for which data is available.</p>
@@ -71,62 +68,55 @@ as the user selects for which data is available.</p>
 R&amp;D on these selected investment categories and specify goals that must
 be met. The current options include:</p>
 <ol class="arabic simple">
-<li>Greenhouse gas emissions (ΔgCO2e/system)</li>
-<li>Labor (Δ$/system)</li>
-<li>Levelized cost of energy (Δ$/kWh)</li>
+<li><p>Greenhouse gas emissions (ΔgCO2e/system)</p></li>
+<li><p>Labor (Δ$/system)</p></li>
+<li><p>Levelized cost of energy (Δ$/kWh)</p></li>
 </ol>
-</div>
-<div class="section" id="modes">
-<h2>Modes<a class="headerlink" href="#modes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modes">
+<h2>Modes<a class="headerlink" href="#modes" title="Permalink to this heading">¶</a></h2>
 <p>The Eutychia interface operates in two modes:</p>
 <ol class="arabic simple">
-<li><strong>Explore Mode</strong>, checked by default,</li>
-<li><strong>Optimize Mode</strong>, which can be enabled by deselecting “explore.” Entering Optimize Mode allows users to update optimization parameters.</li>
+<li><p><strong>Explore Mode</strong>, checked by default,</p></li>
+<li><p><strong>Optimize Mode</strong>, which can be enabled by deselecting “explore.” Entering Optimize Mode allows users to update optimization parameters.</p></li>
 </ol>
 <p>The selected mode determines which user inputs can be edited. The
 following table summarizes the parameters that can be updated, the
 corresponding <code class="docutils literal notranslate"><span class="pre">optimizer</span></code> parameter name, and the widget (currently)
 used to make this change.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="41%" />
-<col width="19%" />
-<col width="10%" />
-<col width="14%" />
-<col width="16%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"></th>
-<th class="head">Parameter</th>
-<th class="head">Widget</th>
-<th class="head">Explore Mode</th>
-<th class="head">Optimize Mode</th>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Parameter</p></th>
+<th class="head"><p>Widget</p></th>
+<th class="head"><p>Explore Mode</p></th>
+<th class="head"><p>Optimize Mode</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Investment level (USD) by category</td>
-<td><code class="docutils literal notranslate"><span class="pre">max_amount</span></code></td>
-<td>slider</td>
-<td>X</td>
-<td>X</td>
+<tbody>
+<tr class="row-even"><td><p>Investment level (USD) by category</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max_amount</span></code></p></td>
+<td><p>slider</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td>Total portfolio investment (USD)</td>
-<td><code class="docutils literal notranslate"><span class="pre">total_amount</span></code></td>
-<td>slider</td>
-<td>&#160;</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Total portfolio investment (USD)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">total_amount</span></code></p></td>
+<td><p>slider</p></td>
+<td></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td>Metric constraint</td>
-<td><code class="docutils literal notranslate"><span class="pre">min_metric</span></code></td>
-<td>slider</td>
-<td>&#160;</td>
-<td>X</td>
+<tr class="row-even"><td><p>Metric constraint</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">min_metric</span></code></p></td>
+<td><p>slider</p></td>
+<td></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td>Optimization metric to maximize</td>
-<td><code class="docutils literal notranslate"><span class="pre">metric</span></code></td>
-<td>dropdown</td>
-<td>&#160;</td>
-<td>X</td>
+<tr class="row-odd"><td><p>Optimization metric to maximize</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">metric</span></code></p></td>
+<td><p>dropdown</p></td>
+<td></td>
+<td><p>X</p></td>
 </tr>
 </tbody>
 </table>
@@ -134,36 +124,37 @@ used to make this change.</p>
 reflected immediately in the output visualizations. In Optimize Mode,
 once satisfied with the selected metrics, the user can click “optimize”
 to model the chosen scenario.</p>
-</div>
-<div class="section" id="visualizations">
-<h2>Visualizations<a class="headerlink" href="#visualizations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="visualizations">
+<h2>Visualizations<a class="headerlink" href="#visualizations" title="Permalink to this heading">¶</a></h2>
 <p>Users are presented with the option to interact with the data in varying
 levels of detail. These options are enabled to suit the needs of users,
 from those who prefer a snapshot of the bigger picture for quick
 analysis to those who would like to study the distributional probability
 of achieving each metric. Plots are generated using the Seaborn 0.11.0
-package. <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[1]</a> The available visualizations in order of increasing level
+package. <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> The available visualizations in order of increasing level
 of detail include:</p>
 <ol class="arabic simple">
-<li><strong>Heatmaps</strong> (<code class="docutils literal notranslate"><span class="pre">heatmap</span></code>) with metric scaled to percent of the
-maximum possible improvement,</li>
-<li><strong>Annotated heatmaps</strong> with metric values overlayed, and</li>
-<li><strong>Distributions</strong> with the probability of ahieving each metric based
+<li><p><strong>Heatmaps</strong> (<code class="docutils literal notranslate"><span class="pre">heatmap</span></code>) with metric scaled to percent of the
+maximum possible improvement,</p></li>
+<li><p><strong>Annotated heatmaps</strong> with metric values overlayed, and</p></li>
+<li><p><strong>Distributions</strong> with the probability of ahieving each metric based
 on the number of samples. At this stage of development, these results
 can be viewed in columns (by metric) or in a grid. The user can
-select from the following options:<ul>
-<li>Box plots (<code class="docutils literal notranslate"><span class="pre">boxplot</span></code>)</li>
-<li>Probability distributions (<code class="docutils literal notranslate"><span class="pre">kdeplot</span></code>)</li>
-<li>Violin plots (<code class="docutils literal notranslate"><span class="pre">violinplot</span></code>)</li>
+select from the following options:</p>
+<ul class="simple">
+<li><p>Box plots (<code class="docutils literal notranslate"><span class="pre">boxplot</span></code>)</p></li>
+<li><p>Probability distributions (<code class="docutils literal notranslate"><span class="pre">kdeplot</span></code>)</p></li>
+<li><p>Violin plots (<code class="docutils literal notranslate"><span class="pre">violinplot</span></code>)</p></li>
 </ul>
 </li>
 </ol>
 <p>A user can toggle between their visualization options using the links
 (heatmap, column, grid) at the top left-hand corner of the screen. By
 default, Eutychia opens to the grid layout.</p>
-</div>
-<div class="section" id="running-the-server">
-<h2>Running the Server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="running-the-server">
+<h2>Running the Server<a class="headerlink" href="#running-the-server" title="Permalink to this heading">¶</a></h2>
 <p>Visit the folder <code class="docutils literal notranslate"><span class="pre">src/eutychia/</span></code> and start the server in debug mode</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>\<span class="n">eutychia</span>
 <span class="n">debug</span><span class="o">.</span><span class="n">cmd</span>
@@ -185,20 +176,18 @@ default, Eutychia opens to the grid layout.</p>
 </pre></div>
 </div>
 <p>and then visit <a class="reference external" href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a>.</p>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#footnote-reference-1">[1]</a></td><td>Michael Waskom, Olga Botvinnik, Maoz Gelbart, Joel Ostblom, Paul
-Hobson, Saulius Lukauskas, David C Gemperline, et al.&nbsp;2020.
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Michael Waskom, Olga Botvinnik, Maoz Gelbart, Joel Ostblom, Paul
+Hobson, Saulius Lukauskas, David C Gemperline, et al. 2020.
 Mwaskom/Seaborn: V0.11.0 (Sepetmber 2020). Zenodo.
-<a class="reference external" href="https://doi.org/10.5281/zenodo.4019146">https://doi.org/10.5281/zenodo.4019146</a>.</td></tr>
-</tbody>
-</table>
-</div>
-</div>
+<a class="reference external" href="https://doi.org/10.5281/zenodo.4019146">https://doi.org/10.5281/zenodo.4019146</a>.</p>
+</aside>
+</section>
+</section>
 
 
           </div>
@@ -217,15 +206,14 @@ Mwaskom/Seaborn: V0.11.0 (Sepetmber 2020). Zenodo.
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example-technology.html">Technology Model Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example-analysis.html">Analysis Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
@@ -234,23 +222,19 @@ Mwaskom/Seaborn: V0.11.0 (Sepetmber 2020). Zenodo.
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="optimizers.html" title="previous chapter">Optimization</a></li>
-      <li>Next: <a href="deployment.html" title="next chapter">Deployment Plan</a></li>
   </ul></li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -267,7 +251,7 @@ Mwaskom/Seaborn: V0.11.0 (Sepetmber 2020). Zenodo.
       &copy;2021, National Renewable Energy Laboratory.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

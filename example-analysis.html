@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Analysis Example &#8212; Tyche 1.0 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Approach" href="approach.html" />
@@ -35,17 +34,17 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="analysis-example">
-<span id="sec-analysisexample"></span><h1>Analysis Example<a class="headerlink" href="#analysis-example" title="Permalink to this headline">¶</a></h1>
+  <section id="analysis-example">
+<span id="sec-analysisexample"></span><h1>Analysis Example<a class="headerlink" href="#analysis-example" title="Permalink to this heading">¶</a></h1>
 <p>Multiple Objectives for Residential PV.</p>
-<div class="section" id="import-packages">
-<h2>Import packages.<a class="headerlink" href="#import-packages" title="Permalink to this headline">¶</a></h2>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<section id="import-packages">
+<h2>Import packages.<a class="headerlink" href="#import-packages" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../src&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>             <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>             <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pl</span>
 <span class="kn">import</span> <span class="nn">pandas</span>            <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">seaborn</span>           <span class="k">as</span> <span class="nn">sb</span>
@@ -55,25 +54,25 @@
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-data">
-<h2>Load data.<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="load-data">
+<h2>Load data.<a class="headerlink" href="#load-data" title="Permalink to this heading">¶</a></h2>
 <p>The data should be stored in a set of comma-separated value files in a sub-directory of the technology folder, as shown in <a class="reference internal" href="cheat-sheet.html#fig-directorystruct"><span class="std std-numref">the directory structure diagram (Fig. 1)</span></a></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">Designs</span><span class="p">(</span><span class="s2">&quot;data/pv_residential_simple&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">Designs</span><span class="p">(</span><span class="s2">&quot;data/pv_residential_simple&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investments</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">Investments</span><span class="p">(</span><span class="s2">&quot;data/pv_residential_simple&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investments</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">Investments</span><span class="p">(</span><span class="s2">&quot;data/pv_residential_simple&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Compile the production and metric functions for each technology in the dataset.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="examine-the-data">
-<h2>Examine the data.<a class="headerlink" href="#examine-the-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="examine-the-data">
+<h2>Examine the data.<a class="headerlink" href="#examine-the-data" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">functions</span></code> table specifies where the Python code for each technology resides.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">functions</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">functions</span>
 </pre></div>
 </div>
 <div>
@@ -128,7 +127,7 @@
 </table>
 </div><p>Right now, only the style <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is supported.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">indices</span></code> table defines the subscripts for variables.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">indices</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">indices</span>
 </pre></div>
 </div>
 <div>
@@ -228,7 +227,7 @@
   </tbody>
 </table>
 </div><p>The <code class="docutils literal notranslate"><span class="pre">designs</span></code> table contains the cost, input, efficiency, and price data for a scenario.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">designs</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">designs</span>
 </pre></div>
 </div>
 <div>
@@ -350,7 +349,7 @@
 </table>
 <p>90 rows × 3 columns</p>
 </div><p>The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> table contains additional techno-economic parameters for each technology.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">parameters</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">parameters</span>
 </pre></div>
 </div>
 <div>
@@ -474,7 +473,7 @@
 </table>
 <p>210 rows × 4 columns</p>
 </div><p>The <code class="docutils literal notranslate"><span class="pre">results</span></code> table specifies the units of measure for results of computations.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">results</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">results</span>
 </pre></div>
 </div>
 <div>
@@ -541,7 +540,7 @@
   </tbody>
 </table>
 </div><p>The <code class="docutils literal notranslate"><span class="pre">tranches</span></code> table specifies multually exclusive possibilities for investments: only one <code class="docutils literal notranslate"><span class="pre">Tranch</span></code> may be selected for each <code class="docutils literal notranslate"><span class="pre">Category</span></code>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investments</span><span class="o">.</span><span class="n">tranches</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investments</span><span class="o">.</span><span class="n">tranches</span>
 </pre></div>
 </div>
 <div>
@@ -636,7 +635,7 @@
   </tbody>
 </table>
 </div><p>The <code class="docutils literal notranslate"><span class="pre">investments</span></code> table bundles a consistent set of tranches (one per category) into an overall investment.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investments</span><span class="o">.</span><span class="n">investments</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investments</span><span class="o">.</span><span class="n">investments</span>
 </pre></div>
 </div>
 <div>
@@ -719,13 +718,13 @@
     </tr>
   </tbody>
 </table>
-</div></div>
-<div class="section" id="evaluate-the-scenarios-in-the-dataset">
-<h2>Evaluate the scenarios in the dataset.<a class="headerlink" href="#evaluate-the-scenarios-in-the-dataset" title="Permalink to this headline">¶</a></h2>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span> <span class="o">=</span> <span class="n">designs</span><span class="o">.</span><span class="n">evaluate_scenarios</span><span class="p">(</span><span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</div></section>
+<section id="evaluate-the-scenarios-in-the-dataset">
+<h2>Evaluate the scenarios in the dataset.<a class="headerlink" href="#evaluate-the-scenarios-in-the-dataset" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span> <span class="o">=</span> <span class="n">designs</span><span class="o">.</span><span class="n">evaluate_scenarios</span><span class="p">(</span><span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div>
@@ -1067,15 +1066,15 @@
     </tr>
   </tbody>
 </table>
-</div><div class="section" id="save-results">
-<h3>Save results.<a class="headerlink" href="#save-results" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-scenario.csv&quot;</span><span class="p">)</span>
+</div><section id="save-results">
+<h3>Save results.<a class="headerlink" href="#save-results" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-scenario.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="plot-ghg-metric">
-<h3>Plot GHG metric.<a class="headerlink" href="#plot-ghg-metric" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+</section>
+<section id="plot-ghg-metric">
+<h3>Plot GHG metric.<a class="headerlink" href="#plot-ghg-metric" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
@@ -1100,10 +1099,10 @@
 </pre></div>
 </div>
 <img alt="_images/output_35_0.png" src="_images/output_35_0.png" />
-</div>
-<div class="section" id="plot-lcoe-metric">
-<h3>Plot LCOE metric.<a class="headerlink" href="#plot-lcoe-metric" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+</section>
+<section id="plot-lcoe-metric">
+<h3>Plot LCOE metric.<a class="headerlink" href="#plot-lcoe-metric" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
@@ -1128,10 +1127,10 @@
 </pre></div>
 </div>
 <img alt="_images/output_37_0.png" src="_images/output_37_0.png" />
-</div>
-<div class="section" id="plot-labor-metric">
-<h3>Plot labor metric.<a class="headerlink" href="#plot-labor-metric" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+</section>
+<section id="plot-labor-metric">
+<h3>Plot labor metric.<a class="headerlink" href="#plot-labor-metric" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
@@ -1156,16 +1155,16 @@
 </pre></div>
 </div>
 <img alt="_images/output_39_0.png" src="_images/output_39_0.png" />
-</div>
-</div>
-<div class="section" id="evaluate-the-investments-in-the-dataset">
-<h2>Evaluate the investments in the dataset.<a class="headerlink" href="#evaluate-the-investments-in-the-dataset" title="Permalink to this headline">¶</a></h2>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span> <span class="o">=</span> <span class="n">investments</span><span class="o">.</span><span class="n">evaluate_investments</span><span class="p">(</span><span class="n">designs</span><span class="p">,</span> <span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</section>
+</section>
+<section id="evaluate-the-investments-in-the-dataset">
+<h2>Evaluate the investments in the dataset.<a class="headerlink" href="#evaluate-the-investments-in-the-dataset" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span> <span class="o">=</span> <span class="n">investments</span><span class="o">.</span><span class="n">evaluate_investments</span><span class="p">(</span><span class="n">designs</span><span class="p">,</span> <span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="costs-of-investments">
-<h3>Costs of investments.<a class="headerlink" href="#costs-of-investments" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">amounts</span>
+<section id="costs-of-investments">
+<h3>Costs of investments.<a class="headerlink" href="#costs-of-investments" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">amounts</span>
 </pre></div>
 </div>
 <div>
@@ -1208,10 +1207,10 @@
     </tr>
   </tbody>
 </table>
-</div></div>
-<div class="section" id="benefits-of-investments">
-<h3>Benefits of investments.<a class="headerlink" href="#benefits-of-investments" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</div></section>
+<section id="benefits-of-investments">
+<h3>Benefits of investments.<a class="headerlink" href="#benefits-of-investments" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div>
@@ -1445,7 +1444,7 @@
     </tr>
   </tbody>
 </table>
-</div><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div>
@@ -1533,19 +1532,19 @@
     </tr>
   </tbody>
 </table>
-</div></div>
-<div class="section" id="save-results-1">
-<h3>Save results.<a class="headerlink" href="#save-results-1" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">amounts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-investment-amounts.csv&quot;</span><span class="p">)</span>
+</div></section>
+<section id="id1">
+<h3>Save results.<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">amounts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-investment-amounts.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-investment-metrics.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_results</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-investment-metrics.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="plot-ghg-metric-1">
-<h3>Plot GHG metric.<a class="headerlink" href="#plot-ghg-metric-1" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+</section>
+<section id="id2">
+<h3>Plot GHG metric.<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Investment&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">investment_results</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
@@ -1563,10 +1562,10 @@
 </pre></div>
 </div>
 <img alt="_images/output_51_0.png" src="_images/output_51_0.png" />
-</div>
-<div class="section" id="plot-lcoe-metric-1">
-<h3>Plot LCOE metric.<a class="headerlink" href="#plot-lcoe-metric-1" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+</section>
+<section id="id3">
+<h3>Plot LCOE metric.<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Investment&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">investment_results</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
@@ -1584,10 +1583,10 @@
 </pre></div>
 </div>
 <img alt="_images/output_53_0.png" src="_images/output_53_0.png" />
-</div>
-<div class="section" id="plot-labor-metric-1">
-<h3>Plot labor metric.<a class="headerlink" href="#plot-labor-metric-1" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
+</section>
+<section id="id4">
+<h3>Plot labor metric.<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Investment&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">investment_results</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
@@ -1605,20 +1604,20 @@
 </pre></div>
 </div>
 <img alt="_images/output_55_0.png" src="_images/output_55_0.png" />
-</div>
-</div>
-<div class="section" id="multi-objective-decision-analysis">
-<h2>Multi-objective decision analysis.<a class="headerlink" href="#multi-objective-decision-analysis" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="compute-costs-and-metrics-for-tranches">
-<h3>Compute costs and metrics for tranches.<a class="headerlink" href="#compute-costs-and-metrics-for-tranches" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="multi-objective-decision-analysis">
+<h2>Multi-objective decision analysis.<a class="headerlink" href="#multi-objective-decision-analysis" title="Permalink to this heading">¶</a></h2>
+<section id="compute-costs-and-metrics-for-tranches">
+<h3>Compute costs and metrics for tranches.<a class="headerlink" href="#compute-costs-and-metrics-for-tranches" title="Permalink to this heading">¶</a></h3>
 <p>Tranches are atomic units for building investment portfolios. Evaluate
 all of the tranches, so we can assemble them into investments
 (portfolios).</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span> <span class="o">=</span> <span class="n">investments</span><span class="o">.</span><span class="n">evaluate_tranches</span><span class="p">(</span><span class="n">designs</span><span class="p">,</span> <span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span> <span class="o">=</span> <span class="n">investments</span><span class="o">.</span><span class="n">evaluate_tranches</span><span class="p">(</span><span class="n">designs</span><span class="p">,</span> <span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Display the cost of each tranche.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">amounts</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">amounts</span>
 </pre></div>
 </div>
 <div>
@@ -1691,7 +1690,7 @@ all of the tranches, so we can assemble them into investments
   </tbody>
 </table>
 </div><p>Display the metrics for each tranche.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">summary</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">summary</span>
 </pre></div>
 </div>
 <div>
@@ -1798,22 +1797,22 @@ all of the tranches, so we can assemble them into investments
 </table>
 <p>1350 rows × 2 columns</p>
 </div><p>Save the results.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">amounts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-tranche-amounts.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">amounts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-tranche-amounts.csv&quot;</span><span class="p">)</span>
 <span class="n">tranche_results</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-tranche-summary.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="fit-a-response-surface-to-the-results">
-<h3>Fit a response surface to the results.<a class="headerlink" href="#fit-a-response-surface-to-the-results" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="fit-a-response-surface-to-the-results">
+<h3>Fit a response surface to the results.<a class="headerlink" href="#fit-a-response-surface-to-the-results" title="Permalink to this heading">¶</a></h3>
 <p>The response surface interpolates between the discrete set of cases
 provided in the expert elicitation. This allows us to study funding
 levels intermediate between those scenarios.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">Evaluator</span><span class="p">(</span><span class="n">investments</span><span class="o">.</span><span class="n">tranches</span><span class="p">,</span> <span class="n">tranche_results</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">Evaluator</span><span class="p">(</span><span class="n">investments</span><span class="o">.</span><span class="n">tranches</span><span class="p">,</span> <span class="n">tranche_results</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Here are the categories of investment and the maximum amount that could
 be invested in each:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">max_amount</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">max_amount</span>
 </pre></div>
 </div>
 <div>
@@ -1857,7 +1856,7 @@ be invested in each:</p>
   </tbody>
 </table>
 </div><p>Here are the metrics and their units of measure:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">units</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">units</span>
 </pre></div>
 </div>
 <div>
@@ -1900,11 +1899,11 @@ be invested in each:</p>
     </tr>
   </tbody>
 </table>
-</div><div class="section" id="example-interpolation">
-<h4>Example interpolation.<a class="headerlink" href="#example-interpolation" title="Permalink to this headline">¶</a></h4>
+</div><section id="example-interpolation">
+<h4>Example interpolation.<a class="headerlink" href="#example-interpolation" title="Permalink to this heading">¶</a></h4>
 <p>Let’s evaluate the case where each category is invested in at half of
 its maximum amount.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">example_investments</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">max_amount</span> <span class="o">/</span> <span class="mi">2</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">example_investments</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">max_amount</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="n">example_investments</span>
 </pre></div>
 </div>
@@ -1948,7 +1947,7 @@ its maximum amount.</p>
     </tr>
   </tbody>
 </table>
-</div><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">example_investments</span><span class="p">)</span>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">example_investments</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Category</span>    <span class="n">Index</span>  <span class="n">Sample</span>
@@ -1967,7 +1966,7 @@ its maximum amount.</p>
 </pre></div>
 </div>
 <p>Let’s evaluate the mean instead of outputing the whole distribution.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_statistic</span><span class="p">(</span><span class="n">example_investments</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_statistic</span><span class="p">(</span><span class="n">example_investments</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span>
@@ -1978,7 +1977,7 @@ its maximum amount.</p>
 </pre></div>
 </div>
 <p>Here is the standard deviation:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_statistic</span><span class="p">(</span><span class="n">example_investments</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_statistic</span><span class="p">(</span><span class="n">example_investments</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span>
@@ -1989,7 +1988,7 @@ its maximum amount.</p>
 </pre></div>
 </div>
 <p>A risk-averse decision maker might be interested in the 10% percentile:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_statistic</span><span class="p">(</span><span class="n">example_investments</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_statistic</span><span class="p">(</span><span class="n">example_investments</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span>
@@ -1999,16 +1998,16 @@ its maximum amount.</p>
 <span class="n">Name</span><span class="p">:</span> <span class="n">Value</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="constraint-multiobjective-optimization">
-<h3>ε-Constraint multiobjective optimization<a class="headerlink" href="#constraint-multiobjective-optimization" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">EpsilonConstraintOptimizer</span><span class="p">(</span><span class="n">evaluator</span><span class="p">)</span>
+</section>
+</section>
+<section id="constraint-multiobjective-optimization">
+<h3>ε-Constraint multiobjective optimization<a class="headerlink" href="#constraint-multiobjective-optimization" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">EpsilonConstraintOptimizer</span><span class="p">(</span><span class="n">evaluator</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In order to meaningfully map the decision space, we need to know the
 maximum values for each of the metrics.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metric_max</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">max_metrics</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metric_max</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">max_metrics</span><span class="p">()</span>
 <span class="n">metric_max</span>
 </pre></div>
 </div>
@@ -2018,15 +2017,15 @@ maximum values for each of the metrics.</p>
 <span class="n">Name</span><span class="p">:</span> <span class="n">Value</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
 </pre></div>
 </div>
-<div class="section" id="example-optimization">
-<h4>Example optimization.<a class="headerlink" href="#example-optimization" title="Permalink to this headline">¶</a></h4>
+<section id="example-optimization">
+<h4>Example optimization.<a class="headerlink" href="#example-optimization" title="Permalink to this heading">¶</a></h4>
 <p>Limit spending to $3M.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_max</span> <span class="o">=</span> <span class="mf">3e6</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_max</span> <span class="o">=</span> <span class="mf">3e6</span>
 </pre></div>
 </div>
 <p>Require that the GHG reduction be at least 40 gCO2e/system and that the
 Labor wages not decrease.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metric_min</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GHG&quot;</span><span class="p">,</span> <span class="s2">&quot;Labor&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metric_min</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GHG&quot;</span><span class="p">,</span> <span class="s2">&quot;Labor&quot;</span><span class="p">])</span>
 <span class="n">metric_min</span>
 </pre></div>
 </div>
@@ -2036,7 +2035,7 @@ Labor wages not decrease.</p>
 </pre></div>
 </div>
 <p>Compute the ε-constrained maximum for the LCOE.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
     <span class="s2">&quot;LCOE&quot;</span>                       <span class="p">,</span>
     <span class="n">total_amount</span> <span class="o">=</span> <span class="n">investment_max</span><span class="p">,</span>
     <span class="n">min_metric</span>   <span class="o">=</span> <span class="n">metric_min</span>    <span class="p">,</span>
@@ -2049,7 +2048,7 @@ Labor wages not decrease.</p>
 </pre></div>
 </div>
 <p>Here are the optimal spending levels:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">optimum</span><span class="o">.</span><span class="n">amounts</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">optimum</span><span class="o">.</span><span class="n">amounts</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Category</span>
@@ -2060,7 +2059,7 @@ Labor wages not decrease.</p>
 </pre></div>
 </div>
 <p>Here are the three metrics at that optimum:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span><span class="o">.</span><span class="n">metrics</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span><span class="o">.</span><span class="n">metrics</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span>
@@ -2076,7 +2075,7 @@ constraints.</em></p>
 <p>It turns out that there is no solution for these constraints if we
 evaluate the 10th percentile of the metrics, for a risk-averse decision
 maker.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
     <span class="s2">&quot;LCOE&quot;</span>                       <span class="p">,</span>
     <span class="n">total_amount</span> <span class="o">=</span> <span class="n">investment_max</span><span class="p">,</span>
     <span class="n">min_metric</span>   <span class="o">=</span> <span class="n">metric_min</span>    <span class="p">,</span>
@@ -2090,7 +2089,7 @@ maker.</p>
 </div>
 <p>Let’s try again, but with a less stringent set of constraints, only
 constraining GHG somewhat but not Labor at all.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
     <span class="s2">&quot;LCOE&quot;</span>                                                         <span class="p">,</span>
     <span class="n">total_amount</span> <span class="o">=</span> <span class="n">investment_max</span>                                  <span class="p">,</span>
     <span class="n">min_metric</span>   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">30</span><span class="p">],</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GHG&quot;</span><span class="p">]),</span>
@@ -2102,7 +2101,7 @@ constraining GHG somewhat but not Labor at all.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Optimization terminated successfully.&#39;</span>
 </pre></div>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">optimum</span><span class="o">.</span><span class="n">amounts</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">optimum</span><span class="o">.</span><span class="n">amounts</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Category</span>
@@ -2112,7 +2111,7 @@ constraining GHG somewhat but not Labor at all.</p>
 <span class="n">Name</span><span class="p">:</span> <span class="n">Amount</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
 </pre></div>
 </div>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span><span class="o">.</span><span class="n">metrics</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimum</span><span class="o">.</span><span class="n">metrics</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span>
@@ -2122,13 +2121,13 @@ constraining GHG somewhat but not Labor at all.</p>
 <span class="n">Name</span><span class="p">:</span> <span class="n">Value</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="pareto-surfaces">
-<h3>Pareto surfaces.<a class="headerlink" href="#pareto-surfaces" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="metrics-constrained-by-total-investment">
-<h4>Metrics constrained by total investment.<a class="headerlink" href="#metrics-constrained-by-total-investment" title="Permalink to this headline">¶</a></h4>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pareto_amounts</span> <span class="o">=</span> <span class="kc">None</span>
+</section>
+</section>
+<section id="pareto-surfaces">
+<h3>Pareto surfaces.<a class="headerlink" href="#pareto-surfaces" title="Permalink to this heading">¶</a></h3>
+<section id="metrics-constrained-by-total-investment">
+<h4>Metrics constrained by total investment.<a class="headerlink" href="#metrics-constrained-by-total-investment" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pareto_amounts</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">for</span> <span class="n">investment_max</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1e6</span><span class="p">,</span> <span class="mf">9e6</span><span class="p">,</span> <span class="mf">0.5e6</span><span class="p">):</span>
     <span class="n">metrics</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">max_metrics</span><span class="p">(</span><span class="n">total_amount</span> <span class="o">=</span> <span class="n">investment_max</span><span class="p">)</span>
     <span class="n">pareto_amounts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -2267,7 +2266,7 @@ constraining GHG somewhat but not Labor at all.</p>
     </tr>
   </tbody>
 </table>
-</div><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
     <span class="n">x</span>         <span class="o">=</span> <span class="s2">&quot;Investment [M$]&quot;</span><span class="p">,</span>
     <span class="n">y</span>         <span class="o">=</span> <span class="s2">&quot;Value&quot;</span>          <span class="p">,</span>
     <span class="n">col</span>       <span class="o">=</span> <span class="s2">&quot;Metric&quot;</span>         <span class="p">,</span>
@@ -2283,10 +2282,10 @@ constraining GHG somewhat but not Labor at all.</p>
 <img alt="_images/output_108_1.png" src="_images/output_108_1.png" />
 <p><em>We see that the LCOE metric saturates more slowly than the GHG and
 Labor ones.</em></p>
-</div>
-<div class="section" id="ghg-vs-lcoe-constrained-by-total-investment">
-<h4>GHG vs LCOE, constrained by total investment.<a class="headerlink" href="#ghg-vs-lcoe-constrained-by-total-investment" title="Permalink to this headline">¶</a></h4>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">investment_max</span> <span class="o">=</span> <span class="mi">3</span>
+</section>
+<section id="ghg-vs-lcoe-constrained-by-total-investment">
+<h4>GHG vs LCOE, constrained by total investment.<a class="headerlink" href="#ghg-vs-lcoe-constrained-by-total-investment" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">investment_max</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">pareto_ghg_lcoe</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">for</span> <span class="n">lcoe_min</span> <span class="ow">in</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">*</span> <span class="n">pareto_amounts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">investment_max</span><span class="p">,</span> <span class="s2">&quot;LCOE&quot;</span><span class="p">]:</span>
     <span class="n">optimum</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span>
@@ -2386,7 +2385,7 @@ Labor ones.</em></p>
     </tr>
   </tbody>
 </table>
-</div><div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
     <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;LCOE&quot;</span><span class="p">,</span>
     <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;GHG&quot;</span><span class="p">,</span>
     <span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
@@ -2401,25 +2400,25 @@ Labor ones.</em></p>
 <p><em>The three types of investment are too decoupled to make an interesting
 pareto frontier, and we also need a better solver if we want to push to
 lower right.</em></p>
-</div>
-</div>
-</div>
-<div class="section" id="run-the-interactive-explorer-for-the-decision-space">
-<h2>Run the interactive explorer for the decision space.<a class="headerlink" href="#run-the-interactive-explorer-for-the-decision-space" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="run-the-interactive-explorer-for-the-decision-space">
+<h2>Run the interactive explorer for the decision space.<a class="headerlink" href="#run-the-interactive-explorer-for-the-decision-space" title="Permalink to this heading">¶</a></h2>
 <p>Make sure the the <code class="docutils literal notranslate"><span class="pre">tk</span></code> package is installed on your machine. Here is
 the Anaconda link: <a class="reference external" href="https://anaconda.org/anaconda/tk">https://anaconda.org/anaconda/tk</a>.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">DecisionWindow</span><span class="p">(</span><span class="n">evaluator</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">DecisionWindow</span><span class="p">(</span><span class="n">evaluator</span><span class="p">)</span>
 <span class="n">w</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>A new window should open that looks like the image below. Moving the
 sliders will cause a recomputation of the boxplots.</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;pv_residential_simple_gui.png&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;pv_residential_simple_gui.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/output_118_0.png" src="_images/output_118_0.png" />
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -2438,7 +2437,7 @@ sliders will cause a recomputation of the boxplots.</p>
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="cheat-sheet.html">Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example-technology.html">Technology Model Example</a></li>
@@ -2446,7 +2445,6 @@ sliders will cause a recomputation of the boxplots.</p>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user-interface.html">User Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
@@ -2461,17 +2459,15 @@ sliders will cause a recomputation of the boxplots.</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -2488,7 +2484,7 @@ sliders will cause a recomputation of the boxplots.</p>
       &copy;2021, National Renewable Energy Laboratory.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
