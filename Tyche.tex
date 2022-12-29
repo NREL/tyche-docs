@@ -74,7 +74,7 @@
 
 
 \title{Tyche}
-\date{Dec 27, 2022}
+\date{Dec 29, 2022}
 \release{1.2}
 \author{National Renewable Energy Laboratory}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -94,7 +94,7 @@
 Risk and uncertainty are core characteristics of research and development (R\&D) programs. Attempting to do what has not been done before will sometimes end in failure, just as it will sometimes lead to extraordinary success. The challenge is to identify an optimal mix of R\&D investments in pathways that provide the highest returns while reducing the costs of failure. The goal of the R\&D Pathway and Portfolio Analysis and Evaluation project is to develop systematic, scalable pathway and portfolio analysis and evaluation methodologies and tools that provide high value to the U.S. Department of Energy (DOE) and its Office of Energy Efficiency \& Renewable Energy (EERE). This work aims to inform decision\sphinxhyphen{}making across R\&D projects and programs by assisting analysts and decision makers to identify and evaluate, quantify and monitor, manage, document, and communicate energy technology R\&D pathway and portfolio risks and benefits. The project\sphinxhyphen{}level risks typically considered are technology cost and performance (e.g., efficiency and environmental impact), while the portfolio level risks generally include market factors (e.g., competitiveness and consumer preference).
 
 \sphinxAtStartPar
-{\hyperref[\detokenize{cheat-sheet:sec-quickstart}]{\sphinxcrossref{\DUrole{std,std-ref}{Quick Start Guide}}}} covers how to set up an R\&D decision context using Tyche by creating the necessary input datasets and writing the technology model. {\hyperref[\detokenize{example-technology:sec-techmodelexample}]{\sphinxcrossref{\DUrole{std,std-ref}{Technology Model Example}}}} provides a simple example of developing a technology model, and {\hyperref[\detokenize{example-analysis:sec-analysisexample}]{\sphinxcrossref{\DUrole{std,std-ref}{Analysis Example}}}} provides an analysis example of decision support analysis. High\sphinxhyphen{}level information on the approach behind Tyche is given in {\hyperref[\detokenize{approach:sec-approach}]{\sphinxcrossref{\DUrole{std,std-ref}{Approach}}}} and details on the mathematical formulation used to represent technologies and analyze investment impact is given in {\hyperref[\detokenize{formulation:sec-formulation}]{\sphinxcrossref{\DUrole{std,std-ref}{Mathematical Formulation}}}}. {\hyperref[\detokenize{optimizers:sec-optimizers}]{\sphinxcrossref{\DUrole{std,std-ref}{Optimization}}}} gives information on built\sphinxhyphen{}in optimization algorithms. A preliminary deployment plan is given in {\hyperref[\detokenize{deployment:sec-deployment}]{\sphinxcrossref{\DUrole{std,std-ref}{Deployment Plan}}}}. The complete Python API for the Tyche codebase and the technology models provided with Tyche is in {\hyperref[\detokenize{modules:sec-modules}]{\sphinxcrossref{\DUrole{std,std-ref}{Python API}}}}.
+{\hyperref[\detokenize{cheat-sheet:sec-quickstart}]{\sphinxcrossref{\DUrole{std,std-ref}{Quick Start Guide}}}} covers how to set up an R\&D decision context using Tyche by creating the necessary input datasets and writing the technology model. {\hyperref[\detokenize{example-technology:sec-techmodelexample}]{\sphinxcrossref{\DUrole{std,std-ref}{Technology Model Example}}}} provides a simple example of developing a technology model, and {\hyperref[\detokenize{example-analysis:sec-analysisexample}]{\sphinxcrossref{\DUrole{std,std-ref}{Analysis Example}}}} provides an analysis example of decision support analysis. High\sphinxhyphen{}level information on the approach behind Tyche is given in {\hyperref[\detokenize{approach:sec-approach}]{\sphinxcrossref{\DUrole{std,std-ref}{Approach}}}} and details on the mathematical formulation used to represent technologies and analyze investment impact is given in {\hyperref[\detokenize{formulation:sec-formulation}]{\sphinxcrossref{\DUrole{std,std-ref}{Mathematical Formulation}}}}. {\hyperref[\detokenize{optimizers:sec-optimizers}]{\sphinxcrossref{\DUrole{std,std-ref}{Optimization}}}} gives information on built\sphinxhyphen{}in optimization algorithms. The complete Python API for the Tyche codebase and the technology models provided with Tyche is in {\hyperref[\detokenize{modules:sec-modules}]{\sphinxcrossref{\DUrole{std,std-ref}{Python API}}}}.
 
 \sphinxstepscope
 
@@ -255,7 +255,7 @@ Then enter the following commands, pressing Enter after each line:
 \end{itemize}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{conda} \PYG{n}{env} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{file} \PYG{n}{conda}\PYGZbs{}\PYG{n}{win}\PYG{o}{.}\PYG{n}{yml}
+\PYG{n}{conda} \PYG{n}{env} \PYG{n}{create} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{n}{file} \PYG{n}{conda}\PYGZbs{}\PYG{n}{tyche}\PYG{o}{.}\PYG{n}{yml}
 \PYG{n}{conda} \PYG{n}{activate} \PYG{n}{tyche}
 \end{sphinxVerbatim}
 
@@ -658,10 +658,10 @@ Name of the parameter.
 Offset
 &
 \sphinxAtStartPar
-String
+Integer
 &
 \sphinxAtStartPar
-Numerical location of the parameter in the parameter vector.
+Numerical location of the parameter in the parameter vector; begins at zero.
 \\
 \hline
 \sphinxAtStartPar
@@ -4613,191 +4613,6 @@ Institute for Flight Mechanics, Koln, Germany.
 Optimization and root finding (\sphinxcode{\sphinxupquote{scipy.optimize}}) URL:
 \sphinxurl{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.NonlinearConstraint.html}
 Last accessed 12/29/2020.
-
-\end{enumerate}
-
-\sphinxstepscope
-
-
-\chapter{Deployment Plan}
-\label{\detokenize{deployment:deployment-plan}}\label{\detokenize{deployment:sec-deployment}}\label{\detokenize{deployment::doc}}
-
-\section{Objectives}
-\label{\detokenize{deployment:objectives}}\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Securely house all potentially sensitive data within on DOE servers
-within the DOE intranet.
-
-\item {} 
-\sphinxAtStartPar
-Minimize the deployment and maintenance burden at DOE.
-
-\item {} 
-\sphinxAtStartPar
-Assure the quality of software and data updates.
-
-\item {} 
-\sphinxAtStartPar
-Enable DOE personnel and contractors to contribute technology models
-and data.
-
-\end{enumerate}
-
-
-\section{Components and Activities}
-\label{\detokenize{deployment:components-and-activities}}
-\begin{figure}[htbp]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics{{deployment}.png}
-\caption{Deployment of services and activities.}\label{\detokenize{deployment:fig-deployment}}\end{figure}
-
-
-\section{Activities}
-\label{\detokenize{deployment:activities}}
-\sphinxAtStartPar
-Analysts at DOE will connect to Tyche server within the DOE intranet
-using their web browsers to run and analyze scenarios using Tyche. The
-server will have the capability to record scenarios for sharing within
-DOE, but that data will never leave the DOE intranet.
-
-\sphinxAtStartPar
-Analysts developing data and technology models at DOE, NREL, and
-elsewhere can post that data and software to a branch of the GitHub
-Software Repository. Those contributions will be reviewed, vetted, and
-tested before they are pushed to the NREL Data Lake (in the case of
-datasets) or to the \sphinxcode{\sphinxupquote{production}} branch of the GitHub repository (in
-the case of technology models).
-
-\sphinxAtStartPar
-NREL will perform quality assurance and periodically update the
-production version of the data and software, both of which can be
-fetched by DOE on a regular basis.
-
-
-\section{Components}
-\label{\detokenize{deployment:components}}
-
-\subsection{DOE Server}
-\label{\detokenize{deployment:doe-server}}
-\sphinxAtStartPar
-The DOE server for Tyche resides within the DOE intranet. It fetches
-software updates from the GitHub Software Repository and fetches data
-updates from the NREL Data Lake. (Because data volumes are small, it
-could perform these automatically on a daily or weekly basis during off
-hours.) It runs a \sphinxhref{https://pgjones.gitlab.io/quart/}{Quart HTTP
-server} within a
-\sphinxhref{https://docs.conda.io/en/latest/miniconda.html}{Conda} environment.
-Requirements for this server are as follows:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Linux (preferred) or Windows.
-
-\item {} 
-\sphinxAtStartPar
-Four to 16 CPU cores and at least 32 GB of memory.
-
-\item {} 
-\sphinxAtStartPar
-An up\sphinxhyphen{}to\sphinxhyphen{}date installation (version 4.8.3 or later) of the
-\sphinxhref{https://docs.conda.io/en/latest/miniconda.html}{Conda} software
-package manager.
-
-\item {} 
-\sphinxAtStartPar
-Installation of the Tyche environment within Conda. (This will
-install the correct version of Python and the other required
-software, so those need not be installed individually.) See the
-attachment \sphinxurl{conda-environment.yml}.
-
-\item {} 
-\sphinxAtStartPar
-Running a shell script for the Quart HTTP server.
-
-\item {} 
-\sphinxAtStartPar
-Open outgoing HTTPS ports for \sphinxcode{\sphinxupquote{GET}} requests to the NREL Data Lake
-and GitHub.com.
-
-\item {} 
-\sphinxAtStartPar
-An open HTTP incoming port from client web browsers withing the DOE
-intranet.
-
-\item {} 
-\sphinxAtStartPar
-A folder on disk that is regularly backed up.
-
-\end{enumerate}
-
-
-\subsection{NREL Data Lake}
-\label{\detokenize{deployment:nrel-data-lake}}
-\sphinxAtStartPar
-The NREL Data Lake, which is housed on Amazon Web Services (AWS),
-contains all of the non\sphinxhyphen{}sensitive data, such as the parameters for
-technology models and the results of expert elicitations. NREL curates
-the data that is pushed to the data lake.
-
-
-\subsection{GitHub Software Repository}
-\label{\detokenize{deployment:github-software-repository}}
-\sphinxAtStartPar
-The Tyche software resides on the NREL GitHub software repository
-<\sphinxurl{https://github.com/NREL/tyche/}>. The \sphinxcode{\sphinxupquote{production}} branch contains the
-latest deployable version of the software. Other branches contain work
-in progress, contributions from DOE and its subcontractors, and the
-\sphinxcode{\sphinxupquote{development}} (pre\sphinxhyphen{}release) version of the software.
-
-
-\section{Security Considerations}
-\label{\detokenize{deployment:security-considerations}}\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-NREL has authority to operate (ATO) with non\sphinxhyphen{}sensitive software and
-data on its Data Lake and on GitHub.com.
-
-\item {} 
-\sphinxAtStartPar
-Sensitive data (in the form of scenario definitions and results) may
-reside on the DOE server and on the laptops of DOE users.
-
-\item {} 
-\sphinxAtStartPar
-The Tyche service only makes HTTPS \sphinxcode{\sphinxupquote{GET}} requests outside of the
-DOE intranet, and these only consist of fetching non\sphinxhyphen{}sensitive
-datasets and technology models. Thus, the firewall for the Tyche
-server should be configured at follows:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumii}{enumiii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Block all incoming traffic from outside the DOE intranet.
-
-\item {} 
-\sphinxAtStartPar
-Allow incoming HTTP traffic from inside the DOE intranet.
-
-\item {} 
-\sphinxAtStartPar
-Allow outgoing HTTPS traffic to NREL Data Lake and GitHub.com.
-
-\item {} 
-\sphinxAtStartPar
-Block all other outgoing traffic.
-
-\end{enumerate}
-
-\item {} 
-\sphinxAtStartPar
-Ideally, the Tyche software (and its library dependencies) and its
-updates should undergo a security audit.
 
 \end{enumerate}
 
