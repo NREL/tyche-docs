@@ -110,7 +110,7 @@
 <li><p>Change the current working directory to the location of the extracted Tyche files using <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">path/to/tyche/directory</span></code>.</p></li>
 <li><p>Then enter the following commands, pressing Enter after each line:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">--</span><span class="n">file</span> <span class="n">conda</span>\<span class="n">win</span><span class="o">.</span><span class="n">yml</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">--</span><span class="n">file</span> <span class="n">conda</span>\<span class="n">tyche</span><span class="o">.</span><span class="n">yml</span>
 <span class="n">conda</span> <span class="n">activate</span> <span class="n">tyche</span>
 </pre></div>
 </div>
@@ -287,8 +287,8 @@ Example: st.triang(1,loc=5,scale=0.1)</p></td>
 <td><p>Name of the parameter.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Offset</p></td>
-<td><p>String</p></td>
-<td><p>Numerical location of the parameter in the parameter vector.</p></td>
+<td><p>Integer</p></td>
+<td><p>Numerical location of the parameter in the parameter vector; begins at zero.</p></td>
 </tr>
 <tr class="row-even"><td><p>Value</p></td>
 <td><p>Float; Distribution; Mixture of distributions</p></td>
@@ -611,7 +611,6 @@ Example: st.triang(1,loc=5,scale=0.1)</p></td>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 

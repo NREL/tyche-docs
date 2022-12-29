@@ -121,7 +121,7 @@
     <span class="n">_tra_idx</span> <span class="o">=</span> <span class="n">tranches</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
     <span class="n">_odd_cattra_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span>
       <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_inv_idx</span><span class="p">[[</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span><span class="s1">&#39;Tranche&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span>
       <span class="nb">set</span><span class="p">([</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_tra_idx</span><span class="p">[[</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span><span class="s1">&#39;Tranche&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_odd_cattra_set</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -425,7 +425,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../formulation.html">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../optimizers.html">Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment Plan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">Python API</a></li>
 </ul>
 
