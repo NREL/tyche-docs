@@ -646,6 +646,149 @@ particular vehicle/transport technology.</p>
 <section id="tutorial-technologies">
 <h2>Tutorial Technologies<a class="headerlink" href="#tutorial-technologies" title="Permalink to this heading">¶</a></h2>
 <p>The technology models in this section are for exploratory and learning purposes only.</p>
+<section id="module-technology.technology_a_model">
+<span id="template-for-developing-new-models-and-datasets"></span><h3>Template for Developing New Models and Datasets<a class="headerlink" href="#module-technology.technology_a_model" title="Permalink to this heading">¶</a></h3>
+<p>Template for technology model file.</p>
+<p>Corresponds to Technology A in the template decision context.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_a_model.capital_cost">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_a_model.</span></span><span class="sig-name descname"><span class="pre">capital_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_a_model.html#capital_cost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_a_model.capital_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capital cost function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_a_model.fixed_cost">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_a_model.</span></span><span class="sig-name descname"><span class="pre">fixed_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_a_model.html#fixed_cost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_a_model.fixed_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capital cost function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_a_model.metrics">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_a_model.</span></span><span class="sig-name descname"><span class="pre">metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capital</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_price</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_a_model.html#metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_a_model.metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metrics function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>capital</strong> (<em>array</em>) – Capital costs.</p></li>
+<li><p><strong>lifetime</strong> (<em>float</em>) – Technology lifetime.</p></li>
+<li><p><strong>fixed</strong> (<em>array</em>) – Fixed costs.</p></li>
+<li><p><strong>input_raw</strong> (<em>array</em>) – Raw input quantities (before losses).</p></li>
+<li><p><strong>input</strong> (<em>array</em>) – Input quantities.</p></li>
+<li><p><strong>output_raw</strong> (<em>array</em>) – Raw output quantities (before losses).</p></li>
+<li><p><strong>output</strong> (<em>array</em>) – Output quantities.</p></li>
+<li><p><strong>cost</strong> (<em>array</em>) – Costs.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_a_model.production">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_a_model.</span></span><span class="sig-name descname"><span class="pre">production</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capital</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_a_model.html#production"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_a_model.production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Production function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>capital</strong> (<em>array</em>) – Capital costs.</p></li>
+<li><p><strong>lifetime</strong> (<em>float</em>) – Technology lifetime.</p></li>
+<li><p><strong>fixed</strong> (<em>array</em>) – Fixed costs.</p></li>
+<li><p><strong>input</strong> (<em>array</em>) – Input quantities.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-technology.technology_m_model"></span><p>Template for technology model file.</p>
+<p>Corresponds to Technology B in the template decision context.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_m_model.capital_cost">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_m_model.</span></span><span class="sig-name descname"><span class="pre">capital_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_m_model.html#capital_cost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_m_model.capital_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capital cost function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_m_model.fixed_cost">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_m_model.</span></span><span class="sig-name descname"><span class="pre">fixed_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_m_model.html#fixed_cost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_m_model.fixed_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capital cost function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_m_model.metrics">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_m_model.</span></span><span class="sig-name descname"><span class="pre">metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capital</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_price</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_m_model.html#metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_m_model.metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metrics function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>capital</strong> (<em>array</em>) – Capital costs.</p></li>
+<li><p><strong>lifetime</strong> (<em>float</em>) – Technology lifetime.</p></li>
+<li><p><strong>fixed</strong> (<em>array</em>) – Fixed costs.</p></li>
+<li><p><strong>input_raw</strong> (<em>array</em>) – Raw input quantities (before losses).</p></li>
+<li><p><strong>input</strong> (<em>array</em>) – Input quantities.</p></li>
+<li><p><strong>output_raw</strong> (<em>array</em>) – Raw output quantities (before losses).</p></li>
+<li><p><strong>output</strong> (<em>array</em>) – Output quantities.</p></li>
+<li><p><strong>cost</strong> (<em>array</em>) – Costs.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="technology.technology_m_model.production">
+<span class="sig-prename descclassname"><span class="pre">technology.technology_m_model.</span></span><span class="sig-name descname"><span class="pre">production</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capital</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/technology/technology_m_model.html#production"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#technology.technology_m_model.production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Production function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>float</em>) – The scale of operation.</p></li>
+<li><p><strong>capital</strong> (<em>array</em>) – Capital costs.</p></li>
+<li><p><strong>lifetime</strong> (<em>float</em>) – Technology lifetime.</p></li>
+<li><p><strong>fixed</strong> (<em>array</em>) – Fixed costs.</p></li>
+<li><p><strong>input</strong> (<em>array</em>) – Input quantities.</p></li>
+<li><p><strong>parameter</strong> (<em>array</em>) – The technological parameterization.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-technology.simple_electrolysis">
 <span id="simple-electrolysis"></span><h3>Simple Electrolysis<a class="headerlink" href="#module-technology.simple_electrolysis" title="Permalink to this heading">¶</a></h3>
 <p>Simple electrolysis.</p>

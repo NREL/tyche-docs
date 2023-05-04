@@ -1,0 +1,104 @@
+\selectlanguage *{english}
+\contentsline {chapter}{\numberline {1}Quick Start Guide}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}What does Tyche do?}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}What is a “technology”?}{4}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Getting Started}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Install Anaconda}{4}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Download the Tyche software}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Navigate the Tyche directory structure}{4}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Set up the Tyche environment using conda}{5}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Access Tyche analysis functions}{6}{subsection.1.2.5}%
+\contentsline {section}{\numberline {1.3}Defining a Decision Context}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Technology Data and Model}{7}{subsection.1.3.1}%
+\contentsline {subsubsection}{Designs Dataset}{7}{subsubsection*.3}%
+\contentsline {subsubsection}{Parameters Dataset}{8}{subsubsection*.4}%
+\contentsline {subsubsection}{Technology model (.py file)}{9}{subsubsection*.5}%
+\contentsline {subsection}{\numberline {1.3.2}Investment Datasets}{9}{subsection.1.3.2}%
+\contentsline {subsubsection}{Tranches Dataset}{10}{subsubsection*.6}%
+\contentsline {subsubsection}{Investment Dataset}{10}{subsubsection*.7}%
+\contentsline {subsection}{\numberline {1.3.3}Additional Datasets}{11}{subsection.1.3.3}%
+\contentsline {subsubsection}{Indices Dataset}{11}{subsubsection*.8}%
+\contentsline {subsubsection}{Functions Dataset}{12}{subsubsection*.9}%
+\contentsline {subsubsection}{Results Dataset}{12}{subsubsection*.10}%
+\contentsline {section}{\numberline {1.4}Uncertainty in the Input Datasets}{13}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Defining values as probability distributions and mixtures}{13}{subsection.1.4.1}%
+\contentsline {chapter}{\numberline {2}Technology Model Example}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Production function (à la Leontief)}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Metric functions}{17}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Performance of current design.}{17}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Technology Model}{17}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Analysis Example}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Import packages.}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Load data.}{21}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Examine the data.}{22}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Evaluate the scenarios in the dataset.}{22}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Save results.}{22}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Plot GHG metric.}{23}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Plot LCOE metric.}{24}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Plot labor metric.}{25}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Evaluate the investments in the dataset.}{26}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Costs of investments.}{26}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Benefits of investments.}{26}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Save results.}{26}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Plot GHG metric.}{26}{subsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.5.5}Plot LCOE metric.}{27}{subsection.3.5.5}%
+\contentsline {subsection}{\numberline {3.5.6}Plot labor metric.}{28}{subsection.3.5.6}%
+\contentsline {section}{\numberline {3.6}Multi\sphinxhyphen {}objective decision analysis.}{29}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Compute costs and metrics for tranches.}{29}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Fit a response surface to the results.}{30}{subsection.3.6.2}%
+\contentsline {subsubsection}{Example interpolation.}{30}{subsubsection*.11}%
+\contentsline {subsection}{\numberline {3.6.3}ε\sphinxhyphen {}Constraint multiobjective optimization}{31}{subsection.3.6.3}%
+\contentsline {subsubsection}{Example optimization.}{31}{subsubsection*.12}%
+\contentsline {subsection}{\numberline {3.6.4}Pareto surfaces.}{33}{subsection.3.6.4}%
+\contentsline {subsubsection}{Metrics constrained by total investment.}{33}{subsubsection*.13}%
+\contentsline {subsubsection}{GHG vs LCOE, constrained by total investment.}{34}{subsubsection*.14}%
+\contentsline {section}{\numberline {3.7}Run the interactive explorer for the decision space.}{35}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Approach}{37}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Mathematical Formulation}{39}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Cost}{40}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Waste}{40}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Production}{41}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Metrics}{41}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Scenarios}{41}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Investments}{41}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Decision problem}{42}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Experts}{42}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Optimization}{43}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Nonlinear Programming Formulation}{43}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Algorithm Testing}{43}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Sequential Least Squares Programming (SLSQP)}{44}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}SLSQP Solution to Simple Residential Photovoltaics}{44}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3}Differential Evolution}{44}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Differential Evolution Solutions to Simple Residential Photovoltaics}{44}{subsection.6.3.1}%
+\contentsline {subsubsection}{Solution 1}{45}{subsubsection*.15}%
+\contentsline {subsubsection}{Solution 2}{45}{subsubsection*.16}%
+\contentsline {section}{\numberline {6.4}Simplicial Homology Global Optimization}{45}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Piecewise Linear (MILP) Formulation}{46}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Notation}{46}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}One\sphinxhyphen {}Investment\sphinxhyphen {}Category, One\sphinxhyphen {}Metric Example}{47}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}Extension to N x N Problem}{47}{subsection.6.5.3}%
+\contentsline {section}{\numberline {6.6}References}{48}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Python API}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Tyche Module}{51}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}tyche.DecisionGUI}{51}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}tyche.Designs}{52}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}tyche.Distributions}{53}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}tyche.EpsilonConstraints}{55}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}tyche.Evaluator}{58}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}tyche.IO}{60}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}tyche.Investments}{60}{subsection.7.1.7}%
+\contentsline {subsection}{\numberline {7.1.8}tyche.Types}{61}{subsection.7.1.8}%
+\contentsline {subsection}{\numberline {7.1.9}Module contents}{63}{subsection.7.1.9}%
+\contentsline {section}{\numberline {7.2}Technology Module}{63}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Pre\sphinxhyphen {}Built Technology Models and Datasets}{63}{subsection.7.2.1}%
+\contentsline {subsubsection}{Residential Photovoltaics}{63}{subsubsection*.106}%
+\contentsline {subsubsection}{Simple Residential Photovoltaics}{66}{subsubsection*.116}%
+\contentsline {subsubsection}{Utility\sphinxhyphen {}Scale Photovoltaics}{67}{subsubsection*.123}%
+\contentsline {subsubsection}{Transportation}{68}{subsubsection*.128}%
+\contentsline {subsection}{\numberline {7.2.2}Tutorial Technologies}{69}{subsection.7.2.2}%
+\contentsline {subsubsection}{Simple Electrolysis}{69}{subsubsection*.133}%
+\contentsline {subsubsection}{Toy Biorefinery}{70}{subsubsection*.138}%
+\contentsline {subsubsection}{Onshore Wind Turbines}{72}{subsubsection*.143}%
+\contentsline {subsection}{\numberline {7.2.3}Module contents}{73}{subsection.7.2.3}%
+\contentsline {chapter}{Python Module Index}{75}{section*.148}%

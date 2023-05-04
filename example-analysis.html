@@ -226,7 +226,7 @@
     </tr>
   </tbody>
 </table>
-</div><p>The <code class="docutils literal notranslate"><span class="pre">designs</span></code> table contains the cost, input, efficiency, and price data for a scenario.</p>
+</div><p>The <code class="docutils literal notranslate"><span class="pre">designs</span></code> table contains the cost, input, efficiency, and price data resulting from a Tranche.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">designs</span><span class="o">.</span><span class="n">designs</span>
 </pre></div>
 </div>
@@ -257,7 +257,7 @@
     </tr>
     <tr>
       <th>Technology</th>
-      <th>Scenario</th>
+      <th>Tranche</th>
       <th>Variable</th>
       <th>Index</th>
       <th></th>
@@ -379,7 +379,7 @@
     </tr>
     <tr>
       <th>Technology</th>
-      <th>Scenario</th>
+      <th>Tranche</th>
       <th>Parameter</th>
       <th></th>
       <th></th>
@@ -569,7 +569,6 @@
     <tr>
       <th>Category</th>
       <th>Tranche</th>
-      <th>Scenario</th>
       <th></th>
       <th></th>
     </tr>
@@ -719,12 +718,12 @@
   </tbody>
 </table>
 </div></section>
-<section id="evaluate-the-scenarios-in-the-dataset">
-<h2>Evaluate the scenarios in the dataset.<a class="headerlink" href="#evaluate-the-scenarios-in-the-dataset" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span> <span class="o">=</span> <span class="n">designs</span><span class="o">.</span><span class="n">evaluate_scenarios</span><span class="p">(</span><span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<section id="evaluate-the-tranches-in-the-dataset">
+<h2>Evaluate the Tranches in the dataset.<a class="headerlink" href="#evaluate-the-tranches-in-the-dataset" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span> <span class="o">=</span> <span class="n">designs</span><span class="o">.</span><span class="n">evaluate_tranches</span><span class="p">(</span><span class="n">sample_count</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div>
@@ -754,7 +753,7 @@
     </tr>
     <tr>
       <th>Technology</th>
-      <th>Scenario</th>
+      <th>Tranche</th>
       <th>Sample</th>
       <th>Variable</th>
       <th>Index</th>
@@ -1068,19 +1067,19 @@
 </table>
 </div><section id="save-results">
 <h3>Save results.<a class="headerlink" href="#save-results" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-scenario.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tranche_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/pv_residential_simple/example-analysis.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="plot-ghg-metric">
 <h3>Plot GHG metric.<a class="headerlink" href="#plot-ghg-metric" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Tranche&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tranche_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
         <span class="p">[</span><span class="s2">&quot;Metric&quot;</span><span class="p">,</span> <span class="s2">&quot;GHG&quot;</span><span class="p">],</span>
         <span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">,</span> <span class="s2">&quot;Index&quot;</span><span class="p">]</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">]],</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="s2">&quot;Tranche&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">]],</span>
     <span class="n">order</span><span class="o">=</span><span class="p">[</span>
         <span class="s2">&quot;2015 Actual&quot;</span>              <span class="p">,</span>
         <span class="s2">&quot;Module Slow Progress&quot;</span>      <span class="p">,</span>
@@ -1103,12 +1102,12 @@
 <section id="plot-lcoe-metric">
 <h3>Plot LCOE metric.<a class="headerlink" href="#plot-lcoe-metric" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Tranche&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tranche_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
         <span class="p">[</span><span class="s2">&quot;Metric&quot;</span><span class="p">,</span> <span class="s2">&quot;LCOE&quot;</span><span class="p">],</span>
         <span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">,</span> <span class="s2">&quot;Index&quot;</span><span class="p">]</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">]],</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="s2">&quot;Tranche&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">]],</span>
     <span class="n">order</span><span class="o">=</span><span class="p">[</span>
         <span class="s2">&quot;2015 Actual&quot;</span>              <span class="p">,</span>
         <span class="s2">&quot;Module Slow Progress&quot;</span>      <span class="p">,</span>
@@ -1131,12 +1130,12 @@
 <section id="plot-labor-metric">
 <h3>Plot labor metric.<a class="headerlink" href="#plot-labor-metric" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Tranche&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">scenario_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tranche_results</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span>
         <span class="p">[</span><span class="s2">&quot;Metric&quot;</span><span class="p">,</span> <span class="s2">&quot;Labor&quot;</span><span class="p">],</span>
         <span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">,</span> <span class="s2">&quot;Index&quot;</span><span class="p">]</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="s2">&quot;Scenario&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">]],</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="s2">&quot;Tranche&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">]],</span>
     <span class="n">order</span><span class="o">=</span><span class="p">[</span>
         <span class="s2">&quot;2015 Actual&quot;</span>              <span class="p">,</span>
         <span class="s2">&quot;Module Slow Progress&quot;</span>      <span class="p">,</span>
@@ -1244,7 +1243,6 @@
       <th>Investment</th>
       <th>Category</th>
       <th>Tranche</th>
-      <th>Scenario</th>
       <th>Sample</th>
       <th>Technology</th>
       <th>Index</th>
@@ -1806,7 +1804,7 @@ all of the tranches, so we can assemble them into investments
 <h3>Fit a response surface to the results.<a class="headerlink" href="#fit-a-response-surface-to-the-results" title="Permalink to this heading">¶</a></h3>
 <p>The response surface interpolates between the discrete set of cases
 provided in the expert elicitation. This allows us to study funding
-levels intermediate between those scenarios.</p>
+levels intermediate between the pre-defined Tranches.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">ty</span><span class="o">.</span><span class="n">Evaluator</span><span class="p">(</span><span class="n">investments</span><span class="o">.</span><span class="n">tranches</span><span class="p">,</span> <span class="n">tranche_results</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2445,7 +2443,6 @@ sliders will cause a recomputation of the boxplots.</p>
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formulation.html">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 

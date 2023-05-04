@@ -84,7 +84,7 @@ for the variables that are defined in <a class="reference internal" href="#tbl-v
 <td><p>electrolysis, PV cell</p></td>
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\theta \in \Theta\)</span></p></td>
-<td><p>scenario</p></td>
+<td><p>design</p></td>
 <td><p>the result of a particular investment</p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\chi \in X\)</span></p></td>
@@ -198,22 +198,22 @@ for the variables that are defined in <a class="reference internal" href="#tbl-v
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\xi_\theta\)</span></p></td>
 <td><p>variable</p></td>
-<td><p>scenario inputs</p></td>
+<td><p>design inputs</p></td>
 <td><p>(mixed)</p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\zeta_\theta\)</span></p></td>
 <td><p>variable</p></td>
-<td><p>scenario outputs</p></td>
+<td><p>design outputs</p></td>
 <td><p>(mixed)</p></td>
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\psi\)</span></p></td>
 <td><p>function</p></td>
-<td><p>scenario evaluation</p></td>
+<td><p>design evaluation</p></td>
 <td><p>(mixed)</p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\sigma_\phi\)</span></p></td>
 <td><p>function</p></td>
-<td><p>scenario probability</p></td>
+<td><p>design probability</p></td>
 <td><p>1</p></td>
 </tr>
 <tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(q_\phi\)</span></p></td>
@@ -312,10 +312,10 @@ results of technical modeling. We use the convention that higher values
 are worse and lower values are better.</p>
 <p><span class="math notranslate nohighlight">\(\mu_m = M_m(S, C_c, \tau_c, F_f, I_i, I^*_i, O^*_o, O_o, K, \alpha_p)\)</span></p>
 </section>
-<section id="scenarios">
-<h2>Scenarios<a class="headerlink" href="#scenarios" title="Permalink to this heading">¶</a></h2>
-<p>A <em>scenario</em> represents a state of affairs for a technology <span class="math notranslate nohighlight">\(\nu\)</span>.
-If we denote the scenario as <span class="math notranslate nohighlight">\(\theta\)</span>, we have the tuple of input
+<section id="designs">
+<h2>Designs<a class="headerlink" href="#designs" title="Permalink to this heading">¶</a></h2>
+<p>A <em>design</em> represents a state of affairs for a technology <span class="math notranslate nohighlight">\(\nu\)</span>.
+If we denote the design as <span class="math notranslate nohighlight">\(\theta\)</span>, we have the tuple of input
 variables</p>
 <p><span class="math notranslate nohighlight">\(\xi_\theta = \left(S, C_c, \tau_c, F_f, I_i, \eta_i, \eta^\prime_o, \alpha_p, p_i, p^\prime_o\middle) \right|_\theta\)</span></p>
 <p>and the tuple of output variables</p>
@@ -324,12 +324,12 @@ variables</p>
 <p><span class="math notranslate nohighlight">\(\zeta_\theta = \psi_\nu\left(\xi_\theta\middle) \right|_{\nu = \nu(\theta)}\)</span></p>
 <p>given the tuple of functions</p>
 <p><span class="math notranslate nohighlight">\(\psi_\nu = \left(P_o, M_m\middle) \right|_\nu\)</span></p>
-<p>for the technology of the scenario.</p>
+<p>for the technology.</p>
 </section>
 <section id="investments">
 <h2>Investments<a class="headerlink" href="#investments" title="Permalink to this heading">¶</a></h2>
 <p>An <em>investment</em> <span class="math notranslate nohighlight">\(\phi\)</span> assigns a probability distribution to
-scenarios:</p>
+designs:</p>
 <p><span class="math notranslate nohighlight">\(\sigma_\phi(\theta) = P\left(\theta \middle| \phi\right)\)</span>.</p>
 <p>such that</p>
 <p><span class="math notranslate nohighlight">\(\int d\theta \sigma_\phi(\theta) = 1\)</span> or
@@ -373,7 +373,7 @@ probability spaces. Recall that <span class="math notranslate nohighlight">\(\ma
 components for cost <span class="math notranslate nohighlight">\(K\)</span> and each metric <span class="math notranslate nohighlight">\(\mu_m\)</span>, so this is
 a multi-objective problem.</p>
 <p>The two-stage decision problem is a special case of the general problem
-outlined here: Each scenario <span class="math notranslate nohighlight">\(\theta\)</span> can be considers as a
+outlined here: Each design <span class="math notranslate nohighlight">\(\theta\)</span> can be considers as a
 composite of one or more stages.</p>
 </section>
 <section id="experts">
@@ -382,7 +382,7 @@ composite of one or more stages.</p>
 probability and range (e.g., 10th to 90th percentile) of change in the
 cost or waste parameters or the production or metric functions. In
 essence, the expert elicitation defines <span class="math notranslate nohighlight">\(\sigma_\phi(\theta)\)</span> for
-each potential scenario <span class="math notranslate nohighlight">\(\theta\)</span> of each investment <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
+each potential design <span class="math notranslate nohighlight">\(\theta\)</span> resulting from each investment <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
 </section>
 </section>
 
@@ -411,7 +411,6 @@ each potential scenario <span class="math notranslate nohighlight">\(\theta\)</s
 <li class="toctree-l1"><a class="reference internal" href="approach.html">Approach</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Mathematical Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment Plan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python API</a></li>
 </ul>
 

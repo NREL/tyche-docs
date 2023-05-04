@@ -179,9 +179,9 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="tyche.Designs.Designs.evaluate_scenarios">
-<span class="sig-name descname"><span class="pre">evaluate_scenarios</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.evaluate_scenarios"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.evaluate_scenarios" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate scenarios.</p>
+<dt class="sig sig-object py" id="tyche.Designs.Designs.evaluate_tranche_impacts">
+<span class="sig-name descname"><span class="pre">evaluate_tranche_impacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.evaluate_tranche_impacts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.evaluate_tranche_impacts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate tranchess.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>sample_count</strong> (<em>int</em>) – The number of random samples.</p>
@@ -191,7 +191,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tyche.Designs.Designs.vectorize_designs">
-<span class="sig-name descname"><span class="pre">vectorize_designs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">technology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario_count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.vectorize_designs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.vectorize_designs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">vectorize_designs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">technology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tranche_count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.vectorize_designs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.vectorize_designs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make an array of designs.</p>
 </dd></dl>
 
@@ -203,20 +203,20 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tyche.Designs.Designs.vectorize_parameters">
-<span class="sig-name descname"><span class="pre">vectorize_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">technology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario_count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.vectorize_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.vectorize_parameters" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">vectorize_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">technology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tranche_count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.vectorize_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.vectorize_parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make an array of parameters.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tyche.Designs.Designs.vectorize_scenarios">
-<span class="sig-name descname"><span class="pre">vectorize_scenarios</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">technology</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.vectorize_scenarios"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.vectorize_scenarios" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make an array of scenarios.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tyche.Designs.Designs.vectorize_technologies">
 <span class="sig-name descname"><span class="pre">vectorize_technologies</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.vectorize_technologies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.vectorize_technologies" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make an array of technologies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tyche.Designs.Designs.vectorize_tranches">
+<span class="sig-name descname"><span class="pre">vectorize_tranches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">technology</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tyche/Designs.html#Designs.vectorize_tranches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tyche.Designs.Designs.vectorize_tranches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an array of tranches.</p>
 </dd></dl>
 
 </dd></dl>
