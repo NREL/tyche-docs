@@ -74,7 +74,7 @@
 
 
 \title{Tyche}
-\date{Dec 29, 2022}
+\date{May 04, 2023}
 \release{1.2}
 \author{National Renewable Energy Laboratory}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -160,7 +160,7 @@ For additional details on the mathematics and approach behind Tyche, see the {\h
 \subsection{What is a “technology”?}
 \label{\detokenize{cheat-sheet:what-is-a-technology}}
 \sphinxAtStartPar
-In the R\&D decision contexts represented and analyzed by Tyche, “technology” has a very broad definition. A technology converts input(s) to output(s) using capital equipment with a defined lifetime, and incurs fixed and/or variable costs in doing so. A technology may be a manufacturing process, a biorefinery, an agricultural process, a renewable energy technology component such as a silicon wafer or an inverter, a renewable energy technology unit such as a wind turbine or solar panel, a renewable power plant system such as a concentrated solar power plant, and more. Within the R\&D decision context, a technology is also subject to one or more research areas in which R\&D investments can be made to change the technology and its economic, environmental, and other metrics of interest. Multiple technologies can be modeled and compared within the same decision context, provided the same metrics are calculable for each technology. Within Tyche, a technology is represented both physically and economically using a simple but generalized techno\sphinxhyphen{}economic analysis (TEA) model. The TEA is based on a user defined technology model and accompanying datasets of technological and investment information.
+In the R\&D decision contexts represented and analyzed by Tyche, “technology” has a very broad definition. A technology converts input(s) to output(s) using capital equipment with a defined non\sphinxhyphen{}zero lifetime, and incurs fixed and/or variable costs in doing so. A technology may be a manufacturing process, a biorefinery, an agricultural process, a renewable energy technology component such as a silicon wafer or an inverter, a renewable energy technology unit such as a wind turbine or solar panel, a renewable power plant system such as a concentrated solar power plant, and more. Within the R\&D decision context, a technology is also subject to one or more research areas in which R\&D investments can be made to change the technology and its economic, environmental, and other metrics of interest. Multiple technologies can be modeled and compared within the same decision context, provided the same metrics are calculable for each technology. Within Tyche, a technology is represented both physically and economically using a simple but generalized techno\sphinxhyphen{}economic analysis (TEA) model. The TEA is based on a user defined technology model and accompanying datasets of technological and investment information.
 
 
 \section{Getting Started}
@@ -331,7 +331,7 @@ An example technology model is developed in the {\hyperref[\detokenize{example-t
 \subsubsection{Designs Dataset}
 \label{\detokenize{cheat-sheet:designs-dataset}}
 \sphinxAtStartPar
-A “design” is a set of data representing the state of a technology that results from a specific R\&D investment scenario. The \sphinxstyleemphasis{designs} dataset contains information for all of the technologies being evaluated within a decision context. \sphinxstyleemphasis{designs} contains multiple sets of data for each technology: each set represents the technology state that results from a single R\&D investment scenario.  Multiple R\&D investment scenarios are typically represented, each corresponding to a different level of technology advancement, which is quantified probabilistically through expert elicitation. \hyperref[\detokenize{cheat-sheet:tbl-designsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-designsdict}}} provides a data dictionary for the \sphinxstyleemphasis{designs} dataset.
+A “design” is a set of data representing the state of a technology that results from a specific R\&D investment. The \sphinxstyleemphasis{designs} dataset contains one or more designs for each of the technologies being evaluated within a decision context, with each design corresponding to a separate R\&D investment corresponding to a different level of technology advancement. Some or all of the data in the \sphinxstyleemphasis{designs} dataset may be quantified probabilistically through expert elicitation. \hyperref[\detokenize{cheat-sheet:tbl-designsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-designsdict}}} provides a data dictionary for the \sphinxstyleemphasis{designs} dataset.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -370,16 +370,16 @@ Name of the technology.
 \\
 \hline
 \sphinxAtStartPar
-Scenario
+Tranche
 &
 \sphinxAtStartPar
 String
 &
 \sphinxAtStartPar
-Any names are allowed. There must be at least two scenarios defined.
+Any names are allowed. There must be at least two Tranches defined.
 &
 \sphinxAtStartPar
-R\&D investment scenario that results in this technology design.
+A dollar amount invested in a research category that results in this technology design.
 \\
 \hline
 \sphinxAtStartPar
@@ -467,7 +467,7 @@ Mixture of \sphinxstyleemphasis{scipy.stats} distributions
 \end{itemize}
 &
 \sphinxAtStartPar
-Value for the R\&D investment scenario.
+Value resulting from the Tranche.
 Example: st.triang(1,loc=5,scale=0.1)
 \\
 \hline
@@ -578,7 +578,7 @@ Names of outputs from the technology. Every output must have a price, even if th
 Lifetime
 &
 \sphinxAtStartPar
-Time that a piece of capital spends in use; time it takes for a piece of capital’s value to depreciate to zero.
+Time that a piece of capital spends in use; time it takes for a piece of capital’s value to depreciate to zero. Cannot be zero.
 &
 \sphinxAtStartPar
 Names of the capital components of the technology.
@@ -591,7 +591,7 @@ Scale
 Scale at which the technology operates (one value for the technology).
 &
 \sphinxAtStartPar
-No index.
+No index (leave Index blank).
 \\
 \hline
 \end{tabulary}
@@ -602,7 +602,7 @@ No index.
 \subsubsection{Parameters Dataset}
 \label{\detokenize{cheat-sheet:parameters-dataset}}
 \sphinxAtStartPar
-The \sphinxstyleemphasis{parameters} dataset contains any additional technology\sphinxhyphen{}related data, other than that contained in the \sphinxstyleemphasis{designs} dataset, that is required to calculate a technology’s capital cost, fixed cost, production (actual output amounts), and metrics. (These calculations are implemented within the technology model .py file, discussed in the next section.) Identically to the \sphinxstyleemphasis{designs} dataset, the \sphinxstyleemphasis{parameters} dataset contains multiple sets of data corresponding to different R\&D investment scenarios. A data dictionary for the \sphinxstyleemphasis{parameters} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-paramsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-paramsdict}}}.
+The \sphinxstyleemphasis{parameters} dataset contains any additional technology\sphinxhyphen{}related data, other than that contained in the \sphinxstyleemphasis{designs} dataset, that is required to calculate a technology’s capital cost, fixed cost, production (actual output amounts), and metrics. (These calculations are implemented within the technology model .py file, discussed in the next section.) Identically to the \sphinxstyleemphasis{designs} dataset, the \sphinxstyleemphasis{parameters} dataset contains multiple sets of data corresponding to different R\&D investments (Tranches). A data dictionary for the \sphinxstyleemphasis{parameters} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-paramsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-paramsdict}}}.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -635,13 +635,13 @@ Name of the technology.
 \\
 \hline
 \sphinxAtStartPar
-Scenario
+Tranche
 &
 \sphinxAtStartPar
 String
 &
 \sphinxAtStartPar
-Name of the R\&D investment scenario that resulted in the corresponding parameter values or distributions.
+Name of the Tranche that resulted in the corresponding parameter values or distributions.
 \\
 \hline
 \sphinxAtStartPar
@@ -671,7 +671,7 @@ Value
 Float; Distribution; Mixture of distributions
 &
 \sphinxAtStartPar
-Parameter value for the R\&D investment scenario. Example: st.triang(1,loc=5,scale=0.1)
+Parameter value resulting from the Tranche. Example: st.triang(1,loc=5,scale=0.1)
 \\
 \hline
 \sphinxAtStartPar
@@ -702,7 +702,7 @@ Any additional information defined by the user. Not used during Tyche calculatio
 Including the Offset value in the \sphinxstyleemphasis{parameters} dataset creates a user reference that makes it easier to access parameter values when defining the technology model.
 
 \sphinxAtStartPar
-\sphinxstylestrong{Mandatory data.} The \sphinxstyleemphasis{parameters} dataset is required to exist and to include at least one Parameter for every Technology\sphinxhyphen{}Scenario combination. If there are no Parameters present in the technology model, then the Parameter may be None and 0 may be entered under both the Offset and Value columns.
+\sphinxstylestrong{Mandatory data.} The \sphinxstyleemphasis{parameters} dataset is required to exist and to include at least one Parameter for every Technology\sphinxhyphen{}Tranche combination. If there are no Parameters present in the technology model, then the Parameter may be None and 0 may be entered under both the Offset and Value columns.
 
 
 \subsubsection{Technology model (.py file)}
@@ -793,10 +793,10 @@ The previous sections provided information on the input datasets required to def
 \subsubsection{Tranches Dataset}
 \label{\detokenize{cheat-sheet:tranches-dataset}}
 \sphinxAtStartPar
-A Tranche is a discrete unit of R\&D investment (dollar amount) in a specific research category. Research categories are defined for each technology within a decision context and represent narrow topic areas in which R\&D investments are expected to result in technological improvements. Tranches within the same research category are mutually exclusive: one cannot simultaneously invest \$1M and \$5M in a research category. A Scenario is a combination of Tranches that represents one option for making R\&D investments.
+A Tranche is a discrete unit of R\&D investment (dollar amount) in a specific research category. Research categories are defined for each technology within a decision context and represent narrow topic areas in which R\&D investments are expected to result in technological improvements. Tranches within the same research category are mutually exclusive: one cannot simultaneously invest \$1M and \$5M in a research category.
 
 \sphinxAtStartPar
-The \sphinxstyleemphasis{tranches} dataset defines a set of R\&D investments across the research categories that are relevant to the technology under study. Tranches are combined into investment Scenarios – the same Scenarios found in the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. The impact of each Scenario on the technology is highly uncertain and is quantified probabilistically using expert elicitation. A data dictionary for the \sphinxstyleemphasis{tranches} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-tranchesdict}]{Table \ref{\detokenize{cheat-sheet:tbl-tranchesdict}}}.
+The \sphinxstyleemphasis{tranches} dataset defines all of the Tranches that are relevant to the technology under study. Tranches are combined into Investments, discussed in the next section, and are also used to distinguish sets of technology data in the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets. The impact of each Tranche on the technology is highly uncertain and is quantified probabilistically using expert elicitation. A data dictionary for the \sphinxstyleemphasis{tranches} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-tranchesdict}]{Table \ref{\detokenize{cheat-sheet:tbl-tranchesdict}}}.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -839,16 +839,6 @@ Names of the tranches.
 \\
 \hline
 \sphinxAtStartPar
-Scenario
-&
-\sphinxAtStartPar
-String
-&
-\sphinxAtStartPar
-Names of the R\&D investment scenarios, which combine tranches across R\&D categories. The names in this column must correspond to the Scenarios listed in the designs and parameters datasets.
-\\
-\hline
-\sphinxAtStartPar
 Amount
 &
 \sphinxAtStartPar
@@ -876,10 +866,10 @@ Additional user\sphinxhyphen{}defined information. Not used by Tyche.
 \subsubsection{Investment Dataset}
 \label{\detokenize{cheat-sheet:investment-dataset}}
 \sphinxAtStartPar
-An Investment, similar to a Scenario, is a combination of Tranches that represents a particular R\&D strategy.
+An Investment is a combination of Tranches that represents a particular R\&D strategy.
 
 \sphinxAtStartPar
-The \sphinxstyleemphasis{investments} dataset provides a separate way to look at making R\&D investments. Combining individual tranches allows users to explore and optimize R\&D investment amounts, but it may be the case that there are specific strategies that users wish to explore, without optimizing. In this case, the \sphinxstyleemphasis{investments} dataset is used to define specific combinations of tranches that are of interest. A data dictionary for the \sphinxstyleemphasis{investments} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-investmentsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-investmentsdict}}}.
+The \sphinxstyleemphasis{investments} dataset specifies a set of options for making R\&D investments within the decision context. Combining individual Tranches into an Investment allows users to evaluate and compare the impacts of different investment strategies without performing optimization. A data dictionary for the \sphinxstyleemphasis{investments} dataset is given in \hyperref[\detokenize{cheat-sheet:tbl-investmentsdict}]{Table \ref{\detokenize{cheat-sheet:tbl-investmentsdict}}}.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -908,7 +898,7 @@ Investment
 String
 &
 \sphinxAtStartPar
-Name of the R\&D investment. Distinct from the Scenarios.
+Name of the R\&D investment.
 \\
 \hline
 \sphinxAtStartPar
@@ -933,13 +923,12 @@ Names of the tranches within the Investment. Within each row, the Tranche must m
 \hline
 \sphinxAtStartPar
 Notes
-&\sphinxstartmulticolumn{2}%
-\begin{varwidth}[t]{\sphinxcolwidth{2}{3}}
+&
 \sphinxAtStartPar
-String     Additional user\sphinxhyphen{}defined information. Not used by Tyche.
-\par
-\vskip-\baselineskip\vbox{\hbox{\strut}}\end{varwidth}%
-\sphinxstopmulticolumn
+String
+&
+\sphinxAtStartPar
+Additional user\sphinxhyphen{}defined information. Not used by Tyche.
 \\
 \hline
 \end{tabulary}
@@ -947,7 +936,7 @@ String     Additional user\sphinxhyphen{}defined information. Not used by Tyche.
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
-\sphinxstylestrong{Relationship between Categories, Tranches, Scenarios, and Investments.} Both the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} dataset contain technology data under multiple Scenarios. Each Scenario represents the technological outcomes from one or more Tranches, and each Tranche represents a unit of R\&D investment in a single Category (or research area). Scenarios and their component Tranches are defined in the \sphinxstyleemphasis{tranches} dataset. Tranches can also be combined to form Investments, as defined in the \sphinxstyleemphasis{investments} dataset.
+\sphinxstylestrong{Relationship between Categories, Tranches, and Investments.} Both the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} dataset contain technology data under multiple Tranches. Each Tranche represents the technological outcome from one  unit of investment in a single Category (or research area). Tranches are combined to form Investments, as defined in the \sphinxstyleemphasis{investments} dataset.
 
 
 \subsection{Additional Datasets}
@@ -1079,7 +1068,7 @@ Additional user\sphinxhyphen{}defined information. Not used during Tyche calcula
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
-\sphinxstylestrong{Relationship between *indices* and other datasets}. A technology in the Tyche context is quantified using five sets of attribute values and one technology\sphinxhyphen{}level attribute value. The five sets of attribute values are Capital, Input, Output, Parameter, and Metric, and the technology\sphinxhyphen{}level attribute is Scale. Elements within each of the five sets are defined with an Index which simply names the element (for instance, Electricity might be one of the Index values within the Input set). Elements of Capital have an associated Lifetime. Elements of the Input set have an associated ideal amount (also called Input), an Input efficiency value, and an Input price. Elements of the Output set have only an Output efficiency and an Output price; the ideal output amounts are calculated from the technology model. Elements of the Metric set are named with an Index and are likewise calculated from the technology model. Elements of the Parameter set have only a value. The \sphinxstyleemphasis{indices} dataset lists the elements of the Capital, Input, Output, and Metric sets, and contains an Offset column giving the numerical location of each element within its set. The \sphinxstyleemphasis{designs} dataset contains values for each element of the Capital, Input, Output, and Metric sets as well as the technology\sphinxhyphen{}level Scale value. The \sphinxstyleemphasis{parameters} dataset names and gives values for each element of the Parameter set.
+\sphinxstylestrong{Relationship between *indices* and other datasets}. A technology in the Tyche context is quantified using five sets of attribute values and one technology\sphinxhyphen{}level attribute value. The five sets of attribute values are Capital, Input, Output, Parameter, and Metric, and the technology\sphinxhyphen{}level attribute is Scale. Elements within each of the five sets are defined with an Index which simply names the element (for instance, Electricity might be one of the Index values within the Input set). Elements of Capital have an associated non\sphinxhyphen{}zero Lifetime. Elements of the Input set have an associated ideal amount (also called Input), an Input efficiency value, and an Input price. Elements of the Output set have only an Output efficiency and an Output price; the ideal output amounts are calculated from the technology model. Elements of the Metric set are named with an Index and are likewise calculated from the technology model. Elements of the Parameter set have only a value. The \sphinxstyleemphasis{indices} dataset lists the elements of the Capital, Input, Output, and Metric sets, and contains an Offset column giving the numerical location of each element within its set. The \sphinxstyleemphasis{designs} dataset contains values for each element of the Capital, Input, and Output sets as well as the technology\sphinxhyphen{}level Scale value which does not have an Index. The \sphinxstyleemphasis{parameters} dataset names and gives values for each element of the Parameter set.
 
 \sphinxAtStartPar
 \sphinxstylestrong{Mandatory data.} All four Types must be listed in the \sphinxstyleemphasis{indices} dataset. If a particular Type is not relevant to the technology under study, it still must be included in this dataset.
@@ -1352,7 +1341,7 @@ Tyche provides two general use cases for exploring the relationship between R\&D
 In the second use case, a user knows what technological changes must be achieved with R\&D investment and is interested in determining the investment amount that will be required to achieve these changes. In this case the user already knows the contents of the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} dataset, which are deterministic, and uses expert elicitation to fill in the investment amounts in the \sphinxstyleemphasis{tranches} dataset.
 
 \sphinxAtStartPar
-It is critical to note that these use cases are \sphinxstylestrong{mutually exclusive}. Tyche cannot be used to evaluate a scenario in which desired technological changes as well as the investment amounts are both uncertain. What this means for the user is that probability distributions, or mixtures of distributions, can be used to specify values either in the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets or in the \sphinxstyleemphasis{tranches} dataset, but not both. If distributions are used in all three datasets, the code will break by design.
+It is critical to note that these use cases are \sphinxstylestrong{mutually exclusive}. Tyche cannot be used to evaluate a decision context in which the desired technological changes and the investment amounts are both uncertain. What this means for the user is that probability distributions, or mixtures of distributions, can be used to specify values either in the \sphinxstyleemphasis{designs} and \sphinxstyleemphasis{parameters} datasets or in the \sphinxstyleemphasis{tranches} dataset, but not both. If distributions are used in all three datasets, the code will break by design.
 
 
 \subsection{Defining values as probability distributions and mixtures}
@@ -1369,7 +1358,7 @@ An uncertain value can be defined within a dataset using any of the built\sphinx
 Here is a very simple model for electrolysis of water. We just have water, electricity, a catalyst, and some lab space. We choose the fundamental unit of operation to be moles of H$_{\text{2}}$:
 
 \sphinxAtStartPar
-     H$_{\text{2}}$O → H$_{\text{2}}$ + ½ O$_{\text{2}}$
+H$_{\text{2}}$O → H$_{\text{2}}$ + ½ O$_{\text{2}}$
 
 \sphinxAtStartPar
 For this example, we treat the catalyst as the capital that we use to transform inputs into outputs. Our inputs are water and electricity, and our outputs are oxygen and hydrogen. Our only fixed cost is the rent on the lab space at \$1000/year. Using our past experience with electrolysis technology as well as some historical data, we estimate that we’ll be able to produce 6650 mol/year of hydrogen and at this scale, our catalyst has a lifetime of about 3 years. The metrics we’d like to calculate for our electrolysis technology are cost, greenhouse gas (GHG) emissions, and jobs created. Based on this information, the \sphinxstyleemphasis{designs} dataset for the base case electrolysis technology is as shown in \hyperref[\detokenize{example-technology:tbl-electrolysisdesigns}]{Table \ref{\detokenize{example-technology:tbl-electrolysisdesigns}}}.
@@ -1388,7 +1377,7 @@ For this example, we treat the catalyst as the capital that we use to transform 
 Technology
 &\sphinxstyletheadfamily 
 \sphinxAtStartPar
-Scenario
+Tranche
 &\sphinxstyletheadfamily 
 \sphinxAtStartPar
 Variable
@@ -1676,7 +1665,7 @@ A key quantity that is not included in the \sphinxstyleemphasis{designs} dataset
 Technology
 &\sphinxstyletheadfamily 
 \sphinxAtStartPar
-Scenario
+Tranche
 &\sphinxstyletheadfamily 
 \sphinxAtStartPar
 Parameter
@@ -2289,7 +2278,7 @@ The \sphinxcode{\sphinxupquote{indices}} table defines the subscripts for variab
 
 
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{designs}} table contains the cost, input, efficiency, and price data for a scenario.
+The \sphinxcode{\sphinxupquote{designs}} table contains the cost, input, efficiency, and price data resulting from a Tranche.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{designs}\PYG{o}{.}\PYG{n}{designs}
@@ -2334,14 +2323,14 @@ The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of t
 
 
 
-\section{Evaluate the scenarios in the dataset.}
-\label{\detokenize{example-analysis:evaluate-the-scenarios-in-the-dataset}}
+\section{Evaluate the Tranches in the dataset.}
+\label{\detokenize{example-analysis:evaluate-the-tranches-in-the-dataset}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results} \PYG{o}{=} \PYG{n}{designs}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}scenarios}\PYG{p}{(}\PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
+\PYG{n}{tranche\PYGZus{}results} \PYG{o}{=} \PYG{n}{designs}\PYG{o}{.}\PYG{n}{evaluate\PYGZus{}tranches}\PYG{p}{(}\PYG{n}{sample\PYGZus{}count}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{level}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Sample}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{drop\PYGZus{}level}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -2350,7 +2339,7 @@ The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of t
 \subsection{Save results.}
 \label{\detokenize{example-analysis:save-results}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}scenario.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{to\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{output/pv\PYGZus{}residential\PYGZus{}simple/example\PYGZhy{}analysis.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 
@@ -2358,12 +2347,12 @@ The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of t
 \label{\detokenize{example-analysis:plot-ghg-metric}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tranche}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
     \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
         \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{GHG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
         \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tranche}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
     \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
         \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
         \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
@@ -2388,12 +2377,12 @@ The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of t
 \label{\detokenize{example-analysis:plot-lcoe-metric}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tranche}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
     \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
         \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{LCOE}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
         \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tranche}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
     \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
         \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
         \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
@@ -2418,12 +2407,12 @@ The \sphinxcode{\sphinxupquote{investments}} table bundles a consistent set of t
 \label{\detokenize{example-analysis:plot-labor-metric}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{g} \PYG{o}{=} \PYG{n}{sb}\PYG{o}{.}\PYG{n}{boxplot}\PYG{p}{(}
-    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{x}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tranche}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
     \PYG{n}{y}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
-    \PYG{n}{data}\PYG{o}{=}\PYG{n}{scenario\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
+    \PYG{n}{data}\PYG{o}{=}\PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{xs}\PYG{p}{(}
         \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Metric}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Labor}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{,}
         \PYG{n}{level}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Variable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Index}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
-    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Scenario}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tranche}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Value}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{]}\PYG{p}{,}
     \PYG{n}{order}\PYG{o}{=}\PYG{p}{[}
         \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2015 Actual}\PYG{l+s+s2}{\PYGZdq{}}              \PYG{p}{,}
         \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Module Slow Progress}\PYG{l+s+s2}{\PYGZdq{}}      \PYG{p}{,}
@@ -2601,7 +2590,7 @@ Save the results.
 \sphinxAtStartPar
 The response surface interpolates between the discrete set of cases
 provided in the expert elicitation. This allows us to study funding
-levels intermediate between those scenarios.
+levels intermediate between the pre\sphinxhyphen{}defined Tranches.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{evaluator} \PYG{o}{=} \PYG{n}{ty}\PYG{o}{.}\PYG{n}{Evaluator}\PYG{p}{(}\PYG{n}{investments}\PYG{o}{.}\PYG{n}{tranches}\PYG{p}{,} \PYG{n}{tranche\PYGZus{}results}\PYG{o}{.}\PYG{n}{summary}\PYG{p}{)}
@@ -3129,7 +3118,7 @@ electrolysis, PV cell
 \(\theta \in \Theta\)
 &
 \sphinxAtStartPar
-scenario
+design
 &
 \sphinxAtStartPar
 the result of a particular investment
@@ -3443,7 +3432,7 @@ technical parameter
 variable
 &
 \sphinxAtStartPar
-scenario inputs
+design inputs
 &
 \sphinxAtStartPar
 (mixed)
@@ -3456,7 +3445,7 @@ scenario inputs
 variable
 &
 \sphinxAtStartPar
-scenario outputs
+design outputs
 &
 \sphinxAtStartPar
 (mixed)
@@ -3469,7 +3458,7 @@ scenario outputs
 function
 &
 \sphinxAtStartPar
-scenario evaluation
+design evaluation
 &
 \sphinxAtStartPar
 (mixed)
@@ -3482,7 +3471,7 @@ scenario evaluation
 function
 &
 \sphinxAtStartPar
-scenario probability
+design probability
 &
 \sphinxAtStartPar
 1
@@ -3701,11 +3690,11 @@ are worse and lower values are better.
 \(\mu_m = M_m(S, C_c, \tau_c, F_f, I_i, I^*_i, O^*_o, O_o, K, \alpha_p)\)
 
 
-\section{Scenarios}
-\label{\detokenize{formulation:scenarios}}
+\section{Designs}
+\label{\detokenize{formulation:designs}}
 \sphinxAtStartPar
-A \sphinxstyleemphasis{scenario} represents a state of affairs for a technology \(\nu\).
-If we denote the scenario as \(\theta\), we have the tuple of input
+A \sphinxstyleemphasis{design} represents a state of affairs for a technology \(\nu\).
+If we denote the design as \(\theta\), we have the tuple of input
 variables
 
 \sphinxAtStartPar
@@ -3730,14 +3719,14 @@ given the tuple of functions
 \(\psi_\nu = \left(P_o, M_m\middle) \right|_\nu\)
 
 \sphinxAtStartPar
-for the technology of the scenario.
+for the technology.
 
 
 \section{Investments}
 \label{\detokenize{formulation:investments}}
 \sphinxAtStartPar
 An \sphinxstyleemphasis{investment} \(\phi\) assigns a probability distribution to
-scenarios:
+designs:
 
 \sphinxAtStartPar
 \(\sigma_\phi(\theta) = P\left(\theta \middle| \phi\right)\).
@@ -3815,7 +3804,7 @@ a multi\sphinxhyphen{}objective problem.
 
 \sphinxAtStartPar
 The two\sphinxhyphen{}stage decision problem is a special case of the general problem
-outlined here: Each scenario \(\theta\) can be considers as a
+outlined here: Each design \(\theta\) can be considers as a
 composite of one or more stages.
 
 
@@ -3826,7 +3815,7 @@ Each expert elicitation takes the form of an assessment of the
 probability and range (e.g., 10th to 90th percentile) of change in the
 cost or waste parameters or the production or metric functions. In
 essence, the expert elicitation defines \(\sigma_\phi(\theta)\) for
-each potential scenario \(\theta\) of each investment \(\phi\).
+each potential design \(\theta\) resulting from each investment \(\phi\).
 
 \sphinxstepscope
 
@@ -4885,15 +4874,15 @@ Evaluate the performance of a technology.
 
 \end{fulllineitems}
 
-\index{evaluate\_scenarios() (tyche.Designs.Designs method)@\spxentry{evaluate\_scenarios()}\spxextra{tyche.Designs.Designs method}}
+\index{evaluate\_tranche\_impacts() (tyche.Designs.Designs method)@\spxentry{evaluate\_tranche\_impacts()}\spxextra{tyche.Designs.Designs method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.Designs.Designs.evaluate_scenarios}}
+\phantomsection\label{\detokenize{tyche:tyche.Designs.Designs.evaluate_tranche_impacts}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate\_scenarios}}}{\emph{\DUrole{n}{sample\_count}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate\_tranche\_impacts}}}{\emph{\DUrole{n}{sample\_count}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Evaluate scenarios.
+Evaluate tranchess.
 \begin{quote}\begin{description}
 \sphinxlineitem{Parameters}
 \sphinxAtStartPar
@@ -4908,7 +4897,7 @@ Evaluate scenarios.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{tyche:tyche.Designs.Designs.vectorize_designs}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{vectorize\_designs}}}{\emph{\DUrole{n}{technology}}, \emph{\DUrole{n}{scenario\_count}}, \emph{\DUrole{n}{sample\_count}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{vectorize\_designs}}}{\emph{\DUrole{n}{technology}}, \emph{\DUrole{n}{tranche\_count}}, \emph{\DUrole{n}{sample\_count}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
 Make an array of designs.
@@ -4932,22 +4921,10 @@ Make an array of indices.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{tyche:tyche.Designs.Designs.vectorize_parameters}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{vectorize\_parameters}}}{\emph{\DUrole{n}{technology}}, \emph{\DUrole{n}{scenario\_count}}, \emph{\DUrole{n}{sample\_count}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{vectorize\_parameters}}}{\emph{\DUrole{n}{technology}}, \emph{\DUrole{n}{tranche\_count}}, \emph{\DUrole{n}{sample\_count}\DUrole{o}{=}\DUrole{default_value}{1}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
 Make an array of parameters.
-
-\end{fulllineitems}
-
-\index{vectorize\_scenarios() (tyche.Designs.Designs method)@\spxentry{vectorize\_scenarios()}\spxextra{tyche.Designs.Designs method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{tyche:tyche.Designs.Designs.vectorize_scenarios}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{vectorize\_scenarios}}}{\emph{\DUrole{n}{technology}}}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Make an array of scenarios.
 
 \end{fulllineitems}
 
@@ -4960,6 +4937,18 @@ Make an array of scenarios.
 \pysigstopsignatures
 \sphinxAtStartPar
 Make an array of technologies.
+
+\end{fulllineitems}
+
+\index{vectorize\_tranches() (tyche.Designs.Designs method)@\spxentry{vectorize\_tranches()}\spxextra{tyche.Designs.Designs method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{tyche:tyche.Designs.Designs.vectorize_tranches}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{vectorize\_tranches}}}{\emph{\DUrole{n}{technology}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Make an array of tranches.
 
 \end{fulllineitems}
 
@@ -7813,6 +7802,317 @@ Production function.
 The technology models in this section are for exploratory and learning purposes only.
 
 
+\subsubsection{Template for Developing New Models and Datasets}
+\label{\detokenize{technology:module-technology.technology_a_model}}\label{\detokenize{technology:template-for-developing-new-models-and-datasets}}\index{module@\spxentry{module}!technology.technology\_a\_model@\spxentry{technology.technology\_a\_model}}\index{technology.technology\_a\_model@\spxentry{technology.technology\_a\_model}!module@\spxentry{module}}
+\sphinxAtStartPar
+Template for technology model file.
+
+\sphinxAtStartPar
+Corresponds to Technology A in the template decision context.
+\index{capital\_cost() (in module technology.technology\_a\_model)@\spxentry{capital\_cost()}\spxextra{in module technology.technology\_a\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_a_model.capital_cost}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_a\_model.}}\sphinxbfcode{\sphinxupquote{capital\_cost}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Capital cost function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{fixed\_cost() (in module technology.technology\_a\_model)@\spxentry{fixed\_cost()}\spxextra{in module technology.technology\_a\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_a_model.fixed_cost}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_a\_model.}}\sphinxbfcode{\sphinxupquote{fixed\_cost}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Capital cost function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{metrics() (in module technology.technology\_a\_model)@\spxentry{metrics()}\spxextra{in module technology.technology\_a\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_a_model.metrics}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_a\_model.}}\sphinxbfcode{\sphinxupquote{metrics}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{capital}}, \emph{\DUrole{n}{lifetime}}, \emph{\DUrole{n}{fixed}}, \emph{\DUrole{n}{input\_raw}}, \emph{\DUrole{n}{input}}, \emph{\DUrole{n}{input\_price}}, \emph{\DUrole{n}{output\_raw}}, \emph{\DUrole{n}{output}}, \emph{\DUrole{n}{cost}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Metrics function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{capital}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Capital costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lifetime}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – Technology lifetime.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fixed}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Fixed costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{input\_raw}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Raw input quantities (before losses).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{input}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Input quantities.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{output\_raw}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Raw output quantities (before losses).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{output}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Output quantities.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{cost}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{production() (in module technology.technology\_a\_model)@\spxentry{production()}\spxextra{in module technology.technology\_a\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_a_model.production}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_a\_model.}}\sphinxbfcode{\sphinxupquote{production}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{capital}}, \emph{\DUrole{n}{lifetime}}, \emph{\DUrole{n}{fixed}}, \emph{\DUrole{n}{input}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Production function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{capital}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Capital costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lifetime}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – Technology lifetime.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fixed}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Fixed costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{input}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Input quantities.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\phantomsection\label{\detokenize{technology:module-technology.technology_m_model}}\index{module@\spxentry{module}!technology.technology\_m\_model@\spxentry{technology.technology\_m\_model}}\index{technology.technology\_m\_model@\spxentry{technology.technology\_m\_model}!module@\spxentry{module}}
+\sphinxAtStartPar
+Template for technology model file.
+
+\sphinxAtStartPar
+Corresponds to Technology B in the template decision context.
+\index{capital\_cost() (in module technology.technology\_m\_model)@\spxentry{capital\_cost()}\spxextra{in module technology.technology\_m\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_m_model.capital_cost}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_m\_model.}}\sphinxbfcode{\sphinxupquote{capital\_cost}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Capital cost function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{fixed\_cost() (in module technology.technology\_m\_model)@\spxentry{fixed\_cost()}\spxextra{in module technology.technology\_m\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_m_model.fixed_cost}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_m\_model.}}\sphinxbfcode{\sphinxupquote{fixed\_cost}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Capital cost function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{metrics() (in module technology.technology\_m\_model)@\spxentry{metrics()}\spxextra{in module technology.technology\_m\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_m_model.metrics}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_m\_model.}}\sphinxbfcode{\sphinxupquote{metrics}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{capital}}, \emph{\DUrole{n}{lifetime}}, \emph{\DUrole{n}{fixed}}, \emph{\DUrole{n}{input\_raw}}, \emph{\DUrole{n}{input}}, \emph{\DUrole{n}{input\_price}}, \emph{\DUrole{n}{output\_raw}}, \emph{\DUrole{n}{output}}, \emph{\DUrole{n}{cost}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Metrics function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{capital}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Capital costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lifetime}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – Technology lifetime.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fixed}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Fixed costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{input\_raw}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Raw input quantities (before losses).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{input}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Input quantities.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{output\_raw}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Raw output quantities (before losses).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{output}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Output quantities.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{cost}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{production() (in module technology.technology\_m\_model)@\spxentry{production()}\spxextra{in module technology.technology\_m\_model}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{technology:technology.technology_m_model.production}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{technology.technology\_m\_model.}}\sphinxbfcode{\sphinxupquote{production}}}{\emph{\DUrole{n}{scale}}, \emph{\DUrole{n}{capital}}, \emph{\DUrole{n}{lifetime}}, \emph{\DUrole{n}{fixed}}, \emph{\DUrole{n}{input}}, \emph{\DUrole{n}{parameter}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Production function.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{scale}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – The scale of operation.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{capital}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Capital costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{lifetime}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) – Technology lifetime.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{fixed}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Fixed costs.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{input}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – Input quantities.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{parameter}} (\sphinxstyleliteralemphasis{\sphinxupquote{array}}) – The technological parameterization.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
 \subsubsection{Simple Electrolysis}
 \label{\detokenize{technology:module-technology.simple_electrolysis}}\label{\detokenize{technology:simple-electrolysis}}\index{module@\spxentry{module}!technology.simple\_electrolysis@\spxentry{technology.simple\_electrolysis}}\index{technology.simple\_electrolysis@\spxentry{technology.simple\_electrolysis}!module@\spxentry{module}}
 \sphinxAtStartPar
@@ -8307,6 +8607,8 @@ Production function.
 \item\relax\sphinxstyleindexentry{technology.pv\_residential\_large}\sphinxstyleindexpageref{technology:\detokenize{module-technology.pv_residential_large}}
 \item\relax\sphinxstyleindexentry{technology.pv\_residential\_simple}\sphinxstyleindexpageref{technology:\detokenize{module-technology.pv_residential_simple}}
 \item\relax\sphinxstyleindexentry{technology.simple\_electrolysis}\sphinxstyleindexpageref{technology:\detokenize{module-technology.simple_electrolysis}}
+\item\relax\sphinxstyleindexentry{technology.technology\_a\_model}\sphinxstyleindexpageref{technology:\detokenize{module-technology.technology_a_model}}
+\item\relax\sphinxstyleindexentry{technology.technology\_m\_model}\sphinxstyleindexpageref{technology:\detokenize{module-technology.technology_m_model}}
 \item\relax\sphinxstyleindexentry{technology.transport\_model}\sphinxstyleindexpageref{technology:\detokenize{module-technology.transport_model}}
 \item\relax\sphinxstyleindexentry{technology.tutorial\_basic}\sphinxstyleindexpageref{technology:\detokenize{module-technology.tutorial_basic}}
 \item\relax\sphinxstyleindexentry{technology.tutorial\_biorefinery}\sphinxstyleindexpageref{technology:\detokenize{module-technology.tutorial_biorefinery}}
